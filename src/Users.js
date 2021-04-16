@@ -6,7 +6,7 @@ export default function Users() {
 
   return (
     <div>
-      <h1>User id is {id}</h1>
+      <h1>User pico id is {id}</h1>
     </div>
   );
 }
