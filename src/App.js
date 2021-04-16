@@ -17,7 +17,7 @@ class App extends React.Component {
               'Content-Type': 'application/json',
               'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
           },
-          body: JSON.stringify({ descripcion: 'pato gay 3' })
+          body: JSON.stringify({ descripcion: 'exito' })
       };
       fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
           .then(response => response.json())
