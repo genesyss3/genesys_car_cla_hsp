@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import { useParams } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,8 +28,9 @@ class App extends React.Component {
   render() {
       return (
         <div>
-          <input name="nombre"></input>
+          
         </div>
+          
         // <form onSubmit={this.handleSubmit}>
         //     <label>
         //       item seleccionable:

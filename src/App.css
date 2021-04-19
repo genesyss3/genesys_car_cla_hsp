@@ -1,7 +1,13 @@
 .App {
   text-align: center;
 }
+.rows .row {
+  display: inline-block;
+}
 
+.text-left{
+  text-align:left;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

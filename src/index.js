@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Users from './Users';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 
 const routing = (
   <Router>
     <div>
       <Route path="/" component={App} />
-      <Route path="/users/:id" component={Users} />
+      <Route path="/users/:id/idcontacto/:idcontacto" component={Users} />
     </div>
   </Router>
 )
