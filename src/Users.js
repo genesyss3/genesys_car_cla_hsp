@@ -3,6 +3,7 @@ import './App.css'
 import { useParams } from "react-router-dom";
 import { Button, FormControl, InputGroup, Table, Row, Col, Container, DropdownButton, Dropdown } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import HomeContainer from './containers/HomeContainer'
 
 
 export default function Users() {
@@ -11,11 +12,39 @@ export default function Users() {
     const [show3, setShow3] = useState(false)
     const { id } = useParams();
     const { idcontacto } = useParams();
+    const [value,setValue]=useState('');
+    const [value2,setValue2]=useState('');
+    const [value3,setValue3]=useState('');
+    const [value4,setValue4]=useState('');
+    const state = {
+        persons: []
+      }
+    const handleSelect=(e)=>{
+        console.log(e);
+        setShow(true);
+        setValue(e)
+    }
+    const handleSelect2=(e)=>{
+        console.log(e);
+        setShow2(true);
+        setValue2(e)
+    }
+    const handleSelect3=(e)=>{
+        console.log(e);
+        setShow3(true);
+        setValue3(e)
+    }
+    const handleSelect4=(e)=>{
+        console.log(e);
+        setValue4(e)
+    }
+
 
     return (
         <div >
             <br></br>
-            <Container >
+            <div >
+            <Container>
                 <Row className="justify-content-md-center">
                     <Col xs lg="3">
                         <InputGroup className="mb-3">
@@ -137,70 +166,82 @@ export default function Users() {
                 <br></br>
 
             </Container>
+            </div>
+
             <Container >
                 <Row className="text-left">
                     <Col xs={3}><InputGroup className="mb-4">
                         <DropdownButton
                             as={InputGroup.Prepend}
                             variant="outline-secondary"
-                            title="Dropdown"
+                            title="Contacto"
                             id="input-group-dropdown-1"
-                            onSelect={()=>setShow(true)}>
-                            <Dropdown.Item eventKey="option-1">Action</Dropdown.Item>
-                            <Dropdown.Item eventKey="option-2">Another action</Dropdown.Item>
-                            <Dropdown.Item eventKey="option-3">Something else here</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item eventKey="option-4">Separated link</Dropdown.Item>
+                            onSelect={handleSelect}>
+                            <Dropdown.Item eventKey="CONTACTADO">CONTACTADO</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO CONTACTADO">NO CONTACTADO</Dropdown.Item>
                         </DropdownButton>
-                        <FormControl aria-describedby="basic-addon1" />
+                        <FormControl aria-describedby="basic-addon1" value={value}/>
                     </InputGroup>
                     </Col>
                     {show ? <Col id="col2" xs={3}><InputGroup className="mb-4">
                         <DropdownButton
                             as={InputGroup.Prepend}
                             variant="outline-secondary"
-                            title="Dropdown"
+                            title="Nivel 1"
                             id="input-group-dropdown-1"
-                            onSelect={()=>setShow2(true)}>
-                            <Dropdown.Item eventKey="option-1">Action</Dropdown.Item>
-                            <Dropdown.Item eventKey="option-2">Another action</Dropdown.Item>
-                            <Dropdown.Item eventKey="option-3">Something else here</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item eventKey="option-4">Separated link</Dropdown.Item>
+                            onSelect={handleSelect2}>
+                            <Dropdown.Item eventKey="efectivo">efectivo</Dropdown.Item>
+                            <Dropdown.Item eventKey="no efectivo">no efectivo</Dropdown.Item>
                         </DropdownButton>
-                        <FormControl aria-describedby="basic-addon1" />
+                        <FormControl aria-describedby="basic-addon1" value={value2}/>
                     </InputGroup></Col> : null}
                     {show2? <Col id="col2" xs={3}><InputGroup className="mb-4">
                         <DropdownButton
                             as={InputGroup.Prepend}
                             variant="outline-secondary"
-                            title="Dropdown"
+                            title="Nivel 2"
                             id="input-group-dropdown-1"
-                            onSelect={()=>setShow3(true)}>
-                            <Dropdown.Item eventKey="option-1">Action</Dropdown.Item>
-                            <Dropdown.Item eventKey="option-2">Another action</Dropdown.Item>
-                            <Dropdown.Item eventKey="option-3">Something else here</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item eventKey="option-4">Separated link</Dropdown.Item>
+                            onSelect={handleSelect3}>
+                            <Dropdown.Item eventKey="ARGUMENTADO NO">ARGUMENTADO NO</Dropdown.Item>
+                            <Dropdown.Item eventKey="RECHAZO CATEGORICO">RECHAZO CATEGORICO</Dropdown.Item>
+                            <Dropdown.Item eventKey="ARGUMENTADO SI">ARGUMENTADO SI</Dropdown.Item>
+                            <Dropdown.Item eventKey="EXCLUSION">EXCLUSION</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO CONTACTADO">NO CONTACTADO</Dropdown.Item>
+                            <Dropdown.Item eventKey="PERSONAL CALLBACK">PERSONAL CALLBACK</Dropdown.Item>
+                            <Dropdown.Item eventKey="NUMERO INVALIDO">NUMERO INVALIDO</Dropdown.Item>
+                            <Dropdown.Item eventKey="DESACTUALIZADOS">DESACTUALIZADOS</Dropdown.Item>
                         </DropdownButton>
-                        <FormControl aria-describedby="basic-addon1" />
+                        <FormControl aria-describedby="basic-addon1" value={value3}/>
                     </InputGroup></Col> :null}
                     {show3? <Col id="col2" xs={3}><InputGroup className="mb-4">
                         <DropdownButton
                             as={InputGroup.Prepend}
                             variant="outline-secondary"
-                            title="Dropdown"
-                            id="input-group-dropdown-1">
-                            <Dropdown.Item eventKey="option-1">Action</Dropdown.Item>
-                            <Dropdown.Item eventKey="option-2">Another action</Dropdown.Item>
-                            <Dropdown.Item eventKey="option-3">Something else here</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item eventKey="option-4">Separated link</Dropdown.Item>
+                            title="Nivel 3"
+                            id="input-group-dropdown-1"
+                            onSelect ={handleSelect4}>
+                            <Dropdown.Item eventKey="BUSCO OTRO TIPO DE SEGURO">BUSCO OTRO TIPO DE SEGURO</Dropdown.Item>
+                            <Dropdown.Item eventKey="DESEMPLEADO">DESEMPLEADO</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO ME GUSTA CORREDORA/SOCIO">NO ME GUSTA CORREDORA/SOCIO</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO ME GUSTA VENTA TELEFONICA">NO ME GUSTA VENTA TELEFONICA</Dropdown.Item>
+                            <Dropdown.Item eventKey="TITULAR SOLICITA VOLVER A LLAMAR">TITULAR SOLICITA VOLVER A LLAMAR</Dropdown.Item>
+                            <Dropdown.Item eventKey="LLAMADA CORTADA">LLAMADA CORTADA</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO LE INTERESA">NO LE INTERESA</Dropdown.Item>
+                            <Dropdown.Item eventKey="PRODUCTO YA CONTRATADO">PRODUCTO YA CONTRATADO</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO TENGO DINERO PARA SEGUROS">NO TENGO DINERO PARA SEGUROS</Dropdown.Item>
+                            <Dropdown.Item eventKey="PREFIERO MI BANCO/TIENDA">PREFIERO MI BANCO/TIENDA</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO ME GUSTA CORREDORA/SOCIO">NO ME GUSTA CORREDORA/SOCIO</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO ME GUSTA VENTA TELEFONICA">NO ME GUSTA VENTA TELEFONICA</Dropdown.Item>
+                            <Dropdown.Item eventKey="TITULAR SOLICITA VOLVER A LLAMAR">TITULAR SOLICITA VOLVER A LLAMAR</Dropdown.Item>
+                            <Dropdown.Item eventKey="LLAMADA CORTADA">LLAMADA CORTADA</Dropdown.Item>
+                            <Dropdown.Item eventKey="NO LE INTERESA">NO LE INTERESA</Dropdown.Item>
+                            <Dropdown.Item eventKey="PRODUCTO YA CONTRATADO">PRODUCTO YA CONTRATADO</Dropdown.Item>
                         </DropdownButton>
-                        <FormControl aria-describedby="basic-addon1" />
+                        <FormControl aria-describedby="basic-addon1" value={value4}/>
                     </InputGroup></Col> :null}
                 </Row>
             </Container>
+            <HomeContainer/>
             <Table responsive >
                 <tr>
                     <td><h2>Datos Titular</h2></td>
