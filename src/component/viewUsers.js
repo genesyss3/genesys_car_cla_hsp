@@ -18,6 +18,7 @@ class UsersView extends Component {
             datos_Adicional: []
         };
     }
+
     async componentDidMount() {
         console.log('llamo interaccion : '+this.props.data)
         const body = {"id_gestion": this.props.data}
@@ -151,7 +152,7 @@ class UsersView extends Component {
                 </tbody>
             </Table>
             </Tab>
-            <Tab eventKey="DatosAdicional" title="Datos Adicional" >
+            <Tab eventKey="DatosAdicional" title="Datos Adicional">
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>

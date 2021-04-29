@@ -15,6 +15,7 @@ import Comuna from './component/comuna';
 import Ciudad from './component/ciudad';
 import UsersView from './component/viewUsers';
 import { set } from "react-hook-form";
+import { data } from "jquery";
 
 
 
@@ -32,6 +33,7 @@ export default function Users() {
     const { idinteraccion } = useParams();
     const { idcampana } = useParams();
     const { idcontactogenesys } = useParams();
+    const [getinteraccion,setinteraccion]=useState('');
     const [value,setValue]=useState('');
     const [value2,setValue2]=useState('');
     const [value3,setValue3]=useState('');
@@ -61,11 +63,8 @@ export default function Users() {
     const [formParentescoAdi,setValue28]=useState('');
     const [formNacionalidadAdi,setValue29]=useState('');
     const [formfechanacimientoAdi,setValue30]=useState('');
-    const [value6,setValue31]=useState('');
     const [formRut,setValue32]=useState('');
     const [formObservacion,setValue33]=useState('');
-    const [formRegionBenef,setValue34]=useState('');
-    const [formComunaBenef,setValue35]=useState('');
     const [formDireccionBenef,setValue36]=useState('');
     const [formRutBenef,setValue37]=useState('');
     const [formResidencia,setValue38]=useState('');
@@ -81,12 +80,6 @@ export default function Users() {
     const [regionben,setregionben]=useState('');
     const [ciudadben,setciudadben]=useState('');
     const [comunaben,setcomunaben]=useState('');
-
-    const state = {
-        persons: []
-      }
-    
-    
 
     const handleSelect=(e)=>{
         console.log(e);
@@ -157,6 +150,7 @@ export default function Users() {
                     .then(response => {console.log(response)});
                 e.preventDefault();
         setShowTitular(false)
+        
     }
     const handleSelect6=(e)=>{
         console.log(e);
@@ -169,8 +163,6 @@ export default function Users() {
         setValue20(e)
         setValue21(e)
         setValue22(e)
-        setValue34(e)
-        setValue35(e)
         setValue36(e)
         setValue37(e)
         
@@ -284,6 +276,11 @@ export default function Users() {
         document.getElementById('input-group-dropdown-4').disabled = true;
     }
     
+    function handleSelectIntereccion(){
+        return data={idinteraccion}
+    }
+
+    
     return (
         <div >
             <br></br>
@@ -379,7 +376,7 @@ export default function Users() {
                                 <Form.Control placeholder="Fecha nacimiento" type='date' />
                             </Form.Group>
                             <Form.Group as={Col} controlId="formRut" name='formRut' value={formfechanacimiento} onChange={e => setValue32(e.target.value)}>
-                                <Form.Control placeholder="Rut" />
+                                <Form.Control placeholder="Rut" required/>
                             </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -442,7 +439,7 @@ export default function Users() {
                             </Form.Row>
                             <Form.Row>
                             <Form.Group as={Col} controlId="formbutton1">
-                                <Button variant="primary" type="button" onClick={handleSelect5}>Terminar</Button>
+                                <Button variant="primary" type="button" id='btnenviar' type="submit" onClick={handleSelect5}>Terminar</Button>
                             </Form.Group>
                             </Form.Row>
                         </Form>
@@ -645,7 +642,7 @@ export default function Users() {
                     </Modal>
                     </InputGroup></Col> :null}
                 </Row>
-                <UsersView data={idinteraccion}></UsersView>
+                <UsersView data={handleSelectIntereccion}></UsersView>
             </Container>
             <HomeContainer/>
             
