@@ -1,0 +1,16 @@
+{
+  "datos": [
+    {
+      "nombre": "luciano",
+      "apPaterno": "badilla",
+      "rut": "1937239",
+      "dv": "3",
+      "direccion": "ciudad satelite",
+      "sexo": "masculino",
+      "edad": "25",
+      "mail": "lbadilla@s3chile.cl",
+      "comuna": "maipu",
+      "ciudad": "santiago"
+    }
+  ]
+}

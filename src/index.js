@@ -10,7 +10,7 @@ const routing = (
   <Router>
     <div>
       <Route path="/" component={App} />
-      <Route path="/users/:id/idcontacto/:idcontacto" component={Users} />
+      <Route path="/users/:id/idcontacto/:idcontacto/idinteraccion/:idinteraccion/idcampana/:idcampana/idcontactogenesys/:idcontactogenesys" component={Users} />
     </div>
   </Router>
 )

@@ -11,7 +11,7 @@ class HomeContainer extends Component{
         .catch(console.log)
     }
     render(){
-        return <h1>App</h1>
+        return <h1></h1>
     }
 
 }
