@@ -77,6 +77,7 @@ export default function Users() {
     const [contacto_value, setContacto_value] = useState('');
     const [ni1_value, setNi1_value] = useState('');
     const [ni2_value, setNi2_value] = useState('');
+    const [ni3_value, setNi3_value] = useState('');
     const [idRegion, setidRegion] = useState('');
     const [idciudad, setidciudad] = useState('');
     const [idcomuna, setidcomuna] = useState('');
@@ -102,7 +103,11 @@ export default function Users() {
             actualizar: false,
             actualizarBeneficiario: false,
             actualizarAdicional: false
+        },
+        dataContacto:{
+            idContacto:null
         }
+
 
     }
 
@@ -121,29 +126,66 @@ export default function Users() {
         }
 
     });
-
+    const resetearTodo =() =>{
+        setShow(false);
+        setValue('')
+        setContacto_value('')
+        console.log('seteo show')
+        setNi1_value('');
+        setValue2('')
+        setShow2(false);
+        setNi2_value('');
+        setValue3('')
+        setShow3(false);
+        setNi3_value('');
+        setShow4(false);
+        setValue4('')
+        console.log('seteo show4')
+    }
     const handleSelect = (e) => {
+        if(contacto_value!=''){
+            resetearTodo(); 
+        }else{
+            
         console.log(e);
         setShow(true);
+        console.log('CONTACTO: '+e);
         setValue(e.split('-')[1])
         setContacto_value(e.split('-')[0])
+        }
     }
     const handleSelect2 = (e) => {
+        if(ni1_value!=''){
+            resetearTodo();
+        }else{
+            
         console.log(e);
         setShow2(true);
         setValue2(e.split('-')[1])
         setNi1_value(e.split('-')[0])
+        }
     }
     const handleSelect3 = (e) => {
+        if(ni2_value!= ''){
+            resetearTodo()
+        }else{
+            
         console.log(e);
         setShow3(true);
         setValue3(e.split('-')[1])
         setNi2_value(e.split('-')[0])
+        }
     }
     const handleSelect4 = (e) => {
+        if(ni3_value != ''){
+            resetearTodo();
+        }else{
+            
         console.log(e);
         setShow4(true);
         setValue4(e.split('-')[1])
+        setNi3_value(e.split('-')[0]);
+        }
     }
     console.log('Tipificaciones: ')
 

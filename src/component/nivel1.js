@@ -23,6 +23,21 @@ class nivel1 extends Component {
             })
 
     }
+    async componentDidUpdate(){
+        console.log('llamo servicio nivel1: '+this.props.data)
+        /*this.componentWillUnmount();
+        await axios.post(baseUrl,{con_id:this.props.data })
+            .then(response => {
+                console.log('exito get_nivel1: ' + JSON.stringify(response.data));
+                this.setState({opciones_nivel1:response.data});
+            })
+            .catch(response => {
+                console.log(response + ' error get_nivel1')
+            })*/
+    }
+    componentWillUnmount(){
+        console.log('entra componentWillUnmount')
+    }
     render() {
         const { opciones_nivel1 } = this.state;
         //console.log('length evaluadores: '+evaluadores.length)
