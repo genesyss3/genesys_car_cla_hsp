@@ -42,36 +42,36 @@ export default function Users() {
     const [value2,setValue2]=useState('');
     const [value3,setValue3]=useState('');
     const [value4,setValue4]=useState('');
-    const [formTipoPlan,setValue5]=useState('');
-    const [formNombre,setValue6]=useState('');
-    const [formApPaterno,setValue7]=useState('');
-    const [formApMaterno,setValue8]=useState('');
-    const [formfechanacimiento,setValue9]=useState('');
-    const [formDireccion,setValue11]=useState('');
-    const [formTelefono,setValue12]=useState('');
-    const [formMail,setValue13]=useState('');
-    const [formNombreBenef,setValue14]=useState('');
-    const [formApPaternoBenef,setValue15]=useState('');
-    const [formApMaternoBenef,setValue16]=useState('');
-    const [formMailBenef,setValue17]=useState('');
-    const [formTelefonoBenef,setValue18]=useState('');
+    const [formTipoPlan,setFormTipoPlan]=useState('');
+    const [formNombre,setFormNombre]=useState('');
+    const [formApPaterno,setFormApPaterno]=useState('');
+    const [formApMaterno,setFormApMaterno]=useState('');
+    const [formfechanacimiento,setFormFechaNacimiento]=useState('');
+    const [formDireccion,setFormDireccion]=useState('');
+    const [formTelefono,setFormTelefono]=useState('');
+    const [formMail,setFormMail]=useState('');
+    const [formNombreBenef,setNombreBenef]=useState('');
+    const [formApPaternoBenef,setFormApPaternoBenef]=useState('');
+    const [formApMaternoBenef,setForApMaternoBenef]=useState('');
+    const [formMailBenef,setFormMailBenef]=useState('');
+    const [formTelefonoBenef,setFormTelefonoBenef]=useState('');
     const [formCiudadBenef,setValue19]=useState('');
-    const [formParentescoBenef,setValue20]=useState('');
-    const [formPorcentajeBenef,setValue21]=useState('');
-    const [formFechaNacimientoBenef,setValue22]=useState('');
-    const [formNombreAdi,setValue23]=useState('');
-    const [formApMaternoAdi,setValue24]=useState('');
-    const [formApPaternoAdi,setValue25]=useState('');
-    const [formRutAdi,setValue26]=useState('');
-    const [formProfesionAdi,setValue27]=useState('');
-    const [formParentescoAdi,setValue28]=useState('');
-    const [formNacionalidadAdi,setValue29]=useState('');
-    const [formfechanacimientoAdi,setValue30]=useState('');
-    const [formRut,setValue32]=useState('');
-    const [formObservacion,setValue33]=useState('');
-    const [formDireccionBenef,setValue36]=useState('');
-    const [formRutBenef,setValue37]=useState('');
-    const [formResidencia,setValue38]=useState('');
+    const [formParentescoBenef,setFormParentescoBenef]=useState('');
+    const [formPorcentajeBenef,setFormPorcentajeBenef]=useState('');
+    const [formFechaNacimientoBenef,setFormFechaNacimientoBenef]=useState('');
+    const [formNombreAdi,setFormNombreAdi]=useState('');
+    const [formApMaternoAdi,setFormApPaternoAdi]=useState('');
+    const [formApPaternoAdi,setFormApMaternoAdi]=useState('');
+    const [formRutAdi,setFormRutAdi]=useState('');
+    const [formProfesionAdi,setFormProfesionAdi]=useState('');
+    const [formParentescoAdi,setFormParentescoAdi]=useState('');
+    const [formNacionalidadAdi,setFormNacionalidadAdi]=useState('');
+    const [formfechanacimientoAdi,setFormFechaNacimientoAdi]=useState('');
+    const [formRut,setFormRut]=useState('');
+    const [formObservacion,setFormObservacion]=useState('');
+    const [formDireccionBenef,setFormDireccionBenef]=useState('');
+    const [formRutBenef,setFormRutBenef]=useState('');
+    const [formResidencia,setFormResidencia]=useState('');
     const [contacto_value,setContacto_value]=useState('');
     const [ni1_value,setNi1_value]=useState('');
     const [ni2_value,setNi2_value]=useState('');
@@ -117,16 +117,16 @@ export default function Users() {
 
     const handleSelect5=(e)=>{
         setShow5(true)
-        setValue5(e)
-        setValue6(e)
-        setValue7(e)
-        setValue8(e)
-        setValue9(e)
-        setValue11(e)
-        setValue12(e)
-        setValue13(e)
-        setValue32(e)
-        setValue33(e)
+        setFormTipoPlan(e)
+        setFormNombre(e)
+        setFormApPaterno(e)
+        setFormApMaterno(e)
+        setFormFechaNacimiento(e)
+        setFormDireccion(e)
+        setFormTelefono(e)
+        setFormMail(e)
+        setFormRut(e)
+        setFormObservacion(e)
         e.preventDefault();
         if (formTipoPlan== '' || formNombre== '' || formApPaterno== '' || formApMaterno== '' || formfechanacimiento== '' 
         || region== '' || comuna== '' || ciudad== '' || formDireccion== '' || formTelefono== '' || formMail== '' || formRut== '' || formObservacion== ''){
@@ -135,7 +135,12 @@ export default function Users() {
         else{
             function pruebaemail (formMail){
                 const isValid = clRut.validate(formRut);
-                if (isValid != true){
+                var hoy = new Date();
+                if (hoy >= formfechanacimiento) {
+                    alert('la fecha de nacimiento no puede ser mayor a la actual')
+                    console.log("Fecha a partir de hoy");
+                }
+                if (isValid == false){
                     alert('rut no valido');
                 }
                 const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
@@ -143,33 +148,41 @@ export default function Users() {
                     alert('email no valido');
                 }
                 else {
-                    // inicio post
+                    const titular = {
+                        id_gestion: idinteraccion,
+                        id_contacto: idcontacto,
+                        id_campana: idcampana,
+                        id_contacto_genesys: idcontactogenesys,
+                        id_ejecutivo: id,
+                        TipoPlan: formTipoPlan,
+                        Nombre: formNombre,
+                        ApPaterno: formApPaterno,
+                        ApMaterno: formApMaterno,
+                        fechanacimiento: formfechanacimiento,
+                        Region: region,
+                        Comuna: comuna,
+                        Ciudad: ciudad,
+                        Direccion: formDireccion,
+                        Telefono: formTelefono,
+                        Mail: formMail,
+                        Rut: formRut,
+                        Observacion: formObservacion,
+                    }
+                    const titulares = {
+                        titulares: [titular]
+                    }
+
+                    titular.titulares = titulares;
+
                     const requestOptions = {
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/json',
                             'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
                         },
-                        body: JSON.stringify({
-                                id_gestion: idinteraccion,
-                                id_contacto: idcontacto,
-                                id_campana: idcampana,
-                                id_contacto_genesys: idcontactogenesys,
-                                id_ejecutivo: id,
-                                TipoPlan: formTipoPlan,
-                                Nombre: formNombre,
-                                ApPaterno: formApPaterno,
-                                ApMaterno: formApMaterno,
-                                fechanacimiento: formfechanacimiento,
-                                Region: region,
-                                Comuna: comuna,
-                                Ciudad: ciudad,
-                                Direccion: formDireccion,
-                                Telefono: formTelefono,
-                                Mail: formMail,
-                                Rut: formRut,
-                                Observacion: formObservacion,
-                            }),
+                        body: JSON.stringify(titular, ['id_gestion','id_contacto','id_campana','id_contacto_genesys',
+                        'id_ejecutivo','TipoPlan','Nombre','ApPaterno','ApMaterno','fechanacimiento','Region','Comuna',
+                        'Ciudad','Direccion','Telefono','Mail','Rut','Observacion']),
                     };
                     fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
                     .then(response => response.json()).then(response => {console.log(response)});
@@ -182,17 +195,17 @@ export default function Users() {
     }
     const handleSelect6=(e)=>{
         console.log(e);
-        setValue14(e)
-        setValue15(e)
-        setValue16(e)
-        setValue17(e)
-        setValue18(e)
+        setNombreBenef(e)
+        setFormApPaternoBenef(e)
+        setForApMaternoBenef(e)
+        setFormMailBenef(e)
+        setFormTelefonoBenef(e)
         setValue19(e)
-        setValue20(e)
-        setValue21(e)
-        setValue22(e)
-        setValue36(e)
-        setValue37(e)
+        setFormParentescoBenef(e)
+        setFormPorcentajeBenef(e)
+        setFormFechaNacimientoBenef(e)
+        setFormDireccionBenef(e)
+        setFormRutBenef(e)
         e.preventDefault();
         if(formNombreBenef == '' || formApPaternoBenef == '' || formApMaternoBenef == '' || formTelefonoBenef == '' || formMailBenef == ''
          || formFechaNacimientoBenef == '' || comunaben == '' || regionben == '' || ciudadben == '' || formDireccionBenef == ''
@@ -203,11 +216,14 @@ export default function Users() {
             function pruebaemail (formMailBenef){
                 const isValid = clRut.validate(formRutBenef);
                 const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-                if (isValid != true){
+                if (isValid == false){
                     alert('rut no valido');
+                    console.log("validando: "+isValid)
                 }
-                if (isValid != true){
-                    alert('rut no valido');
+                var hoy = new Date();
+                if (hoy >= formFechaNacimientoBenef) {
+                    alert('la fecha de nacimiento no puede ser mayor a la actual')
+                    console.log("Fecha a partir de hoy");
                 }
                 if(!re.exec(formMailBenef)){
                     alert('email no valido');
@@ -245,7 +261,8 @@ export default function Users() {
                             'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
                         },
                         body: JSON.stringify(beneficiario, ['id_gestion','id_contacto','id_campana','id_contacto_genesys',
-                        'id_ejecutivo','Nombre','ApPaterno','ApMaterno','Telefono','Mail','Fechanacimiento','Comuna','Region','Ciudad','Direccion','Parentesco','Porcentaje','Rut']),
+                        'id_ejecutivo','Nombre','ApPaterno','ApMaterno','Telefono','Mail','Fechanacimiento','Comuna','Region',
+                        'Ciudad','Direccion','Parentesco','Porcentaje','Rut']),
                     };
                     fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario', requestOptions)
                     .then(response => response.json())
@@ -259,15 +276,15 @@ export default function Users() {
     }
     const handleSelect7=(e)=>{
         console.log(e);
-        setValue23(e)
-        setValue24(e)
-        setValue25(e)
-        setValue26(e)
-        setValue27(e)
-        setValue28(e)
-        setValue29(e)
-        setValue30(e)
-        setValue38(e)
+        setFormNombreAdi(e)
+        setFormApPaternoAdi(e)
+        setFormApMaternoAdi(e)
+        setFormRutAdi(e)
+        setFormProfesionAdi(e)
+        setFormParentescoAdi(e)
+        setFormNacionalidadAdi(e)
+        setFormFechaNacimientoAdi(e)
+        setFormResidencia(e)
         e.preventDefault();
         const isValid = clRut.validate(formRutAdi);
         if(formNombreAdi == '' || formApPaternoAdi == '' || formApMaternoAdi == ''
@@ -442,28 +459,28 @@ export default function Users() {
                         <Modal.Body>
                         <Form name="datosTitular" >
                             <Form.Row>
-                            <Form.Group as={Col} controlId="formTipoPlan" value={formTipoPlan} onChange={e => setValue5(e.target.value)} name='formTipoPlan' >
+                            <Form.Group as={Col} controlId="formTipoPlan" value={formTipoPlan} onChange={e => setFormTipoPlan(e.target.value)} name='formTipoPlan' >
                                 <Form.Control as="select">
                                 <option>Tipo Plan</option>
                                 <option>Plan 01</option>
                                 <option>Plan 02</option>
                                 </Form.Control>
                             </Form.Group>  
-                            <Form.Group as={Col} controlId="formNombre" name='formNombre'  value={formNombre} onChange={e => setValue6(e.target.value)}>
+                            <Form.Group as={Col} controlId="formNombre" name='formNombre'  value={formNombre} onChange={e => setFormNombre(e.target.value)}>
                                 <Form.Control placeholder="Nombre" />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formApPaterno" name='formApPaterno' value={formApPaterno} onChange={e => setValue7(e.target.value)}>
+                            <Form.Group as={Col} controlId="formApPaterno" name='formApPaterno' value={formApPaterno} onChange={e => setFormApPaterno(e.target.value)}>
                                 <Form.Control placeholder="Ap Paterno" />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formApMaterno" name='formApMaterno' value={formApMaterno} onChange={e => setValue8(e.target.value)}>
+                            <Form.Group as={Col} controlId="formApMaterno" name='formApMaterno' value={formApMaterno} onChange={e => setFormApMaterno(e.target.value)}>
                                 <Form.Control placeholder="Ap Materno" />
                             </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                            <Form.Group as={Col} controlId="formfechanacimiento" name='formfechanacimiento' value={formfechanacimiento} onChange={e => setValue9(e.target.value)}>
+                            <Form.Group as={Col} controlId="formfechanacimiento" name='formfechanacimiento' value={formfechanacimiento} onChange={e => setFormFechaNacimiento(e.target.value)}>
                                 <Form.Control placeholder="Fecha nacimiento" type='date' />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formRut" name='formRut' value={formfechanacimiento} onChange={e => setValue32(e.target.value)} >
+                            <Form.Group as={Col} controlId="formRut" name='formRut' value={formRut} onChange={e => setFormRut(e.target.value)} >
                                 <Form.Control placeholder="11111111-1"/>
                             </Form.Group>
                             </Form.Row>
@@ -510,18 +527,18 @@ export default function Users() {
                                 </FormGroup>
                             </Form.Row>
                             <Form.Row>
-                            <Form.Group as={Col} controlId="formDireccion" name='formDireccion' value={formDireccion} onChange={e => setValue11(e.target.value)}>
+                            <Form.Group as={Col} controlId="formDireccion" name='formDireccion' value={formDireccion} onChange={e => setFormDireccion(e.target.value)}>
                                 <Form.Control placeholder="Direccion" />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formTelefono" name='formTelefono' value={formTelefono} onChange={e => setValue12(e.target.value)}> 
+                            <Form.Group as={Col} controlId="formTelefono" name='formTelefono' value={formTelefono} onChange={e => setFormTelefono(e.target.value)}> 
                                 <Form.Control placeholder="Telefono" typer="number"/>
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formMail" name='formMail' value={formMail} onChange={e => setValue13(e.target.value)}>
+                            <Form.Group as={Col} controlId="formMail" name='formMail' value={formMail} onChange={e => setFormMail(e.target.value)}>
                                 <Form.Control placeholder="Mail" type='email'/>
                             </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                            <Form.Group as={Col} controlId="formObservacion" name='formObservacion' value={formfechanacimiento} onChange={e => setValue33(e.target.value)}>
+                            <Form.Group as={Col} controlId="formObservacion" name='formObservacion' value={formfechanacimiento} onChange={e => setFormObservacion(e.target.value)}>
                                 <Form.Control placeholder="Observaciones"/>
                             </Form.Group>
                             </Form.Row>
@@ -557,16 +574,16 @@ export default function Users() {
                     <Modal.Body>
                     <Form>
                     <Form.Row>  
-                    <Form.Group as={Col} controlId="formNombre" value={formNombreBenef} onChange={e => setValue14(e.target.value)}>
+                    <Form.Group as={Col} controlId="formNombre" value={formNombreBenef} onChange={e => setNombreBenef(e.target.value)}>
                     <Form.Control placeholder="Nombre" />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formApPaterno" value={formApPaternoBenef} onChange={e => setValue15(e.target.value)}>
+                    <Form.Group as={Col} controlId="formApPaterno" value={formApPaternoBenef} onChange={e => setFormApPaternoBenef(e.target.value)}>
                     <Form.Control placeholder="Ap Paterno" />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formApMaterno" value={formApMaternoBenef} onChange={e => setValue16(e.target.value)}>
+                    <Form.Group as={Col} controlId="formApMaterno" value={formApMaternoBenef} onChange={e => setForApMaternoBenef(e.target.value)}>
                     <Form.Control placeholder="Ap Materno" />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formRut" value={formRutBenef} onChange={e => setValue16(e.target.value)}>
+                    <Form.Group as={Col} controlId="formRutBenef" value={formRutBenef} onChange={e => setFormRutBenef(e.target.value)}>
                     <Form.Control placeholder="11111111-1" />
                     </Form.Group>
                     </Form.Row>
@@ -613,18 +630,18 @@ export default function Users() {
                         </FormGroup>
                     </Form.Row>
                     <Form.Row>
-                    <Form.Group as={Col} controlId="formDireccion" value={formDireccionBenef} onChange={e => setValue36(e.target.value)}>
+                    <Form.Group as={Col} controlId="formDireccion" value={formDireccionBenef} onChange={e => setFormDireccionBenef(e.target.value)}>
                     <Form.Control placeholder="Direccion" />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formfechanacimiento" value={formFechaNacimientoBenef} onChange={e => setValue22(e.target.value)}>
+                    <Form.Group as={Col} controlId="formfechanacimiento" value={formFechaNacimientoBenef} onChange={e => setFormFechaNacimientoBenef(e.target.value)}>
                     <Form.Control placeholder="Fecha nacimiento" type='date'/>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formTelefono" value={formTelefonoBenef} onChange={e => setValue18(e.target.value)}>
+                    <Form.Group as={Col} controlId="formTelefono" value={formTelefonoBenef} onChange={e => setFormTelefonoBenef(e.target.value)}>
                     <Form.Control placeholder="Telefono" />
                     </Form.Group>   
                     </Form.Row>
                     <Form.Row>
-                    <Form.Group as={Col} controlId="formParentesco" value={formParentescoBenef} onChange={e => setValue20(e.target.value)}>
+                    <Form.Group as={Col} controlId="formParentesco" value={formParentescoBenef} onChange={e => setFormParentescoBenef(e.target.value)}>
                     <Form.Control as="select">
                     <option>Parentesco</option>
                     <option>Padre</option>
@@ -634,7 +651,7 @@ export default function Users() {
                     <option>Espos@</option>
                     </Form.Control>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formPorcentaje" value={formPorcentajeBenef} onChange={e => setValue21(e.target.value)}>
+                    <Form.Group as={Col} controlId="formPorcentaje" value={formPorcentajeBenef} onChange={e => setFormPorcentajeBenef(e.target.value)}>
                     <Form.Control as="select">
                     <option>Porecentaje</option>
                     <option>1</option>
@@ -648,7 +665,7 @@ export default function Users() {
                     </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                    <Form.Group as={Col} controlId="feormMail" value={formMailBenef} onChange={e => setValue17(e.target.value)}>
+                    <Form.Group as={Col} controlId="feormMail" value={formMailBenef} onChange={e => setFormMailBenef(e.target.value)}>
                     <Form.Control placeholder="Mail" type='email'/>
                     </Form.Group>
                     </Form.Row>
@@ -675,24 +692,24 @@ export default function Users() {
                     <Modal.Body>
                     <Form>
                     <Form.Row> 
-                    <Form.Group as={Col} controlId="formNombre" value={formNombreAdi} onChange={e => setValue23(e.target.value)}> 
+                    <Form.Group as={Col} controlId="formNombre" value={formNombreAdi} onChange={e => setFormNombreAdi(e.target.value)}> 
                     <Form.Control placeholder="Nombre" />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formApPaterno" value={formApPaternoAdi} onChange={e => setValue25(e.target.value)}>
+                    <Form.Group as={Col} controlId="formApPaterno" value={formApPaternoAdi} onChange={e => setFormApMaternoAdi(e.target.value)}>
                     <Form.Control placeholder="Ap Paterno" />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formApMaterno" value={formApMaternoAdi} onChange={e => setValue24(e.target.value)}>
+                    <Form.Group as={Col} controlId="formApMaterno" value={formApMaternoAdi} onChange={e => setFormApPaternoAdi(e.target.value)}>
                     <Form.Control placeholder="Ap Materno" />
                     </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                    <Form.Group as={Col} controlId="formfechanacimiento" value={formfechanacimientoAdi} onChange={e => setValue30(e.target.value)}>
+                    <Form.Group as={Col} controlId="formfechanacimiento" value={formfechanacimientoAdi} onChange={e => setFormFechaNacimientoAdi(e.target.value)}>
                     <Form.Control placeholder="Fecha nacimiento" type='date'/>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formRut" value={formRutAdi} onChange={e => setValue26(e.target.value)}>
+                    <Form.Group as={Col} controlId="formRutAdi" value={formRutAdi} onChange={e => setFormRutAdi(e.target.value)}>
                     <Form.Control placeholder="11111111-1" />
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formparentesco" value={formParentescoAdi} onChange={e => setValue28(e.target.value)}>
+                    <Form.Group as={Col} controlId="formparentesco" value={formParentescoAdi} onChange={e => setFormParentescoAdi(e.target.value)}>
                     <Form.Control as="select">
                     <option>Parentesco</option>
                     <option>Padre</option>
@@ -704,19 +721,19 @@ export default function Users() {
                     </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                    <Form.Group as={Col} controlId="formNacionalidad" value={formNacionalidadAdi} onChange={e => setValue29(e.target.value)}>
+                    <Form.Group as={Col} controlId="formNacionalidad" value={formNacionalidadAdi} onChange={e => setFormNacionalidadAdi(e.target.value)}>
                     <Form.Control as="select">
                     <option>Nacionalidad</option>
                     <option>Chilena</option>
                     <option>Extranjero</option>
                     </Form.Control>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formProfesion" value={formProfesionAdi} onChange={e => setValue27(e.target.value)}>
+                    <Form.Group as={Col} controlId="formProfesion" value={formProfesionAdi} onChange={e => setFormProfesionAdi(e.target.value)}>
                     <Form.Control placeholder="Profesión" />
                     </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                    <Form.Group as={Col} controlId="formResidencia" value={formResidencia} onChange={e => setValue38(e.target.value)}>
+                    <Form.Group as={Col} controlId="formResidencia" value={formResidencia} onChange={e => setFormResidencia(e.target.value)}>
                     <Form.Control placeholder="Residencia" />
                     </Form.Group>
                     </Form.Row>
