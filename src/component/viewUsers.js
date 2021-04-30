@@ -18,7 +18,8 @@ class UsersView extends Component {
             datos_Adicional: [],
             datos_interaccion:{
                 actualizar:true,
-                actualizarBeneficiario: true
+                actualizarBeneficiario: true,
+                actualizarAdicional: true
             }
         };
     }
@@ -71,6 +72,13 @@ class UsersView extends Component {
                 actualizarBeneficiario:false
             }})
         }
+        if(this.props.data.actualizarAdicional == true && this.state.datos_interaccion.actualizarAdicional == true){
+            console.log('a actualizarBeneficiario mierda;');
+            this._commitAutoSaveBeneficiario();
+            this.setState({datos_interaccion:{
+                actualizarAdicional:false
+            }})
+        }
     
     }
 
@@ -96,6 +104,18 @@ class UsersView extends Component {
         })
         .catch(response => {
             console.log(response + ' error POST Beneficiario')
+        })
+      }
+      async _commitAutoSaveAdicional(){
+        console.log('llamo interaccion : '+this.props.data.idinteraccion)
+        const body = {"id_gestion": this.props.data.idinteraccion}
+        await axios.post(baseUrlAdicional,body)
+        .then(response => {
+            console.log('exito al enviar POST Adicional: ' + JSON.stringify(response.data));
+            this.setState({datos_Adicional:response.data});
+        })
+        .catch(response => {
+            console.log(response + ' error POST Adicional')
         })
       }
     render(){
