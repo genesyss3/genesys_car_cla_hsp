@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FormControl, InputGroup, Table, Row, Col, Container } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+
 
 
 const UsersList = () =>{
   const [data, setData] = useState([])
+  const { id_contacto } = useParams();
   const url = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/post_data_client'
   const authorizationToken = '&S396b<eg5Zn(HiLe)BBNtc&'
-  const body = {"id_contacto":"3"};
+  const body = {"id_contacto":id_contacto};
 
   useEffect(() => {
     const fetchData = async () => {

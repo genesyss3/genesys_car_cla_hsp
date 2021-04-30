@@ -131,65 +131,67 @@ export default function Users() {
             alert('debe completar todos los campos')
         }
         else{
-            function pruebaemail (formMail){
-                const isValid = clRut.validate(formRut);
-                if (isValid == false){
-                    alert('rut no valido, por favor escribir nuevamente');
-                    document.getElementById('formRut').value = '';
-                }
-                const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-                if(!re.exec(formMail)){
-                    alert('email no valido, por favor escribir nuevamente');
-                    document.getElementById('formMail').value = '';
-                }
-                else {
-                    const titular = {
-                        id_gestion: idinteraccion,
-                        id_contacto: idcontacto,
-                        id_campana: idcampana,
-                        id_contacto_genesys: idcontactogenesys,
-                        id_ejecutivo: id,
-                        TipoPlan: formTipoPlan,
-                        Nombre: formNombre,
-                        ApPaterno: formApPaterno,
-                        ApMaterno: formApMaterno,
-                        fechanacimiento: formfechanacimiento,
-                        Region: region,
-                        Comuna: comuna,
-                        Ciudad: ciudad,
-                        Direccion: formDireccion,
-                        Telefono: formTelefono,
-                        Mail: formMail,
-                        Rut: formRut,
-                        Observacion: formObservacion,
+            const isValid = clRut.validate(formRut);
+            if (isValid == false){
+                alert('rut no valido, por favor escribir nuevamente');
+                console.log("valida rut "+ isValid + 'rut: ' + formRut)
+                document.getElementById('formRut').value = '';
+            }else{
+                function pruebaemail (formMail){
+                    const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+                    if(!re.exec(formMail)){
+                        alert('email no valido, por favor escribir nuevamente');
+                        document.getElementById('formMail').value = '';
                     }
-                    const titulares = {
-                        titulares: [titular]
-                    }
+                    else {
+                        const titular = {
+                            id_gestion: idinteraccion,
+                            id_contacto: idcontacto,
+                            id_campana: idcampana,
+                            id_contacto_genesys: idcontactogenesys,
+                            id_ejecutivo: id,
+                            TipoPlan: formTipoPlan,
+                            Nombre: formNombre,
+                            ApPaterno: formApPaterno,
+                            ApMaterno: formApMaterno,
+                            fechanacimiento: formfechanacimiento,
+                            Region: region,
+                            Comuna: comuna,
+                            Ciudad: ciudad,
+                            Direccion: formDireccion,
+                            Telefono: formTelefono,
+                            Mail: formMail,
+                            Rut: formRut,
+                            Observacion: formObservacion,
+                        }
+                        const titulares = {
+                            titulares: [titular]
+                        }
 
-                    titular.titulares = titulares;
+                        titular.titulares = titulares;
 
-                    const requestOptions = {
-                        method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json',
-                            'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
-                        },
-                        body: JSON.stringify(titular, ['id_gestion','id_contacto','id_campana','id_contacto_genesys',
-                        'id_ejecutivo','TipoPlan','Nombre','ApPaterno','ApMaterno','fechanacimiento','Region','Comuna',
-                        'Ciudad','Direccion','Telefono','Mail','Rut','Observacion']),
-                    };
-                    if (isValid == true){
-                        fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
-                        .then(response => response.json()).then(response => {console.log(response)});
-                        e.preventDefault();
-                        setShowTitular(false)
-                        document.getElementById('guardar_tipificacion').disabled = true;
+                        const requestOptions = {
+                            method: 'POST',
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+                            },
+                            body: JSON.stringify(titular, ['id_gestion','id_contacto','id_campana','id_contacto_genesys',
+                            'id_ejecutivo','TipoPlan','Nombre','ApPaterno','ApMaterno','fechanacimiento','Region','Comuna',
+                            'Ciudad','Direccion','Telefono','Mail','Rut','Observacion']),
+                        };
+                        if (isValid == true){
+                            fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
+                            .then(response => response.json()).then(response => {console.log(response)});
+                            e.preventDefault();
+                            setShowTitular(false)
+                            document.getElementById('guardar_tipificacion').disabled = true;
+                        }
+                        
                     }
-                    
                 }
+                pruebaemail(formMail);
             }
-            pruebaemail(formMail);
         }
     }
     const handleSelect6=(e)=>{
