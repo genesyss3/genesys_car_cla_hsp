@@ -39,54 +39,52 @@ export default function Users() {
     const { idinteraccion } = useParams();
     const { idcampana } = useParams();
     const { idcontactogenesys } = useParams();
-    const [getinteraccion, setinteraccion] = useState('');
-    const [value, setValue] = useState('');
-    const [value2, setValue2] = useState('');
-    const [value3, setValue3] = useState('');
-    const [value4, setValue4] = useState('');
-    const [formTipoPlan, setFormTipoPlan] = useState('');
-    const [formNombre, setFormNombre] = useState('');
-    const [formApPaterno, setFormApPaterno] = useState('');
-    const [formApMaterno, setFormApMaterno] = useState('');
-    const [formfechanacimiento, setFormFechaNacimiento] = useState('');
-    const [formDireccion, setFormDireccion] = useState('');
-    const [formTelefono, setFormTelefono] = useState('');
-    const [formMail, setFormMail] = useState('');
-    const [formNombreBenef, setNombreBenef] = useState('');
-    const [formApPaternoBenef, setFormApPaternoBenef] = useState('');
-    const [formApMaternoBenef, setForApMaternoBenef] = useState('');
-    const [formMailBenef, setFormMailBenef] = useState('');
-    const [formTelefonoBenef, setFormTelefonoBenef] = useState('');
-    const [formCiudadBenef, setValue19] = useState('');
-    const [formParentescoBenef, setFormParentescoBenef] = useState('');
-    const [formPorcentajeBenef, setFormPorcentajeBenef] = useState('');
-    const [formFechaNacimientoBenef, setFormFechaNacimientoBenef] = useState('');
-    const [formNombreAdi, setFormNombreAdi] = useState('');
-    const [formApMaternoAdi, setFormApPaternoAdi] = useState('');
-    const [formApPaternoAdi, setFormApMaternoAdi] = useState('');
-    const [formRutAdi, setFormRutAdi] = useState('');
-    const [formProfesionAdi, setFormProfesionAdi] = useState('');
-    const [formParentescoAdi, setFormParentescoAdi] = useState('');
-    const [formNacionalidadAdi, setFormNacionalidadAdi] = useState('');
-    const [formfechanacimientoAdi, setFormFechaNacimientoAdi] = useState('');
-    const [formRut, setFormRut] = useState('');
-    const [formObservacion, setFormObservacion] = useState('');
-    const [formDireccionBenef, setFormDireccionBenef] = useState('');
-    const [formRutBenef, setFormRutBenef] = useState('');
-    const [formResidencia, setFormResidencia] = useState('');
-    const [contacto_value, setContacto_value] = useState('');
-    const [ni1_value, setNi1_value] = useState('');
-    const [ni2_value, setNi2_value] = useState('');
+    const [value,setValue]=useState('');
+    const [value2,setValue2]=useState('');
+    const [value3,setValue3]=useState('');
+    const [value4,setValue4]=useState('');
+    const [formTipoPlan,setFormTipoPlan]=useState('');
+    const [formNombre,setFormNombre]=useState('');
+    const [formApPaterno,setFormApPaterno]=useState('');
+    const [formApMaterno,setFormApMaterno]=useState('');
+    const [formfechanacimiento,setFormFechaNacimiento]=useState('');
+    const [formDireccion,setFormDireccion]=useState('');
+    const [formTelefono,setFormTelefono]=useState('');
+    const [formMail,setFormMail]=useState('');
+    const [formNombreBenef,setNombreBenef]=useState('');
+    const [formApPaternoBenef,setFormApPaternoBenef]=useState('');
+    const [formApMaternoBenef,setForApMaternoBenef]=useState('');
+    const [formMailBenef,setFormMailBenef]=useState('');
+    const [formTelefonoBenef,setFormTelefonoBenef]=useState('');
+    const [formParentescoBenef,setFormParentescoBenef]=useState('');
+    const [formPorcentajeBenef,setFormPorcentajeBenef]=useState('');
+    const [formFechaNacimientoBenef,setFormFechaNacimientoBenef]=useState('');
+    const [formNombreAdi,setFormNombreAdi]=useState('');
+    const [formApMaternoAdi,setFormApPaternoAdi]=useState('');
+    const [formApPaternoAdi,setFormApMaternoAdi]=useState('');
+    const [formRutAdi,setFormRutAdi]=useState('');
+    const [formProfesionAdi,setFormProfesionAdi]=useState('');
+    const [formParentescoAdi,setFormParentescoAdi]=useState('');
+    const [formNacionalidadAdi,setFormNacionalidadAdi]=useState('');
+    const [formfechanacimientoAdi,setFormFechaNacimientoAdi]=useState('');
+    const [formRut,setFormRut]=useState('');
+    const [formObservacion,setFormObservacion]=useState('');
+    const [formDireccionBenef,setFormDireccionBenef]=useState('');
+    const [formRutBenef,setFormRutBenef]=useState('');
+    const [formResidencia,setFormResidencia]=useState('');
+    const [contacto_value,setContacto_value]=useState('');
+    const [ni1_value,setNi1_value]=useState('');
+    const [ni2_value,setNi2_value]=useState('');
     const [ni3_value, setNi3_value] = useState('');
-    const [idRegion, setidRegion] = useState('');
-    const [idciudad, setidciudad] = useState('');
-    const [idcomuna, setidcomuna] = useState('');
-    const [region, setregion] = useState('');
-    const [ciudad, setciudad] = useState('');
-    const [comuna, setcomuna] = useState('');
-    const [regionben, setregionben] = useState('');
-    const [ciudadben, setciudadben] = useState('');
-    const [comunaben, setcomunaben] = useState('');
+    const [idRegion,setidRegion]=useState('');
+    const [idciudad,setidciudad]=useState('');
+    const [idcomuna,setidcomuna]=useState('');
+    const [region,setregion]=useState('');
+    const [ciudad,setciudad]=useState('');
+    const [comuna,setcomuna]=useState('');
+    const [regionben,setregionben]=useState('');
+    const [ciudadben,setciudadben]=useState('');
+    const [comunaben,setcomunaben]=useState('');
     const calculated = clRut.calculate(formRut);
     const verififer = clRut.verifier(formRut);
     const formatted = clRut.format(formRut);
@@ -104,8 +102,8 @@ export default function Users() {
             actualizarBeneficiario: false,
             actualizarAdicional: false
         },
-        dataContacto:{
-            idContacto:null
+        dataContacto: {
+            idContacto: null
         }
 
 
@@ -126,7 +124,7 @@ export default function Users() {
         }
 
     });
-    const resetearTodo =() =>{
+    const resetearTodo = () => {
         setShow(false);
         setValue('')
         setContacto_value('')
@@ -143,121 +141,126 @@ export default function Users() {
         console.log('seteo show4')
     }
     const handleSelect = (e) => {
-        if(contacto_value!=''){
-            resetearTodo(); 
-        }else{
-            
-        console.log(e);
-        setShow(true);
-        console.log('CONTACTO: '+e);
-        setValue(e.split('-')[1])
-        setContacto_value(e.split('-')[0])
+        if (contacto_value != '') {
+            resetearTodo();
+        } else {
+
+            console.log(e);
+            setShow(true);
+            console.log('CONTACTO: ' + e);
+            setValue(e.split('-')[1])
+            setContacto_value(e.split('-')[0])
         }
     }
     const handleSelect2 = (e) => {
-        if(ni1_value!=''){
+        if (ni1_value != '') {
             resetearTodo();
-        }else{
-            
-        console.log(e);
-        setShow2(true);
-        setValue2(e.split('-')[1])
-        setNi1_value(e.split('-')[0])
+        } else {
+
+            console.log(e);
+            setShow2(true);
+            setValue2(e.split('-')[1])
+            setNi1_value(e.split('-')[0])
         }
     }
     const handleSelect3 = (e) => {
-        if(ni2_value!= ''){
+        if (ni2_value != '') {
             resetearTodo()
-        }else{
-            
-        console.log(e);
-        setShow3(true);
-        setValue3(e.split('-')[1])
-        setNi2_value(e.split('-')[0])
+        } else {
+
+            console.log(e);
+            setShow3(true);
+            setValue3(e.split('-')[1])
+            setNi2_value(e.split('-')[0])
         }
     }
     const handleSelect4 = (e) => {
-        if(ni3_value != ''){
+        if (ni3_value != '') {
             resetearTodo();
-        }else{
-            
-        console.log(e);
-        setShow4(true);
-        setValue4(e.split('-')[1])
-        setNi3_value(e.split('-')[0]);
+        } else {
+
+            console.log(e);
+            setShow4(true);
+            setValue4(e.split('-')[1])
+            setNi3_value(e.split('-')[0]);
         }
     }
     console.log('Tipificaciones: ')
+    document.getElementById('guardar_tipificacion').disabled = false;
+}
 
-    const handleSelect5 = (e) => {
-        setShow5(true)
-        setFormTipoPlan(e)
-        setFormNombre(e)
-        setFormApPaterno(e)
-        setFormApMaterno(e)
-        setFormFechaNacimiento(e)
-        setFormDireccion(e)
-        setFormTelefono(e)
-        setFormMail(e)
-        setFormRut(e)
-        setFormObservacion(e)
-        e.preventDefault();
-        if (formTipoPlan == '' || formNombre == '' || formApPaterno == '' || formApMaterno == '' || formfechanacimiento == ''
-            || region == '' || comuna == '' || ciudad == '' || formDireccion == '' || formTelefono == '' || formMail == '' || formRut == '' || formObservacion == '') {
-            alert('debe completar todos los campos')
-        }
-        else {
-            function pruebaemail(formMail) {
-                const isValid = clRut.validate(formRut);
-                var hoy = new Date();
-                if (hoy >= formfechanacimiento) {
-                    alert('la fecha de nacimiento no puede ser mayor a la actual')
-                    console.log("Fecha a partir de hoy");
+const handleSelect5 = (e) => {
+    setShow5(true)
+    setFormTipoPlan(e)
+    setFormNombre(e)
+    setFormApPaterno(e)
+    setFormApMaterno(e)
+    setFormFechaNacimiento(e)
+    setFormDireccion(e)
+    setFormTelefono(e)
+    setFormMail(e)
+    setFormRut(e)
+    setFormObservacion(e)
+    e.preventDefault();
+    if (formTipoPlan == '' || formNombre == '' || formApPaterno == '' || formApMaterno == '' || formfechanacimiento == ''
+        || region == '' || comuna == '' || ciudad == '' || formDireccion == '' || formTelefono == '' || formMail == '' || formRut == '' || formObservacion == '') {
+        alert('debe completar todos los campos')
+    }
+    else {
+        function pruebaemail(formMail) {
+            const isValid = clRut.validate(formRut);
+            var hoy = new Date();
+            if (formfechanacimiento <= hoy) {
+                alert('la fecha de nacimiento no puede ser mayor a la actual')
+                console.log("Fecha a partir de hoy");
+            }
+            if (isValid == false) {
+                alert('rut no valido, por favor escribir nuevamente');
+                document.getElementById('formRut').value = '';
+            }
+            const re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+            if (!re.exec(formMail)) {
+                alert('email no valido, por favor escribir nuevamente');
+                document.getElementById('formMail').value = '';
+            }
+            else {
+                const titular = {
+                    id_gestion: idinteraccion,
+                    id_contacto: idcontacto,
+                    id_campana: idcampana,
+                    id_contacto_genesys: idcontactogenesys,
+                    id_ejecutivo: id,
+                    TipoPlan: formTipoPlan,
+                    Nombre: formNombre,
+                    ApPaterno: formApPaterno,
+                    ApMaterno: formApMaterno,
+                    fechanacimiento: formfechanacimiento,
+                    Region: region,
+                    Comuna: comuna,
+                    Ciudad: ciudad,
+                    Direccion: formDireccion,
+                    Telefono: formTelefono,
+                    Mail: formMail,
+                    Rut: formRut,
+                    Observacion: formObservacion,
                 }
-                if (isValid == false) {
-                    alert('rut no valido');
+                const titulares = {
+                    titulares: [titular]
                 }
-                const re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-                if (!re.exec(formMail)) {
-                    alert('email no valido');
-                }
-                else {
-                    const titular = {
-                        id_gestion: idinteraccion,
-                        id_contacto: idcontacto,
-                        id_campana: idcampana,
-                        id_contacto_genesys: idcontactogenesys,
-                        id_ejecutivo: id,
-                        TipoPlan: formTipoPlan,
-                        Nombre: formNombre,
-                        ApPaterno: formApPaterno,
-                        ApMaterno: formApMaterno,
-                        fechanacimiento: formfechanacimiento,
-                        Region: region,
-                        Comuna: comuna,
-                        Ciudad: ciudad,
-                        Direccion: formDireccion,
-                        Telefono: formTelefono,
-                        Mail: formMail,
-                        Rut: formRut,
-                        Observacion: formObservacion,
-                    }
-                    const titulares = {
-                        titulares: [titular]
-                    }
 
-                    titular.titulares = titulares;
+                titular.titulares = titulares;
 
-                    const requestOptions = {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
-                        },
-                        body: JSON.stringify(titular, ['id_gestion', 'id_contacto', 'id_campana', 'id_contacto_genesys',
-                            'id_ejecutivo', 'TipoPlan', 'Nombre', 'ApPaterno', 'ApMaterno', 'fechanacimiento', 'Region', 'Comuna',
-                            'Ciudad', 'Direccion', 'Telefono', 'Mail', 'Rut', 'Observacion']),
-                    };
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+                    },
+                    body: JSON.stringify(titular, ['id_gestion', 'id_contacto', 'id_campana', 'id_contacto_genesys',
+                        'id_ejecutivo', 'TipoPlan', 'Nombre', 'ApPaterno', 'ApMaterno', 'fechanacimiento', 'Region', 'Comuna',
+                        'Ciudad', 'Direccion', 'Telefono', 'Mail', 'Rut', 'Observacion']),
+                };
+                if (isValid == true) {
                     fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
                         .then(response => {
                             setShowTable(false);
@@ -269,82 +272,80 @@ export default function Users() {
                     e.preventDefault();
                     setShowTitular(false)
                 }
+
             }
-            pruebaemail(formMail);
         }
+        pruebaemail(formMail);
     }
-    const handleSelect6 = async (e) => {
-        console.log(e);
-        setNombreBenef(e)
-        setFormApPaternoBenef(e)
-        setForApMaternoBenef(e)
-        setFormMailBenef(e)
-        setFormTelefonoBenef(e)
-        setValue19(e)
-        setFormParentescoBenef(e)
-        setFormPorcentajeBenef(e)
-        setFormFechaNacimientoBenef(e)
-        setFormDireccionBenef(e)
-        setFormRutBenef(e)
-        e.preventDefault();
-        if (formNombreBenef == '' || formApPaternoBenef == '' || formApMaternoBenef == '' || formTelefonoBenef == '' || formMailBenef == ''
-            || formFechaNacimientoBenef == '' || comunaben == '' || regionben == '' || ciudadben == '' || formDireccionBenef == ''
-            || formParentescoBenef == '' || formPorcentajeBenef == '' || formRutBenef == '') {
-            alert('debe completar todos los campos')
-        }
-        else {
-            function pruebaemail(formMailBenef) {
-                console.log('entra pruebaemail: ' + formMailBenef + ' rut:' + formRutBenef)
-                const isValid = clRut.validate(formRutBenef);
-                const re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-                if (isValid == false) {
-                    alert('rut no valido');
-                    console.log("validando: " + isValid)
-                }
-                var hoy = new Date();
-                if (hoy >= formFechaNacimientoBenef) {
+}
+const handleSelect6 = async (e) => {
+    console.log(e);
+    setNombreBenef(e)
+    setFormApPaternoBenef(e)
+    setForApMaternoBenef(e)
+    setFormMailBenef(e)
+    setFormTelefonoBenef(e)
+    setFormParentescoBenef(e)
+    setFormPorcentajeBenef(e)
+    setFormFechaNacimientoBenef(e)
+    setFormDireccionBenef(e)
+    setFormRutBenef(e)
+    e.preventDefault();
+    if (formNombreBenef == '' || formApPaternoBenef == '' || formApMaternoBenef == '' || formTelefonoBenef == '' || formMailBenef == ''
+        || formFechaNacimientoBenef == '' || comunaben == '' || regionben == '' || ciudadben == '' || formDireccionBenef == ''
+        || formParentescoBenef == '' || formPorcentajeBenef == '' || formRutBenef == '') {
+        alert('debe completar todos los campos')
+    }
+    else {
+        function pruebaemail(formMailBenef) {
+            console.log('entra pruebaemail: ' + formMailBenef + ' rut:' + formRutBenef)
+            const isValid = clRut.validate(formRutBenef);
+                const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+                if (isValid == false){
                     alert('la fecha de nacimiento no puede ser mayor a la actual')
                     console.log("Fecha a partir de hoy");
                 }
-                if (!re.exec(formMailBenef)) {
-                    alert('email no valido');
+                if(!re.exec(formMailBenef)){
+                    alert('email no valido, por favor escribir nuevamente');
+                    document.getElementById('formMail').value = '';
+            }
+            else {
+                const beneficiario = {
+                    id_gestion: idinteraccion,
+                    id_contacto: idcontacto,
+                    id_campana: idcampana,
+                    id_contacto_genesys: idcontactogenesys,
+                    id_ejecutivo: id,
+                    Nombre: formNombreBenef,
+                    ApPaterno: formApPaternoBenef,
+                    ApMaterno: formApMaternoBenef,
+                    Telefono: formTelefonoBenef,
+                    Mail: formMailBenef,
+                    Fechanacimiento: formFechaNacimientoBenef,
+                    Comuna: comunaben,
+                    Region: regionben,
+                    Ciudad: ciudadben,
+                    Direccion: formDireccionBenef,
+                    Parentesco: formParentescoBenef,
+                    Porcentaje: formPorcentajeBenef,
+                    Rut: formRutBenef
                 }
-                else {
-                    const beneficiario = {
-                        id_gestion: idinteraccion,
-                        id_contacto: idcontacto,
-                        id_campana: idcampana,
-                        id_contacto_genesys: idcontactogenesys,
-                        id_ejecutivo: id,
-                        Nombre: formNombreBenef,
-                        ApPaterno: formApPaternoBenef,
-                        ApMaterno: formApMaternoBenef,
-                        Telefono: formTelefonoBenef,
-                        Mail: formMailBenef,
-                        Fechanacimiento: formFechaNacimientoBenef,
-                        Comuna: comunaben,
-                        Region: regionben,
-                        Ciudad: ciudadben,
-                        Direccion: formDireccionBenef,
-                        Parentesco: formParentescoBenef,
-                        Porcentaje: formPorcentajeBenef,
-                        Rut: formRutBenef
-                    }
-                    const beneficiarios = {
-                        beneficiarios: [beneficiario]
-                    }
+                const beneficiarios = {
+                    beneficiarios: [beneficiario]
+                }
 
-                    beneficiario.beneficiarios = beneficiarios;
-                    const requestOptions = {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
-                        },
-                        body: JSON.stringify(beneficiario, ['id_gestion', 'id_contacto', 'id_campana', 'id_contacto_genesys',
-                            'id_ejecutivo', 'Nombre', 'ApPaterno', 'ApMaterno', 'Telefono', 'Mail', 'Fechanacimiento', 'Comuna', 'Region',
-                            'Ciudad', 'Direccion', 'Parentesco', 'Porcentaje', 'Rut']),
-                    };
+                beneficiario.beneficiarios = beneficiarios;
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+                    },
+                        body: JSON.stringify(beneficiario, ['id_gestion','id_contacto','id_campana','id_contacto_genesys',
+                        'id_ejecutivo','Nombre','ApPaterno','ApMaterno','Telefono','Mail','Fechanacimiento','Comuna','Region',
+                        'Ciudad','Direccion','Parentesco','Porcentaje','Rut']),
+                };
+                if (isValid == true) {
                     fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario', requestOptions)
                         .then(response => {
                             setShowTable(false);
@@ -428,6 +429,7 @@ export default function Users() {
                 state.data.actualizarAdicional = false;
                 setArregloData(state.data);
             }
+            pruebaemail(formMailBenef);
         }
 
     }
@@ -459,11 +461,12 @@ export default function Users() {
         }
         else {
             setShowTitular(false)
+            document.getElementById('guardar_tipificacion').disabled = true;
+            document.getElementById('input-group-dropdown-1').disabled = true;
+            document.getElementById('input-group-dropdown-2').disabled = true;
+            document.getElementById('input-group-dropdown-3').disabled = true;
+            document.getElementById('input-group-dropdown-4').disabled = true;
         }
-        document.getElementById('input-group-dropdown-1').disabled = true;
-        document.getElementById('input-group-dropdown-2').disabled = true;
-        document.getElementById('input-group-dropdown-3').disabled = true;
-        document.getElementById('input-group-dropdown-4').disabled = true;
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -471,16 +474,29 @@ export default function Users() {
                 'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
             },
             body: JSON.stringify({
-                contacto: value,
-                nivel1: value2,
-                nivel2: value3,
-                nivel3: value4,
-            }),
+                    id_gestion: idinteraccion,
+                    id_contacto: idcontacto,
+                    id_campana: idcampana,
+                    id_contacto_genesys: idcontactogenesys,
+                    id_ejecutivo: id,
+                    contacto: value,
+                    nivel1: value2,
+                    nivel2: value3,
+                    nivel3: value4,
+                }),
         };
         fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_gestiones', requestOptions)
             .then(response => response.json())
             .then(response => { console.log(response) });
     }
+
+    var currentTime = new Date()
+    var month1 = currentTime.getMonth() + 1
+    var day1 = currentTime.getDate()
+    var year1 = currentTime.getFullYear()
+    if (month1<10) month1="0"+month1;
+    if (day1<10) day1="0"+day1;
+    const curdate = year1 + "-" + month1 + "-" + day1
 
     return (
         <div >
@@ -536,118 +552,120 @@ export default function Users() {
                         <FormControl aria-describedby="basic-addon1" value={value4} />
                     </InputGroup></Col> : null}
                     <Col id="col2" xs={3}><InputGroup className="mb-4">
-                        <Button variant="primary" type="button" onClick={guardaTipicficaciones}>Guardar Tipificacion</Button>
+                    <Button variant="primary" id="guardar_tipificacion" type="button" onClick={guardaTipicficaciones} disabled>Guardar Tipificacion</Button>
                     </InputGroup>
                     </Col>
-                    {show4 ? <Col id="col2" xs={3}><InputGroup className="mb-4">
-                        <Modal
-                            size="lg"
-                            show={showTitular}
-                            onHide={() => setShowTitular(false)}
-                            dialogClassName="modal-90w"
-                            aria-labelledby="example-custom-modal-styling-title"
-                        >
-                            <Modal.Header closeButton>
-                                <Modal.Title id="example-custom-modal-styling-title">
-                                    Datos Titular
+                {show4 ? <Col id="col2" xs={3}><InputGroup className="mb-4">
+                    <Modal
+                        size="lg"
+                        show={showTitular}
+                        onHide={() => setShowTitular(false)}
+                        dialogClassName="modal-90w"
+                        aria-labelledby="example-custom-modal-styling-title"
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title id="example-custom-modal-styling-title">
+                                Datos Titular
                             </Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Form name="datosTitular" >
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formTipoPlan" value={formTipoPlan} onChange={e => setFormTipoPlan(e.target.value)} name='formTipoPlan' >
-                                            <Form.Control as="select">
-                                                <option>Tipo Plan</option>
-                                                <option>Plan 01</option>
-                                                <option>Plan 02</option>
-                                            </Form.Control>
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formNombre" name='formNombre' value={formNombre} onChange={e => setFormNombre(e.target.value)}>
-                                            <Form.Control placeholder="Nombre" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formApPaterno" name='formApPaterno' value={formApPaterno} onChange={e => setFormApPaterno(e.target.value)}>
-                                            <Form.Control placeholder="Ap Paterno" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formApMaterno" name='formApMaterno' value={formApMaterno} onChange={e => setFormApMaterno(e.target.value)}>
-                                            <Form.Control placeholder="Ap Materno" />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formfechanacimiento" name='formfechanacimiento' value={formfechanacimiento} onChange={e => setFormFechaNacimiento(e.target.value)}>
-                                            <Form.Control placeholder="Fecha nacimiento" type='date' />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formRut" name='formRut' value={formRut} onChange={e => setFormRut(e.target.value)} >
-                                            <Form.Control placeholder="11111111-1" />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group>
-                                            <InputGroup className="mb-4" >
-                                                <DropdownButton
-                                                    as={InputGroup.Prepend}
-                                                    variant="outline-secondary"
-                                                    title="Region"
-                                                    id="input-group-dropdown-4"
-                                                    onSelect={handleSelectRegion}>
-                                                    <Region></Region>
-                                                </DropdownButton>
-                                                <FormControl aria-describedby="basic-addon1" value={region} />
-                                            </InputGroup>
-                                        </Form.Group>
-                                        <FormGroup>
-                                            <InputGroup className="mb-4">
-                                                <DropdownButton
-                                                    as={InputGroup.Prepend}
-                                                    variant="outline-secondary"
-                                                    title="Ciudad"
-                                                    id="input-group-dropdown-4"
-                                                    onSelect={handleSelectCiudad}>
-                                                    <Ciudad data={idRegion}>
-                                                    </Ciudad>
-                                                </DropdownButton>
-                                                <FormControl aria-describedby="basic-addon1" value={ciudad} />
-                                            </InputGroup>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <InputGroup className="mb-4">
-                                                <DropdownButton
-                                                    as={InputGroup.Prepend}
-                                                    variant="outline-secondary"
-                                                    title="Comuna"
-                                                    id="input-group-dropdown-4"
-                                                    onSelect={handleSelectComuna}>
-                                                    <Comuna data={idciudad}></Comuna>
-                                                </DropdownButton>
-                                                <FormControl aria-describedby="basic-addon1" value={comuna} />
-                                            </InputGroup>
-                                        </FormGroup>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formDireccion" name='formDireccion' value={formDireccion} onChange={e => setFormDireccion(e.target.value)}>
-                                            <Form.Control placeholder="Direccion" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formTelefono" name='formTelefono' value={formTelefono} onChange={e => setFormTelefono(e.target.value)}>
-                                            <Form.Control placeholder="Telefono" typer="number" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formMail" name='formMail' value={formMail} onChange={e => setFormMail(e.target.value)}>
-                                            <Form.Control placeholder="Mail" type='email' />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formObservacion" name='formObservacion' value={formfechanacimiento} onChange={e => setFormObservacion(e.target.value)}>
-                                            <Form.Control placeholder="Observaciones" />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formbutton1">
-                                            <Button variant="primary" id='btnenviar' type="submit" onClick={handleSelect5}>Terminar</Button>
-                                        </Form.Group>
-                                    </Form.Row>
-                                </Form>
-                            </Modal.Body>
+                        </Modal.Header>
+                    <Modal.Body>
+                        <Form name="datosTitular" >
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formTipoPlan" value={formTipoPlan} onChange={e => setFormTipoPlan(e.target.value)} name='formTipoPlan' >
+                                    <Form.Control as="select">
+                                        <option>Tipo Plan</option>
+                                        <option>Plan 01</option>
+                                        <option>Plan 02</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group as={Col} controlId="formNombre" name='formNombre' value={formNombre} onChange={e => setFormNombre(e.target.value)}>
+                                    <Form.Control placeholder="Nombre" />
+                                </Form.Group>
+                                <Form.Group as={Col} controlId="formApPaterno" name='formApPaterno' value={formApPaterno} onChange={e => setFormApPaterno(e.target.value)}>
+                                    <Form.Control placeholder="Ap Paterno" />
+                                </Form.Group>
+                                <Form.Group as={Col} controlId="formApMaterno" name='formApMaterno' value={formApMaterno} onChange={e => setFormApMaterno(e.target.value)}>
+                                    <Form.Control placeholder="Ap Materno" />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formfechanacimiento" name='formfechanacimiento' value={formfechanacimiento} onChange={e => setFormFechaNacimiento(e.target.value)}>
+                                    <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} />
+                                </Form.Group>
+                                <Form.Group as={Col} controlId="formRut" name='formRut' value={formRut} onChange={e => setFormRut(e.target.value)} >
+                                    <Form.Control placeholder="11111111-1" />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group>
+                                    <InputGroup className="mb-4" >
+                                        <DropdownButton
+                                            as={InputGroup.Prepend}
+                                            variant="outline-secondary"
+                                            title="Region"
+                                            id="input-group-dropdown-4"
+                                            onSelect={handleSelectRegion}>
+                                            <Region></Region>
+                                        </DropdownButton>
+                                        <FormControl aria-describedby="basic-addon1" value={region} />
+                                    </InputGroup>
+                                </Form.Group>
+                                <FormGroup>
+                                    <InputGroup className="mb-4">
+                                        <DropdownButton
+                                            as={InputGroup.Prepend}
+                                            variant="outline-secondary"
+                                            title="Ciudad"
+                                            id="input-group-dropdown-4"
+                                            onSelect={handleSelectCiudad}>
+                                            <Ciudad data={idRegion}>
+                                            </Ciudad>
+                                        </DropdownButton>
+                                        <FormControl aria-describedby="basic-addon1" value={ciudad} />
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                    <InputGroup className="mb-4">
+                                        <DropdownButton
+                                            as={InputGroup.Prepend}
+                                            variant="outline-secondary"
+                                            title="Comuna"
+                                            id="input-group-dropdown-4"
+                                            onSelect={handleSelectComuna}>
+                                            <Comuna data={idciudad}></Comuna>
+                                        </DropdownButton>
+                                        <FormControl aria-describedby="basic-addon1" value={comuna} />
+                                    </InputGroup>
+                                </FormGroup>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formDireccion" name='formDireccion' value={formDireccion} onChange={e => setFormDireccion(e.target.value)}>
+                                    <Form.Control placeholder="Direccion" />
+                                </Form.Group>
+                                <Form.Group as={Col} controlId="formTelefono" name='formTelefono' value={formTelefono} onChange={e => setFormTelefono(e.target.value)}>
+                                    <Form.Control placeholder="Telefono" typer="number" />
+                                </Form.Group>
+                                <Form.Group as={Col} controlId="formMail" name='formMail' value={formMail} onChange={e => setFormMail(e.target.value)}>
+                                    <Form.Control placeholder="Mail" type='email' />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formObservacion" name='formObservacion' value={formfechanacimiento} onChange={e => setFormObservacion(e.target.value)}>
+                                    <Form.Control placeholder="Observaciones" />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formbutton1">
+                                    <Button variant="primary" id='btnenviar' type="submit" onClick={handleSelect5}>Terminar</Button>
+                                </Form.Group>
+                            </Form.Row>
+                        </Form>
+                    </Modal.Body>
                         </Modal>
-                    </InputGroup></Col> : null}
-                    {show5 ? <Col id="col2" xs={3}><InputGroup className="mb-4">
+                    </InputGroup></Col> : null
+}
+{
+    show5 ? <Col id="col2" xs={3}><InputGroup className="mb-4">
                         <Form.Row>
                             <Form.Group as={Col} controlId="formbtnAdicional">
                                 <Button variant="primary" size='sm' type="submit" onClick={() => setShowAdicional(true)}>Agregar Adicional</Button>
@@ -664,115 +682,115 @@ export default function Users() {
                             aria-labelledby="example-custom-modal-styling-title">
                             <Modal.Header closeButton>
                                 <Modal.Title id="example-custom-modal-styling-title">
-                                    Datos Beneficiario
+                    Datos Beneficiario
                     </Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Form>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formNombre" value={formNombreBenef} onChange={e => setNombreBenef(e.target.value)}>
-                                            <Form.Control placeholder="Nombre" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formApPaterno" value={formApPaternoBenef} onChange={e => setFormApPaternoBenef(e.target.value)}>
-                                            <Form.Control placeholder="Ap Paterno" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formApMaterno" value={formApMaternoBenef} onChange={e => setForApMaternoBenef(e.target.value)}>
-                                            <Form.Control placeholder="Ap Materno" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formRutBenef" value={formRutBenef} onChange={e => setFormRutBenef(e.target.value)}>
-                                            <Form.Control placeholder="11111111-1" />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group>
-                                            <InputGroup className="mb-4" >
-                                                <DropdownButton
-                                                    as={InputGroup.Prepend}
-                                                    variant="outline-secondary"
-                                                    title="Region"
-                                                    id="input-group-dropdown-4"
-                                                    onSelect={handleSelectRegion}>
-                                                    <Region></Region>
-                                                </DropdownButton>
-                                                <FormControl aria-describedby="basic-addon1" value={regionben} />
-                                            </InputGroup>
-                                        </Form.Group>
-                                        <FormGroup>
-                                            <InputGroup className="mb-4">
-                                                <DropdownButton
-                                                    as={InputGroup.Prepend}
-                                                    variant="outline-secondary"
-                                                    title="Ciudad"
-                                                    id="input-group-dropdown-4"
-                                                    onSelect={handleSelectCiudad}>
-                                                    <Ciudad data={idRegion}>
-                                                    </Ciudad>
-                                                </DropdownButton>
-                                                <FormControl aria-describedby="basic-addon1" value={ciudadben} />
-                                            </InputGroup>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <InputGroup className="mb-4">
-                                                <DropdownButton
-                                                    as={InputGroup.Prepend}
-                                                    variant="outline-secondary"
-                                                    title="Comuna"
-                                                    id="input-group-dropdown-4"
-                                                    onSelect={handleSelectComuna}>
-                                                    <Comuna data={idciudad}></Comuna>
-                                                </DropdownButton>
-                                                <FormControl aria-describedby="basic-addon1" value={comunaben} />
-                                            </InputGroup>
-                                        </FormGroup>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formDireccion" value={formDireccionBenef} onChange={e => setFormDireccionBenef(e.target.value)}>
-                                            <Form.Control placeholder="Direccion" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formfechanacimiento" value={formFechaNacimientoBenef} onChange={e => setFormFechaNacimientoBenef(e.target.value)}>
-                                            <Form.Control placeholder="Fecha nacimiento" type='date' />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formTelefono" value={formTelefonoBenef} onChange={e => setFormTelefonoBenef(e.target.value)}>
-                                            <Form.Control placeholder="Telefono" />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formParentesco" value={formParentescoBenef} onChange={e => setFormParentescoBenef(e.target.value)}>
-                                            <Form.Control as="select">
-                                                <option>Parentesco</option>
-                                                <option>Padre</option>
-                                                <option>Hermano</option>
-                                                <option>Madre</option>
-                                                <option>Hijo</option>
-                                                <option>Espos@</option>
-                                            </Form.Control>
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formPorcentaje" value={formPorcentajeBenef} onChange={e => setFormPorcentajeBenef(e.target.value)}>
-                                            <Form.Control as="select">
-                                                <option>Porecentaje</option>
-                                                <option>1</option>
-                                                <option>10</option>
-                                                <option>20</option>
-                                                <option>25</option>
-                                                <option>50</option>
-                                                <option>75</option>
-                                                <option>100</option>
-                                            </Form.Control>
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="feormMail" value={formMailBenef} onChange={e => setFormMailBenef(e.target.value)}>
-                                            <Form.Control placeholder="Mail" type='email' />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="btnterminar">
-                                            <Button variant="primary" type="button" onClick={handleSelect6}>Terminar</Button>
-                                        </Form.Group>
-                                    </Form.Row>
-                                </Form>
-                            </Modal.Body>
-                        </Modal>
+                    </Modal.Header>
+        <Modal.Body>
+            <Form>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="formNombre" value={formNombreBenef} onChange={e => setNombreBenef(e.target.value)}>
+                        <Form.Control placeholder="Nombre" />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formApPaterno" value={formApPaternoBenef} onChange={e => setFormApPaternoBenef(e.target.value)}>
+                        <Form.Control placeholder="Ap Paterno" />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formApMaterno" value={formApMaternoBenef} onChange={e => setForApMaternoBenef(e.target.value)}>
+                        <Form.Control placeholder="Ap Materno" />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formRutBenef" value={formRutBenef} onChange={e => setFormRutBenef(e.target.value)}>
+                        <Form.Control placeholder="11111111-1" />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group>
+                        <InputGroup className="mb-4" >
+                            <DropdownButton
+                                as={InputGroup.Prepend}
+                                variant="outline-secondary"
+                                title="Region"
+                                id="input-group-dropdown-4"
+                                onSelect={handleSelectRegion}>
+                                <Region></Region>
+                            </DropdownButton>
+                            <FormControl aria-describedby="basic-addon1" value={regionben} id='input-region' />
+                        </InputGroup>
+                    </Form.Group>
+                    <FormGroup>
+                        <InputGroup className="mb-4">
+                            <DropdownButton
+                                as={InputGroup.Prepend}
+                                variant="outline-secondary"
+                                title="Ciudad"
+                                id="input-group-dropdown-4"
+                                onSelect={handleSelectCiudad}>
+                                <Ciudad data={idRegion}>
+                                </Ciudad>
+                            </DropdownButton>
+                            <FormControl aria-describedby="basic-addon1" value={ciudadben} id='input-ciudad' />
+                        </InputGroup>
+                    </FormGroup>
+                    <FormGroup>
+                        <InputGroup className="mb-4">
+                            <DropdownButton
+                                as={InputGroup.Prepend}
+                                variant="outline-secondary"
+                                title="Comuna"
+                                id="input-group-dropdown-4"
+                                onSelect={handleSelectComuna}>
+                                <Comuna data={idciudad}></Comuna>
+                            </DropdownButton>
+                            <FormControl aria-describedby="basic-addon1" value={comunaben} id='input-comuna' />
+                        </InputGroup>
+                    </FormGroup>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="formDireccion" value={formDireccionBenef} onChange={e => setFormDireccionBenef(e.target.value)}>
+                        <Form.Control placeholder="Direccion" />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formfechanacimiento" value={formFechaNacimientoBenef} onChange={e => setFormFechaNacimientoBenef(e.target.value)}>
+                        <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formTelefono" value={formTelefonoBenef} onChange={e => setFormTelefonoBenef(e.target.value)}>
+                        <Form.Control placeholder="Telefono" />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="formParentesco" value={formParentescoBenef} onChange={e => setFormParentescoBenef(e.target.value)}>
+                        <Form.Control as="select">
+                            <option>Parentesco</option>
+                            <option>Padre</option>
+                            <option>Hermano</option>
+                            <option>Madre</option>
+                            <option>Hijo</option>
+                            <option>Espos@</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formPorcentaje" value={formPorcentajeBenef} onChange={e => setFormPorcentajeBenef(e.target.value)}>
+                        <Form.Control as="select">
+                            <option>Porecentaje</option>
+                            <option>1</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>75</option>
+                            <option>100</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="feormMail" value={formMailBenef} onChange={e => setFormMailBenef(e.target.value)}>
+                        <Form.Control placeholder="Mail" type='email' />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="btnterminar">
+                        <Button variant="primary" type="button" onClick={handleSelect6}>Terminar</Button>
+                    </Form.Group>
+                </Form.Row>
+            </Form>
+        </Modal.Body>
+                    </Modal >
 
                         <Modal
                             size="lg"
@@ -782,78 +800,79 @@ export default function Users() {
                             aria-labelledby="example-custom-modal-styling-title">
                             <Modal.Header closeButton>
                                 <Modal.Title id="example-custom-modal-styling-title">
-                                    Datos del Adicional
+                    Datos del Adicional
                     </Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Form>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formNombre" value={formNombreAdi} onChange={e => setFormNombreAdi(e.target.value)}>
-                                            <Form.Control placeholder="Nombre" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formApPaterno" value={formApPaternoAdi} onChange={e => setFormApMaternoAdi(e.target.value)}>
-                                            <Form.Control placeholder="Ap Paterno" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formApMaterno" value={formApMaternoAdi} onChange={e => setFormApPaternoAdi(e.target.value)}>
-                                            <Form.Control placeholder="Ap Materno" />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formfechanacimiento" value={formfechanacimientoAdi} onChange={e => setFormFechaNacimientoAdi(e.target.value)}>
-                                            <Form.Control placeholder="Fecha nacimiento" type='date' />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formRutAdi" value={formRutAdi} onChange={e => setFormRutAdi(e.target.value)}>
-                                            <Form.Control placeholder="11111111-1" />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formparentesco" value={formParentescoAdi} onChange={e => setFormParentescoAdi(e.target.value)}>
-                                            <Form.Control as="select">
-                                                <option>Parentesco</option>
-                                                <option>Padre</option>
-                                                <option>Hermano</option>
-                                                <option>Madre</option>
-                                                <option>Hijo</option>
-                                                <option>Espos@</option>
-                                            </Form.Control>
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formNacionalidad" value={formNacionalidadAdi} onChange={e => setFormNacionalidadAdi(e.target.value)}>
-                                            <Form.Control as="select">
-                                                <option>Nacionalidad</option>
-                                                <option>Chilena</option>
-                                                <option>Extranjero</option>
-                                            </Form.Control>
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formProfesion" value={formProfesionAdi} onChange={e => setFormProfesionAdi(e.target.value)}>
-                                            <Form.Control placeholder="Profesión" />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formResidencia" value={formResidencia} onChange={e => setFormResidencia(e.target.value)}>
-                                            <Form.Control placeholder="Residencia" />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formTerminar">
-                                            <Button variant="primary" type="submit" onClick={handleSelect7}>Terminar</Button>
-                                        </Form.Group>
-                                    </Form.Row>
-                                </Form>
-                            </Modal.Body>
-                        </Modal>
-                    </InputGroup></Col> : null}
-                </Row>
-                {showTable ? <UsersView data={arregloData}></UsersView> : null}
-            </Container>
-            <HomeContainer />
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form>
+                    <Form.Row> 
+                    <Form.Group as={Col} controlId="formNombre" value={formNombreAdi} onChange={e => setFormNombreAdi(e.target.value)}> 
+                    <Form.Control placeholder="Nombre" />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formApPaterno" value={formApPaternoAdi} onChange={e => setFormApMaternoAdi(e.target.value)}>
+                    <Form.Control placeholder="Ap Paterno" />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formApMaterno" value={formApMaternoAdi} onChange={e => setFormApPaternoAdi(e.target.value)}>
+                    <Form.Control placeholder="Ap Materno" />
+                    </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                    <Form.Group as={Col} controlId="formfechanacimiento" value={formfechanacimientoAdi} onChange={e => setFormFechaNacimientoAdi(e.target.value)}>
+                    <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate}/>
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formRutAdi" value={formRutAdi} onChange={e => setFormRutAdi(e.target.value)}>
+                    <Form.Control placeholder="11111111-1" />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formparentesco" value={formParentescoAdi} onChange={e => setFormParentescoAdi(e.target.value)}>
+                    <Form.Control as="select">
+                    <option>Parentesco</option>
+                    <option>Padre</option>
+                    <option>Hermano</option>
+                    <option>Madre</option>
+                    <option>Hijo</option>
+                    <option>Espos@</option>
+                    </Form.Control>
+                    </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                    <Form.Group as={Col} controlId="formNacionalidad" value={formNacionalidadAdi} onChange={e => setFormNacionalidadAdi(e.target.value)}>
+                    <Form.Control as="select">
+                    <option>Nacionalidad</option>
+                    <option>Chilena</option>
+                    <option>Extranjero</option>
+                    </Form.Control>
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formProfesion" value={formProfesionAdi} onChange={e => setFormProfesionAdi(e.target.value)}>
+                    <Form.Control placeholder="Profesión" />
+                    </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                    <Form.Group as={Col} controlId="formResidencia" value={formResidencia} onChange={e => setFormResidencia(e.target.value)}>
+                    <Form.Control placeholder="Residencia" />
+                    </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                    <Form.Group as={Col} controlId="formTerminar">
+                    <Button variant="primary" type="submit" onClick={handleSelect7}>Terminar</Button>
+                    </Form.Group>
+                    </Form.Row>
+                    </Form>
+                    </Modal.Body>
+                    </Modal>
+                    </InputGroup></Col> :null}
+                </Row >
+    { showTable?<UsersView data = { arregloData }></UsersView> : null}
+            </Container >
+    <HomeContainer />
 
 
-            { /*<h1>User id is {id}</h1>
+{ /*<h1>User id is {id}</h1>
               <h2>User idcontacto is {idcontacto}</h2>*/
-             /*crear backend para mostrar en la parte azul*/}
+    /*crear backend para mostrar en la parte azul*/
+}
 
 
-        </div>
+        </div >
     );
 }
 
