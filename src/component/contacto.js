@@ -8,6 +8,7 @@ class contacto extends Component {
     constructor() {
         super();
         this.state = {
+            reload: false,
             opciones_contacto: []
         };
     }

@@ -15,12 +15,15 @@ class UsersView extends Component {
         this.state = {
             datos_Titular: [],
             datos_Beneficiario: [],
-            datos_Adicional: []
+            datos_Adicional: [],
+            datos_interaccion:{
+                actualizar:true
+            }
         };
     }
     async componentDidMount() {
-        console.log('llamo interaccion : '+this.props.data)
-        const body = {"id_gestion": this.props.data}
+        console.log('llamo interaccion : '+this.props.data.idinteraccion)
+        const body = {"id_gestion": this.props.data.idinteraccion}
         await axios.post(baseUrlTitular,body)
         .then(response => {
             console.log('exito al enviar POST Titular: ' + JSON.stringify(response.data));
@@ -47,6 +50,32 @@ class UsersView extends Component {
         })
 
     }
+
+    componentDidUpdate(){
+
+        console.log('gatillo: componentDidUpdate: '+this.props.data.actualizar)
+        if(this.props.data.actualizar == true && this.state.datos_interaccion.actualizar == true){
+            console.log('a actualizar mierda;');
+            this._commitAutoSave();
+            this.setState({datos_interaccion:{
+                actualizar:false
+            }})
+        }
+    
+    }
+
+    async _commitAutoSave(){
+        console.log('llamo interaccion : '+this.props.data.idinteraccion)
+        const body = {"id_gestion": this.props.data.idinteraccion}
+        await axios.post(baseUrlTitular,body)
+        .then(response => {
+            console.log('exito al enviar POST Titular: ' + JSON.stringify(response.data));
+            this.setState({datos_Titular:response.data});
+        })
+        .catch(response => {
+            console.log(response + ' error POST Titular')
+        })
+      }
     render(){
         const { datos_Titular } = this.state;
         const { datos_Beneficiario } = this.state;

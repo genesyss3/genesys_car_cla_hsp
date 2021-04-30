@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './App.css'
 import { useParams } from "react-router-dom";
 import { Button, Form, Modal,FormControl, InputGroup, Table, Row, Col, Container, DropdownButton, Dropdown, FormGroup } from "react-bootstrap";
@@ -20,10 +20,12 @@ import { set } from "react-hook-form";
 
 export default function Users() {
     const [show, setShow] = useState(false)
+    const [firstEntry, setFirstEntry] = useState(true)
     const [show2, setShow2] = useState(false)
     const [show3, setShow3] = useState(false)
     const [show4, setShow4] = useState(false)
     const [show5, setShow5] = useState(false)
+    const [showTable, setShowTable] = useState(false)
     const [showTitular, setShowTitular] = useState(false);
     const [showAdicional, setShowAdicional] = useState(false);
     const [showBenef, setShowBenef] = useState(false);
@@ -81,12 +83,34 @@ export default function Users() {
     const [regionben,setregionben]=useState('');
     const [ciudadben,setciudadben]=useState('');
     const [comunaben,setcomunaben]=useState('');
+    const [idInteraccionPaso,setidInteraccionPaso]=useState('');
+    const [arregloData,setArregloData]=useState('');
 
-    const state = {
-        persons: []
+    let state = {
+        persons: [],
+        data:
+            {
+                idinteraccion: null,
+                actualizar: false
+           }
+        
       }
     
-    
+     useEffect(() => {
+        // Actualiza el título del documento usando la API del navegador
+        
+        setidInteraccionPaso(idinteraccion)
+        if(idInteraccionPaso && firstEntry){
+            console.log('entra useEffect '+idInteraccionPaso);
+            state.data.idinteraccion=idinteraccion;
+            console.log('previo idinteraccion: '+state.data.idinteraccion)
+            setArregloData(state.data)
+            setShowTable(true);
+            
+            setFirstEntry(false);
+        }
+        
+      });
 
     const handleSelect=(e)=>{
         console.log(e);
@@ -111,7 +135,7 @@ export default function Users() {
         setShow4(true);
         setValue4(e.split('-')[1])
     }
-    const handleSelect5=(e)=>{
+    const handleSelect5= async(e) =>{
         setShow5(true)
         setValue5(e)
         setValue6(e)
@@ -152,11 +176,17 @@ export default function Users() {
                             Observacion: formObservacion
                         })
                 };
-                fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
+                await fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
                     .then(response => response.json())
                     .then(response => {console.log(response)});
                 e.preventDefault();
         setShowTitular(false)
+        setShowTable(false);
+        state.data.actualizar = true;
+        state.data.idinteraccion=idinteraccion;
+        setArregloData(state.data);
+        setShowTable(true);
+
     }
     const handleSelect6=(e)=>{
         console.log(e);
@@ -645,7 +675,7 @@ export default function Users() {
                     </Modal>
                     </InputGroup></Col> :null}
                 </Row>
-                <UsersView data={idinteraccion}></UsersView>
+                {showTable? <UsersView data={arregloData}></UsersView> :null}
             </Container>
             <HomeContainer/>
             
