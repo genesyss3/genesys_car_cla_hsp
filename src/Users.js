@@ -297,19 +297,10 @@ export default function Users() {
                 console.log('entra pruebaemail: ' + formMailBenef + ' rut:' + formRutBenef)
                 const isValid = clRut.validate(formRutBenef);
                 const re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-                if (isValid == false) {
-                    alert('rut no valido');
-                    console.log("validando: " + isValid)
-                }
-                var hoy = new Date();
-                if (hoy >= formFechaNacimientoBenef) {
-                    alert('la fecha de nacimiento no puede ser mayor a la actual')
-                    console.log("Fecha a partir de hoy");
-                }
-                if (!re.exec(formMailBenef)) {
-                    alert('email no valido');
-                }
-                else {
+
+
+         
+                
                     const beneficiario = {
                         id_gestion: idinteraccion,
                         id_contacto: idcontacto,
@@ -357,7 +348,7 @@ export default function Users() {
                     setShowBenef(false);
                     state.data.actualizarBeneficiario = false;
                     setArregloData(state.data);
-                }
+                
             }
 
             pruebaemail(formMailBenef);
@@ -376,15 +367,7 @@ export default function Users() {
         setFormResidencia(e)
         e.preventDefault();
         const isValid = clRut.validate(formRutAdi);
-        if (formNombreAdi == '' || formApPaternoAdi == '' || formApMaternoAdi == ''
-            || formfechanacimientoAdi == '' || formRutAdi == '' || formProfesionAdi == ''
-            || formParentescoAdi == '' || formNacionalidadAdi == '' || formResidencia == '') {
-            alert('debe completar todos los campos')
-        } else {
-            if (isValid != true) {
-                alert('rut no valido');
-            }
-            else {
+
                 const adicional = {
                     id_gestion: idinteraccion,
                     id_contacto: idcontacto,
@@ -427,8 +410,8 @@ export default function Users() {
                 setShowAdicional(false)
                 state.data.actualizarAdicional = false;
                 setArregloData(state.data);
-            }
-        }
+            
+        
 
     }
 
