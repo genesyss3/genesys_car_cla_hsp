@@ -17,7 +17,8 @@ class UsersView extends Component {
             datos_Beneficiario: [],
             datos_Adicional: [],
             datos_interaccion:{
-                actualizar:true
+                actualizar:true,
+                actualizarBeneficiario: true
             }
         };
     }
@@ -53,12 +54,20 @@ class UsersView extends Component {
 
     componentDidUpdate(){
 
-        console.log('gatillo: componentDidUpdate: '+this.props.data.actualizar)
+        console.log('componentDidUpdate: variable user.js'+this.props.data.actualizar+' viewuserjs: '+this.state.datos_interaccion.actualizar)
+        console.log('componentDidUpdate: variable user.js'+this.props.data.actualizar+' viewuserjs: '+this.state.datos_interaccion.actualizarBeneficiario)
         if(this.props.data.actualizar == true && this.state.datos_interaccion.actualizar == true){
             console.log('a actualizar mierda;');
             this._commitAutoSave();
             this.setState({datos_interaccion:{
                 actualizar:false
+            }})
+        }
+        if(this.props.data.actualizarBeneficiario == true && this.state.datos_interaccion.actualizarBeneficiario == true){
+            console.log('a actualizarBeneficiario mierda;');
+            this._commitAutoSaveBeneficiario();
+            this.setState({datos_interaccion:{
+                actualizarBeneficiario:false
             }})
         }
     
@@ -74,6 +83,18 @@ class UsersView extends Component {
         })
         .catch(response => {
             console.log(response + ' error POST Titular')
+        })
+      }
+      async _commitAutoSaveBeneficiario(){
+        console.log('llamo interaccion : '+this.props.data.idinteraccion)
+        const body = {"id_gestion": this.props.data.idinteraccion}
+        await axios.post(baseUrlBeneficiario,body)
+        .then(response => {
+            console.log('exito al enviar POST Beneficiario: ' + JSON.stringify(response.data));
+            this.setState({datos_Beneficiario:response.data});
+        })
+        .catch(response => {
+            console.log(response + ' error POST Beneficiario')
         })
       }
     render(){

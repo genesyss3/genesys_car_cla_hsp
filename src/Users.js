@@ -91,7 +91,8 @@ export default function Users() {
         data:
             {
                 idinteraccion: null,
-                actualizar: false
+                actualizar: false,
+                actualizarBeneficiario : false
            }
         
       }
@@ -177,18 +178,21 @@ export default function Users() {
                         })
                 };
                 await fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
-                    .then(response => response.json())
-                    .then(response => {console.log(response)});
+                    .then(response =>{
+                        setShowTable(false);
+                        state.data.actualizar = true;
+                        state.data.idinteraccion=idinteraccion;
+                        setArregloData(state.data);
+                        setShowTable(true);
+                    });
                 e.preventDefault();
         setShowTitular(false)
-        setShowTable(false);
-        state.data.actualizar = true;
-        state.data.idinteraccion=idinteraccion;
-        setArregloData(state.data);
-        setShowTable(true);
 
+        state.data.actualizar = false;
+        setArregloData(state.data);
+        
     }
-    const handleSelect6=(e)=>{
+    const handleSelect6=async (e)=>{
         console.log(e);
         setValue14(e)
         setValue15(e)
@@ -232,11 +236,18 @@ export default function Users() {
                     Rut: formRutBenef
                 })
         };
-        fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario', requestOptions)
-            .then(response => response.json())
-            .then(response => {console.log(response)});
+        await fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario', requestOptions)
+            .then(response => {
+                setShowTable(false);
+                state.data.actualizarBeneficiario = true;
+                state.data.idinteraccion=idinteraccion;
+                setArregloData(state.data);
+                setShowTable(true);
+            });
         e.preventDefault();
-        setShowBenef(false)
+        setShowBenef(false);
+        state.data.actualizar = false;
+        setArregloData(state.data);
         
     }
     const handleSelect7=(e)=>{
