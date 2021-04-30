@@ -111,7 +111,6 @@ export default function Users() {
         console.log(e);
         setShow4(true);
         setValue4(e.split('-')[1])
-        document.getElementById('guardar_tipificacion').disabled = false;
     }
 
     const handleSelect5=(e)=>{
@@ -134,11 +133,6 @@ export default function Users() {
         else{
             function pruebaemail (formMail){
                 const isValid = clRut.validate(formRut);
-                var hoy = new Date();
-                if ( formfechanacimiento <= hoy) {
-                    alert('la fecha de nacimiento no puede ser mayor a la actual')
-                    console.log("Fecha a partir de hoy");
-                }
                 if (isValid == false){
                     alert('rut no valido, por favor escribir nuevamente');
                     document.getElementById('formRut').value = '';
@@ -221,12 +215,12 @@ export default function Users() {
                 const isValid = clRut.validate(formRutBenef);
                 const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
                 if (isValid == false){
-                    alert('la fecha de nacimiento no puede ser mayor a la actual')
-                    console.log("Fecha a partir de hoy");                 
+                    alert('rut no valido, por favor escribir nuevamente');
+                    document.getElementById('formRutBenef').value = '';                
                 }
                 if(!re.exec(formMailBenef)){
                     alert('email no valido, por favor escribir nuevamente');
-                    document.getElementById('formMail').value = '';
+                    document.getElementById('formMailBenef').value = '';
                 }
                 else {
                     const beneficiario = {
@@ -295,57 +289,49 @@ export default function Users() {
             alert('debe completar todos los campos')
         }
         else{
-            function pruebaemail (formMailBenef){
-                const isValid = clRut.validate(formRutBenef);
-                const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-                if (isValid == false){
-                    alert('la fecha de nacimiento no puede ser mayor a la actual')
-                    console.log("Fecha a partir de hoy");                 
-                }
-                if(!re.exec(formMailBenef)){
-                    alert('email no valido, por favor escribir nuevamente');
-                    document.getElementById('formMail').value = '';
-                }else{
-                    const adicional={
-                        id_gestion: idinteraccion,
-                        id_contacto: idcontacto,
-                        id_campana: idcampana,
-                        id_contacto_genesys: idcontactogenesys,
-                        id_ejecutivo: id,
-                        Nombre: formNombreAdi,
-                        ApPaterno: formApPaternoAdi,
-                        ApMaterno: formApMaternoAdi,
-                        fechanacimiento: formfechanacimientoAdi,
-                        rut: formRutAdi,
-                        profesion: formProfesionAdi,
-                        parentesco: formParentescoAdi,
-                        nacionalidad: formNacionalidadAdi,
-                        residencia: formResidencia,
-                    }
-                    const adicionales={
-                        adicionales: [adicional]
-                    }
-            
-                    adicional.adicionales = adicionales
-                    const requestOptions = {
-                        method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json',
-                            'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
-                        },
-                        body: JSON.stringify(adicional, ['id_gestion','id_contacto','id_campana','id_contacto_genesys','id_ejecutivo',
-                        'Nombre','ApPaterno','ApMaterno','fechanacimiento','rut','profesion','parentesco','nacionalidad','residencia']),
-                    };
-                    if (isValid == true){
-                    fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Adicionales', requestOptions)
-                    .then(response => response.json())
-                    .then(response => {console.log(response)});
-                    e.preventDefault();
-                    setShowAdicional(false)
-                    }
-                }
+            const isValid = clRut.validate(formRutAdi);
+            if (isValid == false){
+                alert('rut no valido, por favor escribir nuevamente');
+                document.getElementById('formRutAdi').value = '';                 
             }
-            pruebaemail(formMailBenef);
+            const adicional={
+                id_gestion: idinteraccion,
+                id_contacto: idcontacto,
+                id_campana: idcampana,
+                id_contacto_genesys: idcontactogenesys,
+                id_ejecutivo: id,
+                Nombre: formNombreAdi,
+                ApPaterno: formApPaternoAdi,
+                ApMaterno: formApMaternoAdi,
+                fechanacimiento: formfechanacimientoAdi,
+                rut: formRutAdi,
+                profesion: formProfesionAdi,
+                parentesco: formParentescoAdi,
+                nacionalidad: formNacionalidadAdi,
+                residencia: formResidencia,
+            }
+            const adicionales={
+                adicionales: [adicional]
+            }
+    
+            adicional.adicionales = adicionales
+            const requestOptions = {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+                },
+                body: JSON.stringify(adicional, ['id_gestion','id_contacto','id_campana','id_contacto_genesys','id_ejecutivo',
+                'Nombre','ApPaterno','ApMaterno','fechanacimiento','rut','profesion','parentesco','nacionalidad','residencia']),
+            };
+            if (isValid == true){
+            fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Adicionales', requestOptions)
+            .then(response => response.json())
+            .then(response => {console.log(response)});
+            e.preventDefault();
+            setShowAdicional(false)
+            }
+                
         }
         
     }
@@ -377,11 +363,21 @@ export default function Users() {
         }
         else{
             setShowTitular(false)
-            document.getElementById('guardar_tipificacion').disabled = true;      
-            document.getElementById('input-group-dropdown-1').disabled = true;
-            document.getElementById('input-group-dropdown-2').disabled = true;
-            document.getElementById('input-group-dropdown-3').disabled = true;
-            document.getElementById('input-group-dropdown-4').disabled = true;
+            if(document.getElementById('guardar_tipificacion')){
+                document.getElementById('guardar_tipificacion').disabled = true;
+            }
+            if(document.getElementById('input-group-dropdown-1')){
+                document.getElementById('input-group-dropdown-1').disabled = true;
+            }
+            if(document.getElementById('input-group-dropdown-2')){
+                document.getElementById('input-group-dropdown-2').disabled = true;
+            }
+            if(document.getElementById('input-group-dropdown-3')){
+                document.getElementById('input-group-dropdown-3').disabled = true;
+            }
+            if(document.getElementById('input-group-dropdown-4')){
+                document.getElementById('input-group-dropdown-4').disabled = true;
+            }
         }
         const requestOptions = {
             method: 'POST',
@@ -468,7 +464,7 @@ export default function Users() {
                         <FormControl aria-describedby="basic-addon1" value={value4}/>
                     </InputGroup></Col> :null}
                     <Col id="col2" xs={3}><InputGroup className="mb-4">
-                    <Button variant="primary" id="guardar_tipificacion" type="button" onClick={guardaTipicficaciones} disabled>Guardar Tipificacion</Button>
+                    <Button variant="primary" id="guardar_tipificacion" type="button" onClick={guardaTipicficaciones} >Guardar Tipificacion</Button>
                     </InputGroup>
                     </Col>
                     {show4? <Col id="col2" xs={3}><InputGroup className="mb-4">
@@ -693,7 +689,7 @@ export default function Users() {
                     </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                    <Form.Group as={Col} controlId="feormMail" value={formMailBenef} onChange={e => setFormMailBenef(e.target.value)}>
+                    <Form.Group as={Col} controlId="formMailBenef" value={formMailBenef} onChange={e => setFormMailBenef(e.target.value)}>
                     <Form.Control placeholder="Mail" type='email'/>
                     </Form.Group>
                     </Form.Row>
