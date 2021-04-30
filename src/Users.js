@@ -37,7 +37,6 @@ export default function Users() {
     const { idinteraccion } = useParams();
     const { idcampana } = useParams();
     const { idcontactogenesys } = useParams();
-    const [getinteraccion,setinteraccion]=useState('');
     const [value,setValue]=useState('');
     const [value2,setValue2]=useState('');
     const [value3,setValue3]=useState('');
@@ -55,7 +54,6 @@ export default function Users() {
     const [formApMaternoBenef,setForApMaternoBenef]=useState('');
     const [formMailBenef,setFormMailBenef]=useState('');
     const [formTelefonoBenef,setFormTelefonoBenef]=useState('');
-    const [formCiudadBenef,setValue19]=useState('');
     const [formParentescoBenef,setFormParentescoBenef]=useState('');
     const [formPorcentajeBenef,setFormPorcentajeBenef]=useState('');
     const [formFechaNacimientoBenef,setFormFechaNacimientoBenef]=useState('');
@@ -90,6 +88,7 @@ export default function Users() {
     const digits = clRut.digits(formRut);
     const clean = clRut.clean(formRut);
 
+    
     const handleSelect=(e)=>{
         console.log(e);
         setShow(true);
@@ -112,8 +111,8 @@ export default function Users() {
         console.log(e);
         setShow4(true);
         setValue4(e.split('-')[1])
+        document.getElementById('guardar_tipificacion').disabled = false;
     }
-    console.log('Tipificaciones: ' )
 
     const handleSelect5=(e)=>{
         setShow5(true)
@@ -136,16 +135,18 @@ export default function Users() {
             function pruebaemail (formMail){
                 const isValid = clRut.validate(formRut);
                 var hoy = new Date();
-                if (hoy >= formfechanacimiento) {
+                if ( formfechanacimiento <= hoy) {
                     alert('la fecha de nacimiento no puede ser mayor a la actual')
                     console.log("Fecha a partir de hoy");
                 }
                 if (isValid == false){
-                    alert('rut no valido');
+                    alert('rut no valido, por favor escribir nuevamente');
+                    document.getElementById('formRut').value = '';
                 }
                 const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
                 if(!re.exec(formMail)){
-                    alert('email no valido');
+                    alert('email no valido, por favor escribir nuevamente');
+                    document.getElementById('formMail').value = '';
                 }
                 else {
                     const titular = {
@@ -184,10 +185,14 @@ export default function Users() {
                         'id_ejecutivo','TipoPlan','Nombre','ApPaterno','ApMaterno','fechanacimiento','Region','Comuna',
                         'Ciudad','Direccion','Telefono','Mail','Rut','Observacion']),
                     };
-                    fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
-                    .then(response => response.json()).then(response => {console.log(response)});
-                    e.preventDefault();
-                    setShowTitular(false)
+                    if (isValid == true){
+                        fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
+                        .then(response => response.json()).then(response => {console.log(response)});
+                        e.preventDefault();
+                        setShowTitular(false)
+                        document.getElementById('guardar_tipificacion').disabled = true;
+                    }
+                    
                 }
             }
             pruebaemail(formMail);
@@ -200,7 +205,6 @@ export default function Users() {
         setForApMaternoBenef(e)
         setFormMailBenef(e)
         setFormTelefonoBenef(e)
-        setValue19(e)
         setFormParentescoBenef(e)
         setFormPorcentajeBenef(e)
         setFormFechaNacimientoBenef(e)
@@ -217,16 +221,12 @@ export default function Users() {
                 const isValid = clRut.validate(formRutBenef);
                 const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
                 if (isValid == false){
-                    alert('rut no valido');
-                    console.log("validando: "+isValid)
-                }
-                var hoy = new Date();
-                if (hoy >= formFechaNacimientoBenef) {
                     alert('la fecha de nacimiento no puede ser mayor a la actual')
-                    console.log("Fecha a partir de hoy");
+                    console.log("Fecha a partir de hoy");                 
                 }
                 if(!re.exec(formMailBenef)){
-                    alert('email no valido');
+                    alert('email no valido, por favor escribir nuevamente');
+                    document.getElementById('formMail').value = '';
                 }
                 else {
                     const beneficiario = {
@@ -264,11 +264,14 @@ export default function Users() {
                         'id_ejecutivo','Nombre','ApPaterno','ApMaterno','Telefono','Mail','Fechanacimiento','Comuna','Region',
                         'Ciudad','Direccion','Parentesco','Porcentaje','Rut']),
                     };
+                    if (isValid == true){
                     fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario', requestOptions)
                     .then(response => response.json())
                     .then(response => {console.log(response)});
                     e.preventDefault();
                     setShowBenef(false)
+
+                    }
                 }
             }
             pruebaemail(formMailBenef);
@@ -286,52 +289,63 @@ export default function Users() {
         setFormFechaNacimientoAdi(e)
         setFormResidencia(e)
         e.preventDefault();
-        const isValid = clRut.validate(formRutAdi);
         if(formNombreAdi == '' || formApPaternoAdi == '' || formApMaternoAdi == ''
          || formfechanacimientoAdi == '' || formRutAdi == '' || formProfesionAdi == '' 
          || formParentescoAdi == '' || formNacionalidadAdi == '' || formResidencia == ''){
             alert('debe completar todos los campos')
-        }else{
-            if (isValid != true){
-                alert('rut no valido');
-            }
-            else{
-                const adicional={
-                    id_gestion: idinteraccion,
-                    id_contacto: idcontacto,
-                    id_campana: idcampana,
-                    id_contacto_genesys: idcontactogenesys,
-                    id_ejecutivo: id,
-                    Nombre: formNombreAdi,
-                    ApPaterno: formApPaternoAdi,
-                    ApMaterno: formApMaternoAdi,
-                    fechanacimiento: formfechanacimientoAdi,
-                    rut: formRutAdi,
-                    profesion: formProfesionAdi,
-                    parentesco: formParentescoAdi,
-                    nacionalidad: formNacionalidadAdi,
-                    residencia: formResidencia,
+        }
+        else{
+            function pruebaemail (formMailBenef){
+                const isValid = clRut.validate(formRutBenef);
+                const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+                if (isValid == false){
+                    alert('la fecha de nacimiento no puede ser mayor a la actual')
+                    console.log("Fecha a partir de hoy");                 
                 }
-                const adicionales={
-                    adicionales: [adicional]
+                if(!re.exec(formMailBenef)){
+                    alert('email no valido, por favor escribir nuevamente');
+                    document.getElementById('formMail').value = '';
+                }else{
+                    const adicional={
+                        id_gestion: idinteraccion,
+                        id_contacto: idcontacto,
+                        id_campana: idcampana,
+                        id_contacto_genesys: idcontactogenesys,
+                        id_ejecutivo: id,
+                        Nombre: formNombreAdi,
+                        ApPaterno: formApPaternoAdi,
+                        ApMaterno: formApMaternoAdi,
+                        fechanacimiento: formfechanacimientoAdi,
+                        rut: formRutAdi,
+                        profesion: formProfesionAdi,
+                        parentesco: formParentescoAdi,
+                        nacionalidad: formNacionalidadAdi,
+                        residencia: formResidencia,
+                    }
+                    const adicionales={
+                        adicionales: [adicional]
+                    }
+            
+                    adicional.adicionales = adicionales
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+                        },
+                        body: JSON.stringify(adicional, ['id_gestion','id_contacto','id_campana','id_contacto_genesys','id_ejecutivo',
+                        'Nombre','ApPaterno','ApMaterno','fechanacimiento','rut','profesion','parentesco','nacionalidad','residencia']),
+                    };
+                    if (isValid == true){
+                    fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Adicionales', requestOptions)
+                    .then(response => response.json())
+                    .then(response => {console.log(response)});
+                    e.preventDefault();
+                    setShowAdicional(false)
+                    }
                 }
-        
-                adicional.adicionales = adicionales
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
-                    },
-                    body: JSON.stringify(adicional, ['id_gestion','id_contacto','id_campana','id_contacto_genesys','id_ejecutivo',
-                    'Nombre','ApPaterno','ApMaterno','fechanacimiento','rut','profesion','parentesco','nacionalidad','residencia']),
-                };
-                fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Adicionales', requestOptions)
-                .then(response => response.json())
-                .then(response => {console.log(response)});
-                e.preventDefault();
-                setShowAdicional(false)
             }
+            pruebaemail(formMailBenef);
         }
         
     }
@@ -363,11 +377,12 @@ export default function Users() {
         }
         else{
             setShowTitular(false)
+            document.getElementById('guardar_tipificacion').disabled = true;      
+            document.getElementById('input-group-dropdown-1').disabled = true;
+            document.getElementById('input-group-dropdown-2').disabled = true;
+            document.getElementById('input-group-dropdown-3').disabled = true;
+            document.getElementById('input-group-dropdown-4').disabled = true;
         }
-        document.getElementById('input-group-dropdown-1').disabled = true;
-        document.getElementById('input-group-dropdown-2').disabled = true;
-        document.getElementById('input-group-dropdown-3').disabled = true;
-        document.getElementById('input-group-dropdown-4').disabled = true;
         const requestOptions = {
             method: 'POST',
             headers: { 
@@ -375,6 +390,11 @@ export default function Users() {
                 'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
             },
             body: JSON.stringify({
+                    id_gestion: idinteraccion,
+                    id_contacto: idcontacto,
+                    id_campana: idcampana,
+                    id_contacto_genesys: idcontactogenesys,
+                    id_ejecutivo: id,
                     contacto: value,
                     nivel1: value2,
                     nivel2: value3,
@@ -385,6 +405,14 @@ export default function Users() {
         .then(response => response.json())
         .then(response => {console.log(response)});
     }
+
+    var currentTime = new Date()
+    var month1 = currentTime.getMonth() + 1
+    var day1 = currentTime.getDate()
+    var year1 = currentTime.getFullYear()
+    if (month1<10) month1="0"+month1;
+    if (day1<10) day1="0"+day1;
+    const curdate = year1 + "-" + month1 + "-" + day1
         
     return (
         <div >
@@ -440,7 +468,7 @@ export default function Users() {
                         <FormControl aria-describedby="basic-addon1" value={value4}/>
                     </InputGroup></Col> :null}
                     <Col id="col2" xs={3}><InputGroup className="mb-4">
-                    <Button variant="primary" type="button" onClick={guardaTipicficaciones}>Guardar Tipificacion</Button>
+                    <Button variant="primary" id="guardar_tipificacion" type="button" onClick={guardaTipicficaciones} disabled>Guardar Tipificacion</Button>
                     </InputGroup>
                     </Col>
                     {show4? <Col id="col2" xs={3}><InputGroup className="mb-4">
@@ -478,7 +506,7 @@ export default function Users() {
                             </Form.Row>
                             <Form.Row>
                             <Form.Group as={Col} controlId="formfechanacimiento" name='formfechanacimiento' value={formfechanacimiento} onChange={e => setFormFechaNacimiento(e.target.value)}>
-                                <Form.Control placeholder="Fecha nacimiento" type='date' />
+                                <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate}/>
                             </Form.Group>
                             <Form.Group as={Col} controlId="formRut" name='formRut' value={formRut} onChange={e => setFormRut(e.target.value)} >
                                 <Form.Control placeholder="11111111-1"/>
@@ -598,7 +626,7 @@ export default function Users() {
                                 onSelect ={handleSelectRegion}>
                                 <Region></Region>
                             </DropdownButton>
-                            <FormControl aria-describedby="basic-addon1" value={regionben}/>
+                            <FormControl aria-describedby="basic-addon1" value={regionben} id='input-region'/>
                             </InputGroup>
                         </Form.Group>
                         <FormGroup>
@@ -612,7 +640,7 @@ export default function Users() {
                         <Ciudad data = {idRegion}>
                         </Ciudad>
                         </DropdownButton>
-                        <FormControl aria-describedby="basic-addon1" value={ciudadben}/>
+                        <FormControl aria-describedby="basic-addon1" value={ciudadben} id='input-ciudad'/>
                         </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -625,7 +653,7 @@ export default function Users() {
                         onSelect ={handleSelectComuna}>
                         <Comuna data={idciudad}></Comuna>
                         </DropdownButton>
-                        <FormControl aria-describedby="basic-addon1" value={comunaben}/>
+                        <FormControl aria-describedby="basic-addon1" value={comunaben} id='input-comuna'/>
                         </InputGroup>
                         </FormGroup>
                     </Form.Row>
@@ -634,7 +662,7 @@ export default function Users() {
                     <Form.Control placeholder="Direccion" />
                     </Form.Group>
                     <Form.Group as={Col} controlId="formfechanacimiento" value={formFechaNacimientoBenef} onChange={e => setFormFechaNacimientoBenef(e.target.value)}>
-                    <Form.Control placeholder="Fecha nacimiento" type='date'/>
+                    <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate}/>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formTelefono" value={formTelefonoBenef} onChange={e => setFormTelefonoBenef(e.target.value)}>
                     <Form.Control placeholder="Telefono" />
@@ -704,7 +732,7 @@ export default function Users() {
                     </Form.Row>
                     <Form.Row>
                     <Form.Group as={Col} controlId="formfechanacimiento" value={formfechanacimientoAdi} onChange={e => setFormFechaNacimientoAdi(e.target.value)}>
-                    <Form.Control placeholder="Fecha nacimiento" type='date'/>
+                    <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate}/>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formRutAdi" value={formRutAdi} onChange={e => setFormRutAdi(e.target.value)}>
                     <Form.Control placeholder="11111111-1" />
