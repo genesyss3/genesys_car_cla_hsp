@@ -454,6 +454,11 @@ export default function Users() {
                 'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
             },
             body: JSON.stringify({
+                id_gestion: idinteraccion,
+                id_contacto: idcontacto,
+                id_campana: idcampana,
+                id_contacto_genesys: idcontactogenesys,
+                id_ejecutivo: id,
                 contacto: value,
                 nivel1: value2,
                 nivel2: value3,
