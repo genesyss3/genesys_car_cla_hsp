@@ -16,6 +16,10 @@ import Ciudad from './component/ciudad';
 import UsersView from './component/viewUsers';
 import { set } from "react-hook-form";
 import { data } from "jquery";
+import nivel1 from "./component/nivel1";
+import nivel2 from "./component/nivel2";
+import nivel3 from "./component/nivel3";
+import clRut from '@validatecl/rut';
 
 
 
@@ -80,6 +84,11 @@ export default function Users() {
     const [regionben,setregionben]=useState('');
     const [ciudadben,setciudadben]=useState('');
     const [comunaben,setcomunaben]=useState('');
+    const calculated = clRut.calculate(formRut);
+    const verififer = clRut.verifier(formRut);
+    const formatted = clRut.format(formRut);
+    const digits = clRut.digits(formRut);
+    const clean = clRut.clean(formRut);
 
     const handleSelect=(e)=>{
         console.log(e);
@@ -104,6 +113,8 @@ export default function Users() {
         setShow4(true);
         setValue4(e.split('-')[1])
     }
+    console.log('Tipificaciones: ' )
+
     const handleSelect5=(e)=>{
         setShow5(true)
         setValue5(e)
@@ -117,40 +128,57 @@ export default function Users() {
         setValue32(e)
         setValue33(e)
         e.preventDefault();
-                // inicio post
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
-                    },
-                    body: JSON.stringify({
-                            id_gestion: idinteraccion,
-                            id_contacto: idcontacto,
-                            id_campana: idcampana,
-                            id_contacto_genesys: idcontactogenesys,
-                            id_ejecutivo: id,
-                            TipoPlan: formTipoPlan,
-                            Nombre: formNombre,
-                            ApPaterno: formApPaterno,
-                            ApMaterno: formApMaterno,
-                            fechanacimiento: formfechanacimiento,
-                            Region: region,
-                            Comuna: comuna,
-                            Ciudad: ciudad,
-                            Direccion: formDireccion,
-                            Telefono: formTelefono,
-                            Mail: formMail,
-                            Rut: formRut,
-                            Observacion: formObservacion
-                        })
-                };
-                fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
-                    .then(response => response.json())
-                    .then(response => {console.log(response)});
-                e.preventDefault();
-        setShowTitular(false)
-        
+        if (formTipoPlan== '' || formNombre== '' || formApPaterno== '' || formApMaterno== '' || formfechanacimiento== '' 
+        || region== '' || comuna== '' || ciudad== '' || formDireccion== '' || formTelefono== '' || formMail== '' || formRut== '' || formObservacion== ''){
+            alert('debe completar todos los campos')
+        }
+        else{
+            function pruebaemail (formMail){
+                const isValid = clRut.validate(formRut);
+                if (isValid != true){
+                    alert('rut no valido');
+                }
+                const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+                if(!re.exec(formMail)){
+                    alert('email no valido');
+                }
+                else {
+                    // inicio post
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+                        },
+                        body: JSON.stringify({
+                                id_gestion: idinteraccion,
+                                id_contacto: idcontacto,
+                                id_campana: idcampana,
+                                id_contacto_genesys: idcontactogenesys,
+                                id_ejecutivo: id,
+                                TipoPlan: formTipoPlan,
+                                Nombre: formNombre,
+                                ApPaterno: formApPaterno,
+                                ApMaterno: formApMaterno,
+                                fechanacimiento: formfechanacimiento,
+                                Region: region,
+                                Comuna: comuna,
+                                Ciudad: ciudad,
+                                Direccion: formDireccion,
+                                Telefono: formTelefono,
+                                Mail: formMail,
+                                Rut: formRut,
+                                Observacion: formObservacion,
+                            }),
+                    };
+                    fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario', requestOptions)
+                    .then(response => response.json()).then(response => {console.log(response)});
+                    e.preventDefault();
+                    setShowTitular(false)
+                }
+            }
+            pruebaemail(formMail);
+        }
     }
     const handleSelect6=(e)=>{
         console.log(e);
@@ -165,41 +193,69 @@ export default function Users() {
         setValue22(e)
         setValue36(e)
         setValue37(e)
-        
         e.preventDefault();
-        const requestOptions = {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
-            },
-            body: JSON.stringify({
-                    id_gestion: idinteraccion,
-                    id_contacto: idcontacto,
-                    id_campana: idcampana,
-                    id_contacto_genesys: idcontactogenesys,
-                    id_ejecutivo: id,
-                    Nombre: formNombreBenef,
-                    ApPaterno: formApPaternoBenef,
-                    ApMaterno: formApMaternoBenef,
-                    Telefono: formTelefonoBenef,
-                    Mail: formMailBenef,
-                    Fechanacimiento: formFechaNacimientoBenef,
-                    Comuna: comunaben,
-                    Region: regionben,
-                    Ciudad: ciudadben,
-                    Direccion: formDireccionBenef,
-                    Parentesco: formParentescoBenef,
-                    Porcentaje: formPorcentajeBenef,
-                    Rut: formRutBenef
-                })
-        };
-        fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario', requestOptions)
-            .then(response => response.json())
-            .then(response => {console.log(response)});
-        e.preventDefault();
-        setShowBenef(false)
-        
+        if(formNombreBenef == '' || formApPaternoBenef == '' || formApMaternoBenef == '' || formTelefonoBenef == '' || formMailBenef == ''
+         || formFechaNacimientoBenef == '' || comunaben == '' || regionben == '' || ciudadben == '' || formDireccionBenef == ''
+         || formParentescoBenef == '' || formPorcentajeBenef == '' || formRutBenef == ''){
+            alert('debe completar todos los campos')
+        }
+        else{
+            function pruebaemail (formMailBenef){
+                const isValid = clRut.validate(formRutBenef);
+                const re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+                if (isValid != true){
+                    alert('rut no valido');
+                }
+                if (isValid != true){
+                    alert('rut no valido');
+                }
+                if(!re.exec(formMailBenef)){
+                    alert('email no valido');
+                }
+                else {
+                    const beneficiario = {
+                        id_gestion: idinteraccion,
+                        id_contacto: idcontacto,
+                        id_campana: idcampana,
+                        id_contacto_genesys: idcontactogenesys,
+                        id_ejecutivo: id,
+                        Nombre: formNombreBenef,
+                        ApPaterno: formApPaternoBenef,
+                        ApMaterno: formApMaternoBenef,
+                        Telefono: formTelefonoBenef,
+                        Mail: formMailBenef,
+                        Fechanacimiento: formFechaNacimientoBenef,
+                        Comuna: comunaben,
+                        Region: regionben,
+                        Ciudad: ciudadben,
+                        Direccion: formDireccionBenef,
+                        Parentesco: formParentescoBenef,
+                        Porcentaje: formPorcentajeBenef,
+                        Rut: formRutBenef
+                    }
+                    const beneficiarios = {
+                        beneficiarios: [beneficiario]
+                    }
+            
+                    beneficiario.beneficiarios = beneficiarios;
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+                        },
+                        body: JSON.stringify(beneficiario, ['id_gestion','id_contacto','id_campana','id_contacto_genesys',
+                        'id_ejecutivo','Nombre','ApPaterno','ApMaterno','Telefono','Mail','Fechanacimiento','Comuna','Region','Ciudad','Direccion','Parentesco','Porcentaje','Rut']),
+                    };
+                    fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario', requestOptions)
+                    .then(response => response.json())
+                    .then(response => {console.log(response)});
+                    e.preventDefault();
+                    setShowBenef(false)
+                }
+            }
+            pruebaemail(formMailBenef);
+        }
     }
     const handleSelect7=(e)=>{
         console.log(e);
@@ -213,13 +269,17 @@ export default function Users() {
         setValue30(e)
         setValue38(e)
         e.preventDefault();
-        const requestOptions = {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
-            },
-            body: JSON.stringify({
+        const isValid = clRut.validate(formRutAdi);
+        if(formNombreAdi == '' || formApPaternoAdi == '' || formApMaternoAdi == ''
+         || formfechanacimientoAdi == '' || formRutAdi == '' || formProfesionAdi == '' 
+         || formParentescoAdi == '' || formNacionalidadAdi == '' || formResidencia == ''){
+            alert('debe completar todos los campos')
+        }else{
+            if (isValid != true){
+                alert('rut no valido');
+            }
+            else{
+                const adicional={
                     id_gestion: idinteraccion,
                     id_contacto: idcontacto,
                     id_campana: idcampana,
@@ -233,14 +293,30 @@ export default function Users() {
                     profesion: formProfesionAdi,
                     parentesco: formParentescoAdi,
                     nacionalidad: formNacionalidadAdi,
-                    residencia: formResidencia
-                })
-        };
-        fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Adicionales', requestOptions)
-            .then(response => response.json())
-            .then(response => {console.log(response)});
-        e.preventDefault();
-        setShowAdicional(false)
+                    residencia: formResidencia,
+                }
+                const adicionales={
+                    adicionales: [adicional]
+                }
+        
+                adicional.adicionales = adicionales
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+                    },
+                    body: JSON.stringify(adicional, ['id_gestion','id_contacto','id_campana','id_contacto_genesys','id_ejecutivo',
+                    'Nombre','ApPaterno','ApMaterno','fechanacimiento','rut','profesion','parentesco','nacionalidad','residencia']),
+                };
+                fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Adicionales', requestOptions)
+                .then(response => response.json())
+                .then(response => {console.log(response)});
+                e.preventDefault();
+                setShowAdicional(false)
+            }
+        }
+        
     }
 
     const handleSelectRegion=(e)=>{
@@ -263,6 +339,7 @@ export default function Users() {
     }
 
     const guardaTipicficaciones=(e)=>{
+
         console.log(value4)
         if (value4 == 'ARGUMENTADO SI'){
             setShowTitular(true);
@@ -274,13 +351,24 @@ export default function Users() {
         document.getElementById('input-group-dropdown-2').disabled = true;
         document.getElementById('input-group-dropdown-3').disabled = true;
         document.getElementById('input-group-dropdown-4').disabled = true;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'authorizationToken': '&S396b<eg5Zn(HiLe)BBNtc&',
+            },
+            body: JSON.stringify({
+                    contacto: value,
+                    nivel1: value2,
+                    nivel2: value3,
+                    nivel3: value4,
+                }),
+        };
+        fetch('https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_gestiones', requestOptions)
+        .then(response => response.json())
+        .then(response => {console.log(response)});
     }
-    
-    function handleSelectIntereccion(){
-        return data={idinteraccion}
-    }
-
-    
+        
     return (
         <div >
             <br></br>
@@ -375,8 +463,8 @@ export default function Users() {
                             <Form.Group as={Col} controlId="formfechanacimiento" name='formfechanacimiento' value={formfechanacimiento} onChange={e => setValue9(e.target.value)}>
                                 <Form.Control placeholder="Fecha nacimiento" type='date' />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formRut" name='formRut' value={formfechanacimiento} onChange={e => setValue32(e.target.value)}>
-                                <Form.Control placeholder="Rut" required/>
+                            <Form.Group as={Col} controlId="formRut" name='formRut' value={formfechanacimiento} onChange={e => setValue32(e.target.value)} >
+                                <Form.Control placeholder="11111111-1"/>
                             </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -439,7 +527,7 @@ export default function Users() {
                             </Form.Row>
                             <Form.Row>
                             <Form.Group as={Col} controlId="formbutton1">
-                                <Button variant="primary" type="button" id='btnenviar' type="submit" onClick={handleSelect5}>Terminar</Button>
+                                <Button variant="primary"  id='btnenviar' type="submit" onClick={handleSelect5}>Terminar</Button>
                             </Form.Group>
                             </Form.Row>
                         </Form>
@@ -449,10 +537,10 @@ export default function Users() {
                     {show5? <Col id="col2" xs={3}><InputGroup className="mb-4">
                         <Form.Row>
                             <Form.Group as={Col} controlId="formbtnAdicional">
-                                <Button variant="primary" size='sm' onClick={() => setShowAdicional(true)}>Agregar Adicional</Button>
+                                <Button variant="primary" size='sm' type="submit" onClick={() => setShowAdicional(true)}>Agregar Adicional</Button>
                             </Form.Group>
                             <Form.Group as={Col} controlId="formbtnBeneficiario">
-                                <Button variant="primary" size='sm' onClick={() => setShowBenef(true)} >Agregar Beneficiario</Button>
+                                <Button variant="primary" size='sm' type="submit" onClick={() => setShowBenef(true)} >Agregar Beneficiario</Button>
                             </Form.Group>
                         </Form.Row>
                     <Modal
@@ -479,7 +567,7 @@ export default function Users() {
                     <Form.Control placeholder="Ap Materno" />
                     </Form.Group>
                     <Form.Group as={Col} controlId="formRut" value={formRutBenef} onChange={e => setValue16(e.target.value)}>
-                    <Form.Control placeholder="Rut" />
+                    <Form.Control placeholder="11111111-1" />
                     </Form.Group>
                     </Form.Row>
                     <Form.Row>
@@ -561,12 +649,12 @@ export default function Users() {
                     </Form.Row>
                     <Form.Row>
                     <Form.Group as={Col} controlId="feormMail" value={formMailBenef} onChange={e => setValue17(e.target.value)}>
-                    <Form.Control placeholder="Mail" />
+                    <Form.Control placeholder="Mail" type='email'/>
                     </Form.Group>
                     </Form.Row>
                     <Form.Row>
                     <Form.Group as={Col} controlId="btnterminar">
-                    <Button variant="primary" type="submit" onClick={handleSelect6}>Terminar</Button>
+                    <Button variant="primary" type="button" onClick={handleSelect6}>Terminar</Button>
                     </Form.Group>
                     </Form.Row>
                     </Form>
@@ -602,7 +690,7 @@ export default function Users() {
                     <Form.Control placeholder="Fecha nacimiento" type='date'/>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formRut" value={formRutAdi} onChange={e => setValue26(e.target.value)}>
-                    <Form.Control placeholder="Rut" />
+                    <Form.Control placeholder="11111111-1" />
                     </Form.Group>
                     <Form.Group as={Col} controlId="formparentesco" value={formParentescoAdi} onChange={e => setValue28(e.target.value)}>
                     <Form.Control as="select">
@@ -642,7 +730,7 @@ export default function Users() {
                     </Modal>
                     </InputGroup></Col> :null}
                 </Row>
-                <UsersView data={handleSelectIntereccion}></UsersView>
+                <UsersView data={idinteraccion}></UsersView>
             </Container>
             <HomeContainer/>
             
