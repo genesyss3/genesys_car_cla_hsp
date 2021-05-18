@@ -24,7 +24,7 @@ class nivel1 extends Component {
 
     }
     async componentDidUpdate(){
-        console.log('llamo servicio nivel1: '+this.props.data)
+        //console.log('llamo servicio nivel1: '+this.props.data)
         /*this.componentWillUnmount();
         await axios.post(baseUrl,{con_id:this.props.data })
             .then(response => {

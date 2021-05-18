@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Table,Tab,Tabs } from "react-bootstrap";
+import { Table,Tab,Tabs, Container } from "react-bootstrap";
 import axios from 'axios';
 
 let baseUrlTitular = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/get_titular';
@@ -56,8 +56,8 @@ class UsersView extends Component {
 
     componentDidUpdate(){
 
-        console.log('componentDidUpdate: variable user.js'+this.props.data.actualizar+' viewuserjs: '+this.state.datos_interaccion.actualizar)
-        console.log('componentDidUpdate: variable user.js'+this.props.data.actualizar+' viewuserjs: '+this.state.datos_interaccion.actualizarBeneficiario)
+        //console.log('componentDidUpdate: variable user.js'+this.props.data.actualizar+' viewuserjs: '+this.state.datos_interaccion.actualizar)
+        //console.log('componentDidUpdate: variable user.js'+this.props.data.actualizar+' viewuserjs: '+this.state.datos_interaccion.actualizarBeneficiario)
         if(this.props.data.actualizar == true && this.state.datos_interaccion.actualizar == true){
             console.log('a actualizar mierda;');
             this._commitAutoSave();
@@ -131,6 +131,7 @@ class UsersView extends Component {
                     <td>{item.nombre}</td>
                     <td>{item.appaterno}</td>
                     <td>{item.apmaterno}</td>
+                    <td>{item.rut}</td>
                     <td>{item.fechanacimiento}</td>
                     <td>{item.region}</td>
                     <td>{item.comuna}</td>
@@ -148,6 +149,7 @@ class UsersView extends Component {
                     <td>{item.nombre}</td>
                     <td>{item.appaterno}</td>
                     <td>{item.apmaterno}</td>
+                    <td>{item.rut}</td>
                     <td>{item.region}</td>
                     <td>{item.comuna}</td>
                     <td>{item.ciudad}</td>
@@ -176,7 +178,8 @@ class UsersView extends Component {
                 )
             }, this);
         return(
-            <Tabs defaultActiveKey="DatosTitular" transition={false} id="noanim-tab-example">
+            <Container>
+                <Tabs defaultActiveKey="DatosTitular" transition={false} id="noanim-tab-example">
             <Tab eventKey="DatosTitular" title="Datos Titular">
             <Table striped bordered hover size="sm">
                 <thead>
@@ -185,6 +188,7 @@ class UsersView extends Component {
                     <th>Nombre</th>
                     <th>Ap Paterno</th>
                     <th>Ap Materno</th>
+                    <th>Rut</th>
                     <th>Fecha Nacimiento</th>
                     <th>Region</th>
                     <th>Comuna</th>
@@ -206,6 +210,7 @@ class UsersView extends Component {
                     <th>Nombre</th>
                     <th>Ap Paterno</th>
                     <th>Ap Materno</th>
+                    <th>Rut</th>
                     <th>Region</th>
                     <th>Comuna</th>
                     <th>Ciudad</th>
@@ -242,6 +247,7 @@ class UsersView extends Component {
             </Table>
             </Tab>
             </Tabs>
+            </Container>
         )
     }
 }

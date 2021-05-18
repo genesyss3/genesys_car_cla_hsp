@@ -30,6 +30,7 @@ class Region extends Component {
         let RegionList = datos_region.length > 0
             && datos_region.map((item, i) => {
                 return (
+                    
                     <Dropdown.Item eventKey={item.reg_numero_region + '-' + item.reg_descripcion} >{item.reg_descripcion}</Dropdown.Item>
                 )
             }, this);

@@ -31,7 +31,6 @@ class nivel3 extends Component {
             && opciones_nivel3.map((item, i) => {
                 return (
                     <Dropdown.Item eventKey={item.id_ni3+'-'+item.ni3_descripcion}>{item.ni3_descripcion}</Dropdown.Item>
-                    
                 )
             }, this);
         return (

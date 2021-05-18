@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FormControl, InputGroup, Table, Row, Col, Container } from "react-bootstrap";
+import { Form,FormControl, InputGroup, Table, Row, Col, Container } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 
 const UsersList = () =>{
+  const { idinteraccion } = useParams();
   const [data, setData] = useState([])
   const url = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/post_data_client'
   const authorizationToken = '&S396b<eg5Zn(HiLe)BBNtc&'
-  const body = {"id_contacto":"3"};
+  const body = {"id_contacto":idinteraccion};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,217 +32,84 @@ const UsersList = () =>{
   return(
     <>
       {data.map((userinfo) => (
-        <Container>
-        <Row className="justify-content-md-center">
-            <Col xs lg="3">
-            <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                <InputGroup.Text id="inputGroup-sizing-default">Nombre</InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControl
-            name = "nombre"
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-            value = {userinfo.con_metadata.nombre}
-            />
-        </InputGroup>
-    </Col>
-    <Col xs lg="3">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Ap Paterno</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name = "apPaterno"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.ap_paterno}
-    />
-    </InputGroup>
-    </Col>
-    <Col xs lg="3">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Ap Materno</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name = "apMaterno"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.ap_materno}
-    />
-    </InputGroup>
-    </Col>
-    </Row>
-    <Row>
-    <Col xs lg="2">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Rut</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="rut"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.rut}
-    />
-    </InputGroup>
-    </Col>
-    <Col xs lg="2">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">DV</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="dv"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.dv}
-    />
-    </InputGroup>
-    </Col>
-    <Col xs lg="6">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Fecha Nacimiento</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="fecha_nacimiento"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.fecha_nacimiento}
-    />
-    </InputGroup>
-    </Col>
-    </Row>
-    <Row className="justify-content-md-center">
-        <Col xs lg="6">
-        <InputGroup className="mb-3">
-            <InputGroup.Prepend>
-            <InputGroup.Text id="inputGroup-sizing-default">Direccion</InputGroup.Text>
-        </InputGroup.Prepend>
-        <FormControl
-        name="direccion"
-        aria-label="Default"
-        aria-describedby="inputGroup-sizing-default"
-        value = {userinfo.con_metadata.direccion}
-        />
-    </InputGroup>
-    </Col>
-    <Col xs lg="3">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Sexo</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="sexo"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.sexo}
-    />
-    </InputGroup>
-    </Col>
-    <Col xs lg="2">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Edad</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="edad"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.edad}
-    />
-    </InputGroup>
-    </Col>
-    </Row>
-    <Row className="justify-content-md-center">
-        <Col xs lg="4">
-        <InputGroup className="mb-3">
-            <InputGroup.Prepend>
-            <InputGroup.Text id="inputGroup-sizing-default">Mail</InputGroup.Text>
-        </InputGroup.Prepend>
-        <FormControl
-        name="mail"
-        aria-label="Default"
-        aria-describedby="inputGroup-sizing-default"
-        value = {userinfo.con_metadata.mail}
-        />
-    </InputGroup>
-    </Col>
-    <Col xs lg="3">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Comuna</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="comuna"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.comuna}
-    />
-    </InputGroup>
-    </Col>
-    <Col xs lg="4">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Ciudad</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="ciudad"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.ciudad}
-    />
-    </InputGroup>
-    </Col>
-    </Row>
-    <Row>
-    <Col xs lg="4">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Telefono1</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="telefono1"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.telefono1}
-    />
-    </InputGroup>
-    </Col>
-    <Col xs lg="4">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Telefono2</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="telefono2"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.telefono2}
-    />
-    </InputGroup>
-    </Col>
-    <Col xs lg="4">
-    <InputGroup className="mb-3">
-        <InputGroup.Prepend>
-        <InputGroup.Text id="inputGroup-sizing-default">Telefono3</InputGroup.Text>
-    </InputGroup.Prepend>
-    <FormControl
-    name="telefono3"
-    aria-label="Default"
-    aria-describedby="inputGroup-sizing-default"
-    value = {userinfo.con_metadata.telefono3}
-    />
-    </InputGroup>
-    </Col>
-    </Row>
-    <br></br>
-    <br></br>
-    
-    </Container>
-      ))}
+      <Container>
+      <Form>
+        <Form.Row>
+            <Form.Group as={Col} controlId="nombre">
+            <Form.Label>Nombre</Form.Label>
+            <Form.Control disabled value={userinfo.con_metadata.nombre}/>
+            </Form.Group>
+            <Form.Group as={Col} controlId="ap_paterno">
+            <Form.Label>Ap Paterno</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.ap_paterno} />
+            </Form.Group>
+            <Form.Group as={Col} controlId="ap_materno">
+            <Form.Label>Ap Materno</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.ap_materno} />
+            </Form.Group>
+        </Form.Row>
+        
+        <Form.Row>
+            <Form.Group as={Col} controlId="rut">
+            <Form.Label>Rut</Form.Label>
+            <Form.Control disabled value={userinfo.con_metadata.rut}/>
+            </Form.Group>
+            <Form.Group as={Col} controlId="dv">
+            <Form.Label>DV</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.dv} />
+            </Form.Group>
+            <Form.Group as={Col} controlId="fecha_nacimiento">
+            <Form.Label>Fecha Nacimiento</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.fecha_nacimiento} />
+            </Form.Group>
+        </Form.Row>
+
+        <Form.Row>
+            <Form.Group as={Col} controlId="direccion">
+            <Form.Label>Direccion</Form.Label>
+            <Form.Control disabled value={userinfo.con_metadata.direccion}/>
+            </Form.Group>
+            <Form.Group as={Col} controlId="sexo">
+            <Form.Label>Sexo</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.sexo} />
+            </Form.Group>
+            <Form.Group as={Col} controlId="edad">
+            <Form.Label>Edad</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.edad} />
+            </Form.Group>
+        </Form.Row>
+        
+        <Form.Row>
+            <Form.Group as={Col} controlId="Mail">
+            <Form.Label>Mail</Form.Label>
+            <Form.Control disabled value={userinfo.con_metadata.mail}/>
+            </Form.Group>
+            <Form.Group as={Col} controlId="comuna">
+            <Form.Label>Comuna</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.comuna} />
+            </Form.Group>
+            <Form.Group as={Col} controlId="ciudad">
+            <Form.Label>Ciudad</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.ciudad} />
+            </Form.Group>
+        </Form.Row>
+        
+        <Form.Row>
+            <Form.Group as={Col} controlId="telefono1">
+            <Form.Label>Telefono 1</Form.Label>
+            <Form.Control disabled value={userinfo.con_metadata.telefono1}/>
+            </Form.Group>
+            <Form.Group as={Col} controlId="telefono2">
+            <Form.Label>Telefono 2</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.telefono2} />
+            </Form.Group>
+            <Form.Group as={Col} controlId="telefono3">
+            <Form.Label>Telefono 3</Form.Label>
+            <Form.Control disabled  value={userinfo.con_metadata.telefono3} />
+            </Form.Group>
+        </Form.Row>
+      </Form>
+      </Container>))}
     </>
   );
 }

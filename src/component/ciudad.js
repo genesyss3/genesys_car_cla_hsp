@@ -31,7 +31,6 @@ class Ciudad extends Component {
         let CiudadList = datos_ciudad.length > 0
         && datos_ciudad.map((item, i) => {
             return (
-                
                 <Dropdown.Item eventKey={item.ciu_numero_ciudad + '-' + item.ciu_descripcion}>{item.ciu_descripcion}</Dropdown.Item>
             )
         }, this);
