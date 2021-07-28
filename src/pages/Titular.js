@@ -381,7 +381,7 @@ class Titular extends React.Component{
                         <Form.Group as={Col}>
                             <Form.Label>Beneficiarios</Form.Label>
                             <Form.Check type='radio' name ='TipoBeneficiario' label='Beneficiarios Legales' onChange={this.handleInputChangeSelect}
-                            value='Beneficiario Legal' required/>
+                            value='Heredero Legal' required/>
                             <Form.Check type='radio' name ='TipoBeneficiario' label='Ingresar Beneficiarios' onChange={this.handleInputChangeSelect}
                             value='Beneficiario Adicional' required/>
                         </Form.Group>
