@@ -261,25 +261,25 @@ class ModalBeneficiario extends React.Component{
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formNombre">
-                                <p>Primer Nombre</p>
+                                <Form.Label>Primer Nombre</Form.Label>
                                     <Form.Control placeholder="Nombre" name='Nombre' value={this.state.Nombre} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formSegunNombre">
-                                <p>Segundo Nombre</p>
+                                <Form.Label>Segundo Nombre</Form.Label>
                                     <Form.Control placeholder="Segundo Nombre" name='SegundoNombre' value={this.state.SegundoNombre} onChange={this.handleInputChange}/>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formApPaterno">
-                                    <p>Apellido Paterno</p>
+                                    <Form.Label>Apellido Paterno</Form.Label>
                                     <Form.Control placeholder="Ap Paterno" name='ApPaterno' value={this.state.ApPaterno} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formApMaterno">
-                                    <p>Apellido Materno</p>
+                                    <Form.Label>Apellido Materno</Form.Label>
                                     <Form.Control placeholder="Ap Materno" name='ApMaterno' value={this.state.ApMaterno} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formRutBenef">
-                                    <p>Rut</p>
+                                    <Form.Label>Rut</Form.Label>
                                     <Form.Control placeholder="11111111-1" name='Rut' value={this.state.Rut} onChange={this.handleInputChange}/>
                                 </Form.Group>
                             </Form.Row>
@@ -308,7 +308,7 @@ class ModalBeneficiario extends React.Component{
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col}>
-                                    <p>Tipo calle</p>
+                                    <Form.Label>Tipo calle</Form.Label>
                                     <Form.Control size='md' as="select" name='TipoCalle' value={this.state.TipoCalle} onChange={this.handleInputChangeSelect} >
                                         <option value=''>Tipo Calle</option>
                                         <option value='Avenida'>Avenida</option>
@@ -317,33 +317,33 @@ class ModalBeneficiario extends React.Component{
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formDireccion">
-                                    <p>Direccion</p>
+                                    <Form.Label>Direccion</Form.Label>
                                     <Form.Control placeholder="Direccion" name='Direccion' value={this.state.Direccion} onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col}>
-                                    <p>Tipo Vivienda</p>
+                                    <Form.Label>Tipo Vivienda</Form.Label>
                                     <Form.Control size='md' name='TipoVivienda' placeholder="Observacion vivienda, depto,torre,villa,parcela,etc" value={this.state.TipoVivienda} onChange={this.handleinputChangeSelect} required/>
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <p>Numeracion</p>
+                                    <Form.Label>Numeracion</Form.Label>
                                     <Form.Control placeholder="Numeracion" name='Numeracion' type='number'value={this.state.Numeracion} onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formfechanacimiento">
-                                    <p>Fecha nacimiento</p>
+                                    <Form.Label>Fecha nacimiento</Form.Label>
                                     <Form.Control placeholder="Fecha nacimiento" type='date' min="1900-01-01" max={curdate} name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formTelefono">
-                                    <p>Telefono</p>
+                                    <Form.Label>Telefono</Form.Label>
                                     <Form.Control placeholder="Telefono" name='Telefono' value={this.state.Telefono} onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formParentesco">
-                                    <p>Parentesco</p>
+                                    <Form.Label>Parentesco</Form.Label>
                                     <Form.Control as="select" name='Parentesco' value={this.state.Parentesco} onChange={this.handleInputChangeSelect} required>
                                         <option value=''>Parentesco</option>
                                         <option>Hijo</option>
@@ -351,7 +351,7 @@ class ModalBeneficiario extends React.Component{
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formPorcentaje">
-                                    <p>Porcentaje asignado</p>
+                                    <Form.Label>Porcentaje asignado</Form.Label>
                                     <Form.Control as="select" name='Porcentaje' value={this.state.Porcentaje} onChange={this.handleInputChangeSelect} required>
                                         <option value=''>Porecentaje asignado</option>
                                         <PorcentajeBenef id_gestion={this.state.id_gestion}></PorcentajeBenef>
@@ -360,7 +360,7 @@ class ModalBeneficiario extends React.Component{
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formMailBenef">
-                                    <p>Mail</p>
+                                    <Form.Label>Mail</Form.Label>
                                     <Form.Control placeholder="Mail" type='email' name='Mail' value={this.state.Mail} onChange={this.handleInputChange}/>
                                 </Form.Group>
                             </Form.Row>
