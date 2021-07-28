@@ -334,7 +334,7 @@ class ModalBeneficiario extends React.Component{
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formfechanacimiento">
                                     <p>Fecha nacimiento</p>
-                                    <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} />
+                                    <Form.Control placeholder="Fecha nacimiento" type='date' min="1900-01-01" max={curdate} name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formTelefono">
                                     <p>Telefono</p>

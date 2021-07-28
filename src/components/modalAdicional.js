@@ -206,7 +206,7 @@ class ModalAdicional extends React.Component{
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formfechanacimiento">
                                     <p>Fecha nacimiento</p>
-                                    <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} required/>
+                                    <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} min="1900-01-01" name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formRutAdi">
                                     <p>Rut</p>

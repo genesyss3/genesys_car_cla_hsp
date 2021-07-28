@@ -312,7 +312,7 @@ class Titular extends React.Component{
                     <Form.Row>
                         <Form.Group as={Col}>
                             <p>Fecha de nacimiento</p>
-                            <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} name='Fechanacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} required/>
+                            <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} min="1900-01-01" name='Fechanacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} required/>
                         </Form.Group>
                         <Form.Group as={Col}>
                             <p>Rut</p>
