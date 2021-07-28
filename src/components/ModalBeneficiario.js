@@ -39,7 +39,7 @@ class ModalBeneficiario extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this)
         this.onConfirmar= this.onConfirmar.bind(this)
         this.resetall= this.resetall.bind(this)
-    } 
+    }
 
     resetall(){
         this.setState({
@@ -225,7 +225,7 @@ class ModalBeneficiario extends React.Component{
                             console.log(this.state.enviado);   
                         }
                         document.getElementById('exitosoBen').hidden=false
-                        this.resetall()
+                        document.getElementsByClassName('close')[0].click()
                     })
                     .catch(response => {
                         console.log(response + ' error POST envio datos')
@@ -261,20 +261,25 @@ class ModalBeneficiario extends React.Component{
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formNombre">
+                                <p>Primer Nombre</p>
                                     <Form.Control placeholder="Nombre" name='Nombre' value={this.state.Nombre} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formSegunNombre">
+                                <p>Segundo Nombre</p>
                                     <Form.Control placeholder="Segundo Nombre" name='SegundoNombre' value={this.state.SegundoNombre} onChange={this.handleInputChange}/>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formApPaterno">
+                                    <p>Apellido Paterno</p>
                                     <Form.Control placeholder="Ap Paterno" name='ApPaterno' value={this.state.ApPaterno} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formApMaterno">
+                                    <p>Apellido Materno</p>
                                     <Form.Control placeholder="Ap Materno" name='ApMaterno' value={this.state.ApMaterno} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formRutBenef">
+                                    <p>Rut</p>
                                     <Form.Control placeholder="11111111-1" name='Rut' value={this.state.Rut} onChange={this.handleInputChange}/>
                                 </Form.Group>
                             </Form.Row>
@@ -303,6 +308,7 @@ class ModalBeneficiario extends React.Component{
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col}>
+                                    <p>Tipo calle</p>
                                     <Form.Control size='md' as="select" name='TipoCalle' value={this.state.TipoCalle} onChange={this.handleInputChangeSelect} >
                                         <option value=''>Tipo Calle</option>
                                         <option value='Avenida'>Avenida</option>
@@ -310,31 +316,34 @@ class ModalBeneficiario extends React.Component{
                                         <option value='Calle'>Calle</option>
                                     </Form.Control>
                                 </Form.Group>
-                                <Form.Group as={Col}>
-                                    <Form.Control size='md' as="select" name='TipoVivienda' value={this.state.TipoVivienda} onChange={this.handleinputChangeSelect} required>
-                                        <option value=''>Tipo Vivienda</option>
-                                        <option value='Casa'>Casa</option>
-                                        <option value='Departamento'>Departamento</option>
-                                        <option value='Condominio'>Condominio</option>
-                                    </Form.Control>
-                                </Form.Group>
                                 <Form.Group as={Col} controlId="formDireccion">
+                                    <p>Direccion</p>
                                     <Form.Control placeholder="Direccion" name='Direccion' value={this.state.Direccion} onChange={this.handleInputChange} />
                                 </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
                                 <Form.Group as={Col}>
+                                    <p>Tipo Vivienda</p>
+                                    <Form.Control size='md' name='TipoVivienda' placeholder="Observacion vivienda, depto,torre,villa,parcela,etc" value={this.state.TipoVivienda} onChange={this.handleinputChangeSelect} required/>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <p>Numeracion</p>
                                     <Form.Control placeholder="Numeracion" name='Numeracion' type='number'value={this.state.Numeracion} onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formfechanacimiento">
+                                    <p>Fecha nacimiento</p>
                                     <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formTelefono">
+                                    <p>Telefono</p>
                                     <Form.Control placeholder="Telefono" name='Telefono' value={this.state.Telefono} onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formParentesco">
+                                    <p>Parentesco</p>
                                     <Form.Control as="select" name='Parentesco' value={this.state.Parentesco} onChange={this.handleInputChangeSelect} required>
                                         <option value=''>Parentesco</option>
                                         <option>Hijo</option>
@@ -342,6 +351,7 @@ class ModalBeneficiario extends React.Component{
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formPorcentaje">
+                                    <p>Porcentaje asignado</p>
                                     <Form.Control as="select" name='Porcentaje' value={this.state.Porcentaje} onChange={this.handleInputChangeSelect} required>
                                         <option value=''>Porecentaje asignado</option>
                                         <PorcentajeBenef id_gestion={this.state.id_gestion}></PorcentajeBenef>
@@ -350,6 +360,7 @@ class ModalBeneficiario extends React.Component{
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formMailBenef">
+                                    <p>Mail</p>
                                     <Form.Control placeholder="Mail" type='email' name='Mail' value={this.state.Mail} onChange={this.handleInputChange}/>
                                 </Form.Group>
                             </Form.Row>

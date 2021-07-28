@@ -13,19 +13,42 @@ class PorcentajeBenef extends React.Component {
             opciones_porcentaje: []
         };
     }
-    async componentDidMount() {
-        /*console.log('llamo servicio contacto')
-        console.log('llamo data '+ this.props.id_contacto)*/
-        await axios.post(baseUrl,{id_contacto: this.props.id_contacto})
-            .then(response => {
-                console.log('get_benef_porcent: ' + JSON.stringify(response.data));
-                this.setState({opciones_porcentaje:response.data});
-            })
-            .catch(response => {
-                console.log(response + ' error get_evaluadores')
-            })
 
+    async componentDidMount(){
+        console.log('valido dato:  ' +this.props.id_gestion)
+        this.setState({
+            opciones_porcentaje:'',
+        })
+        await axios.post(baseUrl,{id_gestion: this.props.id_gestion})
+        .then(response => {
+            console.log('get_benef_porcent: ' + JSON.stringify(response.data));
+            this.setState({opciones_porcentaje:response.data});
+        })
+        .catch(response => {
+            console.log(response + ' error get_evaluadores')
+        })
     }
+    componentDidUpdate(prevProps){
+        if (this.props.id_gestion !== prevProps.id_gestion) {
+            this.fetchData(this.state.opciones_porcentaje);
+        }
+    }
+
+    
+    /*async componentDidMount() {
+        //console.log('llamo servicio contacto')
+        console.log('llamo data '+ this.props.id_gestion)
+        await axios.post(baseUrl,{id_gestion: this.props.id_gestion})
+        .then(response => {
+            console.log('get_benef_porcent: ' + JSON.stringify(response.data));
+            this.setState({opciones_porcentaje:response.data});
+        })
+        .catch(response => {
+            console.log(response + ' error get_evaluadores')
+        })
+    }*/
+
+
     render() {
         const { opciones_porcentaje } = this.state;
         let porcentajeList = opciones_porcentaje.length > 0

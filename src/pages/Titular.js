@@ -46,6 +46,13 @@ class Titular extends React.Component{
         this.mostrarBeneficiario = this.mostrarBeneficiario.bind(this)
         this.ocultarModal = this.ocultarModal.bind(this)
         this.onConfirmar= this.onConfirmar.bind(this)
+        this.handleinputCodigo= this.handleinputCodigo.bind(this)
+    }
+
+    handleinputCodigo(){
+        this.setState({
+            CodigoOperacion: clRut.format(this.state.Rut).split('-')[0]+'8149'
+        })
     }
 
     onConfirmar() {
@@ -75,6 +82,7 @@ class Titular extends React.Component{
             [nombre]: valor.toUpperCase()
         });
     }
+
     handleInputChangeSelect=(event)=>{
         const target = event.target;
         const valor = target.value;
@@ -171,7 +179,7 @@ class Titular extends React.Component{
     
 
     async envioDatosBenef() {
-
+        this.handleinputCodigo()
         const body = JSON.stringify({
             id_gestion: this.state.id_gestion,
             id_contacto: this.state.id_contacto,
@@ -200,7 +208,8 @@ class Titular extends React.Component{
             Rut: clRut.format(this.state.Rut),
             TipoBeneficiario: this.state.TipoBeneficiario,
             Observacion: this.state.Observacion,
-            TipoAgregado: 'Titular'
+            TipoAgregado: 'Titular',
+            CodigoOperacion: clRut.format(this.state.Rut).split('-')[0]+'8149',
         })
         console.log(body)
         if(this.validarDatos() === true){
@@ -237,7 +246,6 @@ class Titular extends React.Component{
     mostrarBeneficiario(){
         this.setState({
             showBenef: true,
-            
         })
     }
     mostrarAdicional(){
@@ -265,8 +273,13 @@ class Titular extends React.Component{
             <Container>
                 <h3>Datos Titular</h3>
                 <Form onSubmit={this.handleSubmit}>
-                <Form.Row>
+                    <Form.Row>
                         <Form.Group as={Col}>
+                            <p>Codigo Operacion</p>
+                            <Form.Control name='CodigoOperacion' disabled value={this.state.CodigoOperacion} placeholder={this.state.CodigoOperacion} required/>
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <p>Plan</p>
                             <Form.Control as="select" name='Tipoplan' value={this.state.Tipoplan} onChange={this.handleInputChangeSelect} required>
                                 <option value=''>Tipo Plan</option>
                                 <option>Plan TITULAR PLAN 1 UF 0.2593</option>
@@ -277,46 +290,52 @@ class Titular extends React.Component{
                                 <option>Plan 4 CON 2 ADIC PLAN 2 UF 0.4034</option>
                             </Form.Control>
                         </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
                         <Form.Group as={Col}>
+                            <p>Primer Nombre</p>
                             <Form.Control placeholder="Nombre" name='Nombre' value={this.state.Nombre} onChange={this.handleInputChange} required/>
                         </Form.Group>
                         <Form.Group as={Col}>
+                            <p>Segundo Nombre</p>
                             <Form.Control placeholder="Segundo Nombre" name='SegundoNombre' value={this.state.SegundoNombre} onChange={this.handleInputChange}/>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
                         <Form.Group as={Col} >
+                            <p>Apellido Paterno</p>
                             <Form.Control placeholder="Ap Paterno" name='ApPaterno' value={this.state.ApPaterno} onChange={this.handleInputChange} required/>
                         </Form.Group>
                         <Form.Group as={Col}>
+                            <p>Apellido Materno</p>
                             <Form.Control placeholder="Ap Materno"  name='ApMaterno' value={this.state.ApMaterno} onChange={this.handleInputChange} required/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
+                            <p>Fecha de nacimiento</p>
                             <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} name='Fechanacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} required/>
                         </Form.Group>
                         <Form.Group as={Col}>
+                            <p>Rut</p>
                             <Form.Control placeholder="11111111-1"  name='Rut' value={this.state.Rut} onChange={this.handleInputChange} required/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
-                            <Form.Label>Region</Form.Label>
+                            <p>Region</p>
                             <Form.Control size='md' as="select" name='Region' value={this.state.Region} onChange={this.handleChangeRegion} required>
                                 <option value=''>Seleccionar</option>
                                 <Region></Region>
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Label>Localidad</Form.Label>
+                            <p>Localidad</p>
                             <Form.Control size='md' as="select" name='Ciudad' value={this.state.Ciudad} onChange={this.handleChangeCiudad} required>
                             <option value=''>Seleccionar</option>
                             <Ciudad data={this.state.RegionId}></Ciudad>
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Label>Comuna</Form.Label>
+                            <p>Comuna</p>
                             <Form.Control size='md' as="select" name='Comuna' value={this.state.Comuna} onChange={this.handleChangeComuna} required>
                                 <option value=''>Seleccionar</option>
                                 <Comuna data={this.state.CiudadId}></Comuna>
@@ -325,6 +344,7 @@ class Titular extends React.Component{
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
+                            <p>Tipo de calle</p>
                             <Form.Control size='md' as="select" name='TipoCalle' value={this.state.TipoCalle} onChange={this.handleInputChangeSelect} required>
                                 <option value=''>Tipo Calle</option>
                                 <option value='Avenida'>Avenida</option>
@@ -333,31 +353,33 @@ class Titular extends React.Component{
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Control size='md' as="select" name='TipoVivienda' value={this.state.TipoVivienda} onChange={this.handleinputChangeSelect} required>
-                                <option value=''>Tipo Vivienda</option>
-                                <option value='Casa'>Casa</option>
-                                <option value='Departamento'>Departamento</option>
-                                <option value='Condominio'>Condominio</option>
-                            </Form.Control>
-                        </Form.Group>
-                        <Form.Group as={Col}>
+                            <p>Direccion</p>
                             <Form.Control placeholder="Direccion" name='Direccion' value={this.state.Direccion} onChange={this.handleInputChange} required/>
                         </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
                         <Form.Group as={Col}>
+                            <p>Tipo Vivienda</p>
+                            <Form.Control size='md' name='TipoVivienda' placeholder="Observacion vivienda, depto,torre,villa,parcela,etc" value={this.state.TipoVivienda} onChange={this.handleinputChangeSelect} required/>
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <p>Numeracion</p>
                             <Form.Control placeholder="Numeracion" name='Numeracion' type='number'value={this.state.Numeracion} onChange={this.handleInputChange} required/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
+                            <p>Telefono</p>
                             <Form.Control placeholder="Telefono" typer="number" name='Telefono' value={this.state.Telefono} onChange={this.handleInputChange} required/>
                         </Form.Group>
                         <Form.Group as={Col}>
+                            <p>Mail</p>
                             <Form.Control placeholder="Mail" type='email' name='Mail' value={this.state.Mail} onChange={this.handleInputChange} required/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
-                            <Form.Label>Beneficiarios</Form.Label>
+                            <p>Beneficiarios</p>
                             <Form.Check type='radio' name ='TipoBeneficiario' label='Beneficiarios Legales' onChange={this.handleInputChangeSelect}
                             value='Beneficiario Legal' required/>
                             <Form.Check type='radio' name ='TipoBeneficiario' label='Ingresar Beneficiarios' onChange={this.handleInputChangeSelect}

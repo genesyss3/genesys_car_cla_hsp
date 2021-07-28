@@ -187,26 +187,33 @@ class ModalAdicional extends React.Component{
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formNombre">
+                                    <p>Primer Nombre</p>
                                     <Form.Control placeholder="Nombre" name='Nombre' value={this.state.Nombre} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formSeNombre">
+                                    <p>Segundo Nombre</p>
                                     <Form.Control placeholder="Segundo Nombre" name='SegundoNombre' value={this.state.SegundoNombre} onChange={this.handleInputChange}/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formApPaterno">
+                                    <p>Apellido Paterno</p>
                                     <Form.Control placeholder="Ap Paterno" name='ApPaterno' value={this.state.ApPaterno} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formApMaterno">
+                                    <p>Apellido Materno</p>
                                     <Form.Control placeholder="Ap Materno" name='ApMaterno' value={this.state.ApMaterno} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formfechanacimiento">
+                                    <p>Fecha nacimiento</p>
                                     <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formRutAdi">
+                                    <p>Rut</p>
                                     <Form.Control placeholder="11111111-1" name='Rut' value={this.state.Rut} onChange={this.handleInputChange} required />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formparentesco">
+                                    <p>Parentesco</p>
                                     <Form.Control as="select" name='Parentesco' value={this.state.Parentesco} onChange={this.handleInputChangeSelect} required>
                                         <option value=''>Parentesco</option>
                                         <option>Hijo</option>
@@ -216,6 +223,7 @@ class ModalAdicional extends React.Component{
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formNacionalidad" >
+                                    <p>Nacionalidad</p>
                                     <Form.Control as="select" name='Nacionalidad' value={this.state.Nacionalidad} onChange={this.handleInputChangeSelect} required>
                                         <option value=''>Nacionalidad</option>
                                         <option>Chilena</option>
@@ -223,11 +231,13 @@ class ModalAdicional extends React.Component{
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formProfesion" >
+                                    <p>Profesion</p>
                                     <Form.Control placeholder="Profesión" name='Profesion' value={this.state.Profesion} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formResidencia" >
+                                    <p>Residencia</p>
                                     <Form.Control placeholder="Residencia" name='Residencia' value={this.state.Residencia} onChange={this.handleInputChange} required/>
                                 </Form.Group>
                             </Form.Row>
