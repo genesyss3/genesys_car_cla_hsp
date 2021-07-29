@@ -158,7 +158,7 @@ class Titular extends React.Component{
         console.log('Validando Datos')
         if(this.state.Tipoplan !== '' && this.state.Nombre !== '' && this.state.ApPaterno !== '' && this.state.ApMaterno !== '' && this.state.Fechanacimiento !== ''
          && this.state.Region !== '' && this.state.Comuna !== '' && this.state.Ciudad !== '' && this.state.RegionId !== '' && this.state.ComunaId !== ''
-         && this.state.CiudadId !== '' && this.state.Direccion !== '' && this.state.Telefono !== '' && this.state.Mail !== '' && this.state.Rut !== '' && this.state.Observacion !== ''){
+         && this.state.CiudadId !== '' && this.state.Direccion !== '' && this.state.Telefono !== '' && this.state.Mail !== '' && this.state.Rut !== ''){
             return true
         }else{
             alert('Faltan campos que completar')
@@ -360,7 +360,7 @@ class Titular extends React.Component{
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Tipo Vivienda</Form.Label>
-                            <Form.Control size='md' name='TipoVivienda' placeholder="Observacion vivienda, depto,torre,villa,parcela,etc" value={this.state.TipoVivienda} onChange={this.handleinputChangeSelect} required/>
+                            <Form.Control size='md' name='TipoVivienda' placeholder="Observacion vivienda, depto,torre,villa,parcela,etc" value={this.state.TipoVivienda} onChange={this.handleinputChangeSelect}/>
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Numeracion</Form.Label>
@@ -380,7 +380,7 @@ class Titular extends React.Component{
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Beneficiarios</Form.Label>
-                            <Form.Check type='radio' name ='TipoBeneficiario' label='Beneficiarios Legales' onChange={this.handleInputChangeSelect}
+                            <Form.Check type='radio' name ='TipoBeneficiario' label='Herederos Legales' onChange={this.handleInputChangeSelect}
                             value='Heredero Legal' required/>
                             <Form.Check type='radio' name ='TipoBeneficiario' label='Ingresar Beneficiarios' onChange={this.handleInputChangeSelect}
                             value='Beneficiario Adicional' required/>
@@ -388,7 +388,7 @@ class Titular extends React.Component{
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
-                            <Form.Control placeholder="Observaciones" name='Observacion' typer='textarea' value={this.state.Observacion} onChange={this.handleInputChange} required/>
+                            <Form.Control placeholder="Observaciones" name='Observacion' typer='textarea' value={this.state.Observacion} onChange={this.handleInputChange}/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>

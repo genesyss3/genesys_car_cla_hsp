@@ -216,6 +216,22 @@ class ModalBeneficiario extends React.Component{
         console.log(body)
         if(this.validarDatos() === true){
             if(this.state.Rut !== ''){
+                await axios.post(baseUrl,body)
+                .then(response => {
+                    console.log('exito al enviar POST Datos Titular: ');
+                    if (response.status === 200) {
+                        this.state.enviado++;
+                        console.log(this.state.enviado);   
+                    }
+                    document.getElementById('exitosoBen').hidden=false
+                    document.getElementsByClassName('close')[0].click()
+                })
+                .catch(response => {
+                    console.log(response + ' error POST envio datos')
+                    document.getElementById('fallidoBen').hidden=false
+                })
+            }
+            if(this.state.Rut !== ''){
                 if(this.validaRut(this.state.Rut) === true){
                     await axios.post(baseUrl,body)
                     .then(response => {
@@ -324,7 +340,7 @@ class ModalBeneficiario extends React.Component{
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>Tipo Vivienda</Form.Label>
-                                    <Form.Control size='md' name='TipoVivienda' placeholder="Observacion vivienda, depto,torre,villa,parcela,etc" value={this.state.TipoVivienda} onChange={this.handleinputChangeSelect} required/>
+                                    <Form.Control size='md' name='TipoVivienda' placeholder="Observacion vivienda, depto,torre,villa,parcela,etc" value={this.state.TipoVivienda} onChange={this.handleInputChange}/>
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label>Numeracion</Form.Label>
