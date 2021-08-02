@@ -229,7 +229,7 @@ class Titular extends React.Component{
                             if(this.state.TipoBeneficiario === 'Beneficiario Adicional'){        
                                 document.getElementById('Beneficiario').hidden=false
                             }
-                            if(this.state.TipoBeneficiario === 'Beneficiario Legal'){
+                            if(this.state.TipoBeneficiario === 'Heredero Legal'){
                                 document.getElementById('Adicional').hidden=false
                             }
                         }

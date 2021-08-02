@@ -8,6 +8,7 @@ import Region from './region';
 import Comuna from './comuna';
 import Ciudad from './ciudad';
 import PorcentajeBenef from '../components/porcentajebenef'
+import Parentesco from './parentesco'
 
 let baseUrl = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario'
 axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
@@ -25,6 +26,13 @@ class ModalBeneficiario extends React.Component{
             fono: this.props.fono,
             id_ejecutivo: this.props.id_ejecutivo,
             formValid: true,
+            Region: '',
+            RegionId: '',
+            Comuna: '',
+            ComunaId: '',
+            Ciudad: '',
+            CiudadId: '',
+            Rut:'',
             enviado : 0
         };
         
@@ -35,7 +43,7 @@ class ModalBeneficiario extends React.Component{
         this.handleChangeCiudad = this.handleChangeCiudad.bind(this)
         this.handleChangeComuna = this.handleChangeComuna.bind(this)
         this.validaRut = this.validaRut.bind(this)
-        this.validarDatos = this.validarDatos.bind(this)
+        //this.validarDatos = this.validarDatos.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.onConfirmar= this.onConfirmar.bind(this)
         this.resetall= this.resetall.bind(this)
@@ -161,17 +169,6 @@ class ModalBeneficiario extends React.Component{
         }
         return true
     }
-    
-    validarDatos(){
-        console.log('Validando Datos')
-        if(this.state.Nombre !== '' && this.state.ApPaterno !== ''
-         && this.state.ApMaterno !== '' && this.state.Parentesco !== ''){
-            return true
-        }else{
-            alert('Faltan campos que completar')
-            return false
-        }
-    }
 
     async handleSubmit(e) {
         e.preventDefault();
@@ -211,11 +208,26 @@ class ModalBeneficiario extends React.Component{
             Parentesco: this.state.Parentesco,
             Porcentaje: this.state.Porcentaje,
             Mail: this.state.Mail,
-            TipoAgregado: 'Beneficiario Legal'
+            TipoAgregado: 'Beneficiario Adicional'
         })
         console.log(body)
-        if(this.validarDatos() === true){
-            if(this.state.Rut !== ''){
+        if(this.state.Rut === ''){
+            await axios.post(baseUrl,body)
+            .then(response => {
+                console.log('exito al enviar POST Datos Titular: ');
+                if (response.status === 200) {
+                    this.state.enviado++;
+                    console.log(this.state.enviado);   
+                }
+                document.getElementById('exitosoBen').hidden=false
+                document.getElementsByClassName('close')[0].click()
+            })
+            .catch(response => {
+                console.log(response + ' error POST envio datos')
+                document.getElementById('fallidoBen').hidden=false
+            })
+        }else{
+            if(this.validaRut(this.state.Rut) === true){
                 await axios.post(baseUrl,body)
                 .then(response => {
                     console.log('exito al enviar POST Datos Titular: ');
@@ -231,29 +243,10 @@ class ModalBeneficiario extends React.Component{
                     document.getElementById('fallidoBen').hidden=false
                 })
             }
-            if(this.state.Rut !== ''){
-                if(this.validaRut(this.state.Rut) === true){
-                    await axios.post(baseUrl,body)
-                    .then(response => {
-                        console.log('exito al enviar POST Datos Titular: ');
-                        if (response.status === 200) {
-                            this.state.enviado++;
-                            console.log(this.state.enviado);   
-                        }
-                        document.getElementById('exitosoBen').hidden=false
-                        document.getElementsByClassName('close')[0].click()
-                    })
-                    .catch(response => {
-                        console.log(response + ' error POST envio datos')
-                        document.getElementById('fallidoBen').hidden=false
-                    })
-                }
-
-                if(this.state.enviado >= 5){
-                    document.getElementById('Beneficiario').disabled=true
-                    document.getElementsByClassName('close')[0].click()
-                }
-            }
+        }
+        if(this.state.enviado >= 5){
+            document.getElementById('Beneficiario').disabled=true
+            document.getElementsByClassName('close')[0].click()
         }
     }
 
@@ -362,8 +355,7 @@ class ModalBeneficiario extends React.Component{
                                     <Form.Label>Parentesco</Form.Label>
                                     <Form.Control as="select" name='Parentesco' value={this.state.Parentesco} onChange={this.handleInputChangeSelect} required>
                                         <option value=''>Parentesco</option>
-                                        <option>Hijo</option>
-                                        <option>Espos@</option>
+                                        <Parentesco></Parentesco>
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formPorcentaje">
