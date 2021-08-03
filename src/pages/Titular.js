@@ -9,6 +9,7 @@ import Comuna from '../components/comuna';
 import Ciudad from '../components/ciudad';
 import ModalAdicional from '../components/modalAdicional'
 import ModalBeneficiario from '../components/ModalBeneficiario'
+import Planes from '../components/getPlanes'
 
 let baseUrl = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario'
 axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
@@ -187,7 +188,12 @@ class Titular extends React.Component{
             id_contacto_genesys: this.state.id_contacto_genesys,
             fono: this.state.fono,
             id_ejecutivo: this.state.id_ejecutivo,
-            Tipoplan: this.state.Tipoplan,
+            Tipoplan: this.state.Plan.split('*')[1],
+            pro_name_cam: this.state.Plan.split('*')[0],
+            pro_desc_plan: this.state.Plan.split('*')[2],
+            pro_valu_plan: this.state.Plan.split('*')[3],
+            pro_cod_plan_sponsor: this.state.Plan.split('*')[4],
+            pro_sponsor: this.state.Plan.split('*')[5],
             Nombre: this.state.Nombre,
             SegundoNombre: this.state.SegundoNombre,
             ApPaterno: this.state.ApPaterno,
@@ -282,12 +288,7 @@ class Titular extends React.Component{
                             <Form.Label>Plan</Form.Label>
                             <Form.Control as="select" name='Tipoplan' value={this.state.Tipoplan} onChange={this.handleInputChangeSelect} required>
                                 <option value=''>Tipo Plan</option>
-                                <option>Plan TITULAR PLAN 1 UF 0.2593</option>
-                                <option>Plan TITULAR PLAN 2 UF 0.3133</option>
-                                <option>Plan 3 CON 1 ADIC PLAN 1 UF 0.3493</option>
-                                <option>Plan 4 CON 1 ADIC PLAN 2 UF 0.4034</option>
-                                <option>Plan 3 CON 2 ADIC PLAN 1 UF 0.3493</option>
-                                <option>Plan 4 CON 2 ADIC PLAN 2 UF 0.4034</option>
+                                <Planes></Planes>
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>

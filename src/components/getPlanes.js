@@ -14,7 +14,7 @@ class Planes extends Component {
     }
     async componentDidMount() {
         //console.log('llamo servicio planes')
-        await axios.post(baseUrl,{pro_id: 5})
+        await axios.post(baseUrl,{pro_id: 6})
             .then(response => {
                 //console.log('exito get_evaluadores: ' + JSON.stringify(response.data));
                 this.setState({opciones_planes:response.data});
@@ -32,7 +32,7 @@ class Planes extends Component {
                 return (
                     <option key={contador++} value={item.pro_name_cam+'*'+item.pro_cod_plan+'*'+
                     item.pro_desc_plan+'*'+item.pro_valu_plan+'*'+
-                    item.pro_cod_plan_sponsor+'*'+item.pro_sponsor}>{item.pro_cod_plan}</option>
+                    item.pro_cod_plan_sponsor+'*'+item.pro_sponsor}>{item.pro_cod_plan+' UF '+item.pro_valu_plan}</option>
                 )
             }, this);
         return (
