@@ -188,12 +188,12 @@ class Titular extends React.Component{
             id_contacto_genesys: this.state.id_contacto_genesys,
             fono: this.state.fono,
             id_ejecutivo: this.state.id_ejecutivo,
-            Tipoplan: this.state.Plan.split('*')[1],
-            pro_name_cam: this.state.Plan.split('*')[0],
-            pro_desc_plan: this.state.Plan.split('*')[2],
-            pro_valu_plan: this.state.Plan.split('*')[3],
-            pro_cod_plan_sponsor: this.state.Plan.split('*')[4],
-            pro_sponsor: this.state.Plan.split('*')[5],
+            Tipoplan: this.state.Tipoplan.split('*')[1],
+            pro_name_cam: this.state.Tipoplan.split('*')[0],
+            pro_desc_plan: this.state.Tipoplan.split('*')[2],
+            pro_valu_plan: this.state.Tipoplan.split('*')[3],
+            pro_cod_plan_sponsor: this.state.Tipoplan.split('*')[4],
+            pro_sponsor: this.state.Tipoplan.split('*')[5],
             Nombre: this.state.Nombre,
             SegundoNombre: this.state.SegundoNombre,
             ApPaterno: this.state.ApPaterno,
@@ -234,8 +234,6 @@ class Titular extends React.Component{
                             document.getElementById('Titular').disabled=true
                             if(this.state.TipoBeneficiario === 'Beneficiario Adicional'){        
                                 document.getElementById('Beneficiario').hidden=false
-                            }
-                            if(this.state.TipoBeneficiario === 'Heredero Legal'){
                                 document.getElementById('Adicional').hidden=false
                             }
                         }
@@ -412,10 +410,10 @@ class Titular extends React.Component{
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formbtnBeneficiario">
-                            <Button variant="primary" type="button" id='Beneficiario' onClick={this.mostrarBeneficiario} hidden>Agregar Beneficiario</Button>
-                        </Form.Group>
-                        <Form.Group as={Col} controlId="formbtnAdicional">
                             <Button variant="primary" type="button" id='Adicional' onClick={this.mostrarAdicional} hidden>Agregar Adicional</Button>
+                            <br></br>
+                            <br></br>
+                            <Button variant="primary" type="button" id='Beneficiario' onClick={this.mostrarBeneficiario} hidden>Agregar Beneficiario</Button>
                         </Form.Group>
                     </Form.Row>
                 </Form>
