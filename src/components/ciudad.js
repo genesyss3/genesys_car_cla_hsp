@@ -17,7 +17,7 @@ class Ciudad extends Component {
     fetchData(){
         //console.log('valido dato:  ' +this.props.data)
         const bodyCiudad = {
-            "id_campana": 'cam_cardif_hsp_fam',
+            "id_campana": '506d64a7-9e0f-4d01-bff0-eb3505d67275',
             "reg_id":  this.props.data}
         this.setState({
             datos_ciudad:'',

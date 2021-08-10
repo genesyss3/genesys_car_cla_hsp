@@ -16,7 +16,7 @@ class Comuna extends Component {
     fetchData(){
         //console.log('valido dato:  ' +this.props.data)
         const bodyComuna = {
-            "id_campana": 'cam_cardif_hsp_fam',
+            "id_campana": '506d64a7-9e0f-4d01-bff0-eb3505d67275',
             "com_ciu_numero_ciudad": this.props.data}
         this.setState({
             datos_comuna:'',
