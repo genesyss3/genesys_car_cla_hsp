@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
-let baseUrlRegion = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/get_region';
+let baseUrlRegion = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/get_region_hom';
+axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
 
 class Region extends Component {
     
@@ -14,7 +15,7 @@ class Region extends Component {
     }
     async componentDidMount() {
         //console.log('llamo data : '+this.props.data)
-        await axios.post(baseUrlRegion)
+        await axios.post(baseUrlRegion,{id_campana: 'cam_cardif_hsp_fam'})
         .then(response => {
             //console.log('exito al enviar POST Region: ' + JSON.stringify(response.data));
             this.setState({datos_region:response.data});

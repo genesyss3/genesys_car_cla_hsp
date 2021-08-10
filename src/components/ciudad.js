@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import { Dropdown } from "react-bootstrap";
 import axios from 'axios';
 
-let baseUrlCiudad = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/get_ciudad';
+let baseUrlCiudad = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/get_ciudad_hom';
+axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
 
 class Ciudad extends Component {
     
@@ -15,7 +16,9 @@ class Ciudad extends Component {
     }
     fetchData(){
         //console.log('valido dato:  ' +this.props.data)
-        const bodyCiudad = {"reg_id":  this.props.data}
+        const bodyCiudad = {
+            "id_campana": 'cam_cardif_hsp_fam',
+            "reg_id":  this.props.data}
         this.setState({
             datos_ciudad:'',
         })

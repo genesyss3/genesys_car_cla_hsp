@@ -22,7 +22,8 @@ class Contacto extends Component {
             })
             .catch(response => {
                 console.log(response + ' error get_evaluadores')
-            })
+            }
+        )
 
     }
     render() {

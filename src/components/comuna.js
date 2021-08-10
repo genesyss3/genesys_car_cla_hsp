@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
-let baseUrlComuna = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/get_comuna';
+let baseUrlComuna = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/get_comuna_hom';
+axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
 
 class Comuna extends Component {
     
@@ -14,7 +15,9 @@ class Comuna extends Component {
     }
     fetchData(){
         //console.log('valido dato:  ' +this.props.data)
-        const bodyComuna = {"com_ciu_numero_ciudad": this.props.data}
+        const bodyComuna = {
+            "id_campana": 'cam_cardif_hsp_fam',
+            "com_ciu_numero_ciudad": this.props.data}
         this.setState({
             datos_comuna:'',
         })
