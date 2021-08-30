@@ -30,6 +30,7 @@ class Titular extends React.Component{
             id_campana: params.idCampana,
             id_contacto_genesys: params.idContactoGenesys,
             fono: params.fono,
+            cola: params.cola,
             formValid: true,
             enviado : 0
         };
@@ -187,6 +188,7 @@ class Titular extends React.Component{
             id_campana: this.state.id_campana,
             id_contacto_genesys: this.state.id_contacto_genesys,
             fono: this.state.fono,
+            cola: this.state.cola,
             id_ejecutivo: this.state.id_ejecutivo,
             Tipoplan: this.state.Tipoplan.split('*')[1],
             pro_name_cam: this.state.Tipoplan.split('*')[0],
@@ -427,7 +429,7 @@ class Titular extends React.Component{
                     id_contacto={this.state.id_contacto}
                     id_campana={this.state.id_campana}
                     id_contacto_genesys={this.state.id_contacto_genesys}
-                    fono={this.state.fono}
+                    cola={this.state.cola}
                     id_ejecutivo={this.state.id_ejecutivo}>
                     </ModalBeneficiario>
                 </Modal>
@@ -442,8 +444,8 @@ class Titular extends React.Component{
                     id_campana={this.state.id_campana}
                     id_contacto_genesys={this.state.id_contacto_genesys}
                     fono={this.state.fono}
-                    id_ejecutivo={this.state.id_ejecutivo}
-                    >
+                    cola={this.state.cola}
+                    id_ejecutivo={this.state.id_ejecutivo}>
                     </ModalAdicional>
                 </Modal>
             </Container>

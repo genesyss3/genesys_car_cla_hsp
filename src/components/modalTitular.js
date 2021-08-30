@@ -22,6 +22,7 @@ class ModalTitular extends React.Component{
             id_campana: '',
             id_contacto_genesys: '',
             fono: '',
+            cola:'',
             id_ejecutivo: '',
             Tipoplan:'',
             Nombre:'',
@@ -66,6 +67,7 @@ class ModalTitular extends React.Component{
             id_campana: this.props.id_campana,
             id_contacto_genesys: this.props.id_contacto_genesys,
             fono: this.props.fono,
+            cola: this.props.cola,
             id_ejecutivo: this.props.id_ejecutivo,
         })
         
@@ -179,6 +181,7 @@ class ModalTitular extends React.Component{
             id_campana: this.state.id_campana,
             id_contacto_genesys: this.state.id_contacto_genesys,
             fono: this.state.fono,
+            cola: this.state.cola,
             id_ejecutivo: this.state.id_ejecutivo,
             Tipoplan: this.state.Tipoplan,
             Nombre: this.state.Nombre,

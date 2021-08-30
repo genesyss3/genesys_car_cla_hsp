@@ -12,8 +12,8 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path ="/users/:idEjecutivo/idcontacto/:idContacto/idinteraccion/:idGestion/idcampana/:idCampana/idcontactogenesys/:idContactoGenesys/fono/:fono" component ={Tipificaciones}/>
-        <Route exact path ="/formulario/users/:idEjecutivo/idcontacto/:idContacto/idinteraccion/:idGestion/idcampana/:idCampana/idcontactogenesys/:idContactoGenesys/fono/:fono" component ={Titular}/>
+        <Route exact path ="/users/:idEjecutivo/idcontacto/:idContacto/idinteraccion/:idGestion/idcampana/:idCampana/idcontactogenesys/:idContactoGenesys/fono/:fono/cola/:cola" component ={Tipificaciones}/>
+        <Route exact path ="/formulario/users/:idEjecutivo/idcontacto/:idContacto/idinteraccion/:idGestion/idcampana/:idCampana/idcontactogenesys/:idContactoGenesys/fono/:fono/cola/:cola" component ={Titular}/>
         <Route component={NotFound}/>
       </Switch>
     </BrowserRouter>

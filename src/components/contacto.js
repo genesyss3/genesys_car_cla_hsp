@@ -15,7 +15,7 @@ class Contacto extends Component {
     }
     async componentDidMount() {
         //console.log('llamo servicio contacto')
-        await axios.post(baseUrl,{cont_id: 'typ_car_hosp_fam'})
+        await axios.post(baseUrl,{cont_id: '506d64a7-9e0f-4d01-bff0-eb3505d67275'})
             .then(response => {
                 //console.log('exito get_evaluadores: ' + JSON.stringify(response.data));
                 this.setState({opciones_contacto:response.data});

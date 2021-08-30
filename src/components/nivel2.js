@@ -16,7 +16,7 @@ class Nivel2 extends Component {
         this.setState({
             opciones_nivel2:''
         })
-        axios.post(baseUrl, {ni1_id:this.props.data, cont_id: 'typ_car_hosp_fam'})
+        axios.post(baseUrl, {ni1_id:this.props.data, cont_id: '506d64a7-9e0f-4d01-bff0-eb3505d67275'})
             .then(response => {
                 console.log('exito get_nivel2: ' + JSON.stringify(response.data));
                 this.setState({opciones_nivel2:response.data});

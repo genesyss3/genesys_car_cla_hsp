@@ -34,6 +34,7 @@ class Tipificaciones extends React.Component{
             id_contacto_genesys: params.idContactoGenesys,
             id_ejecutivo: params.idEjecutivo,
             fono: params.fono,
+            cola: params.cola,
             Fecha: '',
             Hora:'',
             Observacion:'',
@@ -183,6 +184,7 @@ class Tipificaciones extends React.Component{
                 id_campana: this.state.id_campana,
                 id_contacto_genesys: this.state.id_contacto_genesys,
                 fono: this.state.fono,
+                cola: this.state.cola,
                 id_ejecutivo: this.state.id_ejecutivo,
                 Fecha: this.state.Fecha,
                 Hora: this.state.Hora,
@@ -217,6 +219,7 @@ class Tipificaciones extends React.Component{
             id_campana: this.state.id_campana,
             id_contacto_genesys: this.state.id_contacto_genesys,
             fono: this.state.fono,
+            cola: this.state.cola,
             id_ejecutivo: this.state.id_ejecutivo,
             contacto: this.state.contacto,
             nivel1: this.state.nivel1,
@@ -248,7 +251,7 @@ class Tipificaciones extends React.Component{
         if(this.state.nivel3 === 'ARGUMENTADO SI'){
             
             window.location.href='/formulario/users/'+this.state.id_ejecutivo+'/idcontacto/'+this.state.id_contacto+'/idinteraccion/'+this.state.id_gestion+'/idcampana/'
-            +this.state.id_campana+'/idcontactogenesys/'+this.state.id_contacto_genesys+'/fono/'+this.state.fono
+            +this.state.id_campana+'/idcontactogenesys/'+this.state.id_contacto_genesys+'/fono/'+this.state.fono+'/cola/'+this.state.cola
         }
     }
 
