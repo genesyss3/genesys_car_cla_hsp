@@ -14,7 +14,7 @@ class Nacionalidad extends Component {
         };
     }
     async componentDidMount() {
-        await axios.post(baseUrl,{id_campana: 'car_cla_hsp_fam'})
+        await axios.post(baseUrl,{id_campana: 'car_cla_hsp_famv2'})
         .then(response => {
             //console.log('exito al enviar POST nacionalidad: ' + JSON.stringify(response.data));
             this.setState({datos_nacionalidad:response.data});

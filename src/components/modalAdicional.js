@@ -6,6 +6,9 @@ import axios from 'axios';
 import clRut from '@validatecl/rut';
 import Nacionalidad from './nacionalidad';
 import Parentesco from './parentesco';
+import Profesion from './profesion';
+import Ciudad from './ciudad'
+import Comuna from './comuna'
 
 let baseUrl ='https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Adicionales'
 axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
@@ -38,6 +41,8 @@ class ModalAdicional extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this)
         this.onConfirmar= this.onConfirmar.bind(this)
         this.resetall= this.resetall.bind(this)
+        this.handleChangeCiudad = this.handleChangeCiudad.bind(this)
+        this.handleChangeComuna = this.handleChangeComuna.bind(this)
     }
 
     resetall(){
@@ -52,6 +57,31 @@ class ModalAdicional extends React.Component{
             Nacionalidad: '',
             Residencia: ''
         })
+    }
+
+    handleChangeCiudad(event) {
+        if(event.target.value === ''){
+            this.resetearSelect()
+        }else{
+            console.log(event.target.value)
+            this.setState({
+                Ciudad: event.target.value,
+                CiudadId: event.target.value.split('-')[0],
+                Comuna: ''
+            });
+        }
+    }
+
+    handleChangeComuna(event) {
+        if(event.target.value === ''){
+            this.resetearSelect()
+        }else{
+            console.log(event.target.value)
+            this.setState({
+                Comuna: event.target.value,
+                ComunaId: event.target.value.split('-')[0],
+            });
+        }
     }
 
     onConfirmar() {
@@ -74,9 +104,9 @@ class ModalAdicional extends React.Component{
         const target = event.target;
         const valor = target.value;
         const nombre = target.name;
-        /*console.log('target: ' + target)
+        //console.log('target: ' + target)
         console.log('valor: ' + valor)
-        console.log('nombre: ' + nombre)*/
+        /*console.log('nombre: ' + nombre)*/
         this.setState({
             [nombre]: valor.toUpperCase()
         })
@@ -87,6 +117,7 @@ class ModalAdicional extends React.Component{
         const target = event.target;
         const valor = target.value;
         const nombre = target.name;
+        console.log('valor: ' + valor)
         this.setState({
             [nombre]: valor
         })
@@ -132,7 +163,8 @@ class ModalAdicional extends React.Component{
             ApMaterno: this.state.ApMaterno,
             Fechanacimiento: this.state.Fechanacimiento,
             Rut: clRut.format(this.state.Rut),
-            Profesion: this.state.Profesion,
+            Profesion: this.state.Profesion.split('-')[1],
+            ProfesionId: this.state.Profesion.split('-')[0],
             cod_parentesco: this.state.Parentesco.split('-')[0],
             cod_parentesco_campana: this.state.Parentesco.split('-')[1],
             Parentesco: this.state.Parentesco.split('-')[2],
@@ -140,7 +172,14 @@ class ModalAdicional extends React.Component{
             cod_nacionalidad_campana: this.state.Nacionalidad.split('-')[1],
             Nacionalidad: this.state.Nacionalidad.split('-')[2],
             Residencia: this.state.Residencia,
-            TipoAgregado: 'Heredero Legal'
+            Direccion: this.state.Direccion,
+            CiudadId: this.state.Ciudad.split('-')[0],
+            Ciudad: this.state.Ciudad.split('-')[1],
+            ComunaId: this.state.Comuna.split('-')[0],
+            Comuna: this.state.Comuna.split('-')[1],
+            Telefono: this.state.Telefono,
+            TipoAgregado: 'Adicional'
+
         })
         if(this.state.Rut === ''){
             await axios.post(baseUrl,body)
@@ -230,6 +269,38 @@ class ModalAdicional extends React.Component{
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Direccion</Form.Label>
+                                    <Form.Control placeholder='Direccion' name='Direccion' value={this.state.Direccion} onChange={this.handleInputChange}/>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Numeracion</Form.Label>
+                                    <Form.Control placeholder='Numeracion' name='Numeracion' value={this.state.Numeracion} onChange={this.handleInputChange}/>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Ciudad</Form.Label>
+                                    <Form.Control as='select' name='Ciudad' value={this.state.Ciudad} onChange={this.handleChangeCiudad}>
+                                        <option value=''>Seleccione Ciudad</option>
+                                        <Ciudad></Ciudad>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Comuna</Form.Label>
+                                    <Form.Control as='select' name='Comuna' value={this.state.Comuna} onChange={this.handleChangeComuna}>
+                                        <option value=''>Seleccione Comuna</option>
+                                        <Comuna  data={this.state.CiudadId}></Comuna>
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Telefono</Form.Label>
+                                    <Form.Control placeholder='Telefono' name='Telefono' value={this.state.Telefono} onChange={this.handleInputChange}/>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
                                 <Form.Group as={Col} controlId="formfechanacimiento">
                                     <Form.Label>Fecha nacimiento</Form.Label>
                                     <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} min="1900-01-01" name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} />
@@ -256,13 +327,16 @@ class ModalAdicional extends React.Component{
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formProfesion" >
                                     <Form.Label>Profesion</Form.Label>
-                                    <Form.Control placeholder="Profesión" name='Profesion' value={this.state.Profesion} onChange={this.handleInputChange} />
+                                    <Form.Control as='select' name='Profesion' value={this.state.Profesion} onChange={this.handleInputChangeSelect}>
+                                        <option value=''>Profesion</option>
+                                        <Profesion></Profesion>
+                                    </Form.Control>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formResidencia" >
-                                    <Form.Label>Residencia</Form.Label>
-                                    <Form.Control placeholder="Residencia" name='Residencia' value={this.state.Residencia} onChange={this.handleInputChange} />
+                                    <Form.Label>Mail</Form.Label>
+                                    <Form.Control placeholder="Mail" name='Mail' type='mail' value={this.state.Mail} onChange={this.handleInputChange} />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>

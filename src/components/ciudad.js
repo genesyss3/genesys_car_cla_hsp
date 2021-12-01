@@ -14,11 +14,32 @@ class Ciudad extends Component {
             datos_ciudad: []
         };
     }
+
+    async componentDidMount() {
+        //console.log('llamo data : '+this.props.data)
+        const bodyCiudad = {
+            "id_campana": '506d64a7-9e0f-4d01-bff0-eb3505d67275V2',
+            "reg_id":  '500'}
+        this.setState({
+            datos_ciudad:'',
+        })
+        axios.post(baseUrlCiudad,bodyCiudad)
+            .then(response => {
+                //console.log('exito get_nivel1: ' + JSON.stringify(response.data));
+                this.setState({datos_ciudad:response.data});
+            })
+            .catch(response => {
+                console.log(response + ' error get_nivel1')
+                
+            })
+
+    }
+    /*
     fetchData(){
         //console.log('valido dato:  ' +this.props.data)
         const bodyCiudad = {
-            "id_campana": '506d64a7-9e0f-4d01-bff0-eb3505d67275',
-            "reg_id":  this.props.data}
+            "id_campana": '506d64a7-9e0f-4d01-bff0-eb3505d67275V2',
+            "reg_id":  '500'}
         this.setState({
             datos_ciudad:'',
         })
@@ -36,7 +57,7 @@ class Ciudad extends Component {
         if (this.props.data !== prevProps.data) {
             this.fetchData(this.state.datos_ciudad);
         }
-    }
+    }*/
     render(){
         const { datos_ciudad } = this.state;
         let CiudadList = datos_ciudad.length > 0

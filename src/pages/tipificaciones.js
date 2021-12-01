@@ -9,6 +9,7 @@ import Nivel2 from '../components/nivel2'
 import Nivel3 from '../components/nivel3'
 import MostrarInfo from '../components/mostarinfo'
 import ObsAgendamiento from '../components/obsAgendamiento'
+import EncabezadoCliente from '../components/header';
 
 axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
 
@@ -252,6 +253,9 @@ class Tipificaciones extends React.Component{
             
             window.location.href='/formulario/users/'+this.state.id_ejecutivo+'/idcontacto/'+this.state.id_contacto+'/idinteraccion/'+this.state.id_gestion+'/idcampana/'
             +this.state.id_campana+'/idcontactogenesys/'+this.state.id_contacto_genesys+'/fono/'+this.state.fono+'/cola/'+this.state.cola
+        }else{
+            console.log('Envio a parent');
+            window.parent.postMessage({gestion_finished:true}, "*")
         }
     }
 
@@ -303,9 +307,12 @@ class Tipificaciones extends React.Component{
     }
 
     render(){
-
+        
         return(
             <Container>
+                <EncabezadoCliente data={this.state.id_contacto}></EncabezadoCliente>
+                <br/>
+                <h3>Tipificaciones</h3>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formContacto">
@@ -362,7 +369,8 @@ class Tipificaciones extends React.Component{
                 <Row>
                     <MostrarInfo data={this.state.id_contacto}></MostrarInfo>
                 </Row>
-                <div  id='agendamiento'>
+                <ObsAgendamiento data={this.state.id_contacto}></ObsAgendamiento>
+                <div  hidden id='agendamiento'>
                 <Row className="justify-content-md-center">
                     <Col>
                         <Jumbotron>

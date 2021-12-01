@@ -4,12 +4,14 @@ import { Container, Form, Col, Button, Modal, Alert} from "react-bootstrap";
 import Dialog from 'react-bootstrap-dialog';
 import axios from 'axios';
 import clRut from '@validatecl/rut';
-import Region from '../components/region';
 import Comuna from '../components/comuna';
 import Ciudad from '../components/ciudad';
 import ModalAdicional from '../components/modalAdicional'
 import ModalBeneficiario from '../components/ModalBeneficiario'
 import Planes from '../components/getPlanes'
+import Nacionalidad from '../components/nacionalidad'
+import EncabezadoCliente from '../components/header'
+import Profesion from '../components/profesion';
 
 let baseUrl = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_formulario'
 axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
@@ -31,6 +33,36 @@ class Titular extends React.Component{
             id_contacto_genesys: params.idContactoGenesys,
             fono: params.fono,
             cola: params.cola,
+            Tipoplan: '',
+            pro_name_cam: '',
+            pro_desc_plan: '',
+            pro_valu_plan: '',
+            pro_cod_plan_sponsor: '',
+            pro_sponsor: '',
+            Nombre: '',
+            SegundoNombre: '',
+            ApPaterno: '',
+            ApMaterno: '',
+            Fechanacimiento: '',
+            Comuna: '',
+            Ciudad: '',
+            ComunaId: '',
+            CiudadId: '',
+            Direccion: '',
+            Numeracion: '',
+            TipoCalle: '',
+            TipoVivienda: this.setState.TipoVivienda,
+            Telefono: '',
+            Mail: '',
+            cod_nacionalidad: '',
+            cod_nacionalidad_campana: '',
+            Nacionalidad: '',
+            Profesion: '',
+            Rut: '',
+            TipoBeneficiario: '',
+            Observacion: '',
+            TipoAgregado: '',
+            CodigoOperacion: '',
             formValid: true,
             enviado : 0
         };
@@ -38,7 +70,6 @@ class Titular extends React.Component{
         this.envioDatosBenef = this.envioDatosBenef.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleInputChangeSelect = this.handleInputChangeSelect.bind(this);
-        this.handleChangeRegion = this.handleChangeRegion.bind(this)
         this.handleChangeCiudad = this.handleChangeCiudad.bind(this)
         this.handleChangeComuna = this.handleChangeComuna.bind(this)
         this.validarDatos = this.validarDatos.bind(this)
@@ -77,9 +108,9 @@ class Titular extends React.Component{
         const target = event.target;
         const valor = target.value;
         const nombre = target.name;
-        /*console.log('target: ' + target)
+        //console.log('target: ' + target)
         console.log('valor: ' + valor)
-        console.log('nombre: ' + nombre)*/
+        //console.log('nombre: ' + nombre)
         this.setState({
             [nombre]: valor.toUpperCase()
         });
@@ -89,6 +120,7 @@ class Titular extends React.Component{
         const target = event.target;
         const valor = target.value;
         const nombre = target.name;
+        console.log('valor: ' + valor)
         this.setState({
             [nombre]: valor
         });
@@ -96,8 +128,6 @@ class Titular extends React.Component{
 
     resetearSelect(){
         this.setState({
-            Region: '',
-            RegionId: '',
             ComunaId: '',
             Comuna: '',
             Ciudad: '',
@@ -105,7 +135,7 @@ class Titular extends React.Component{
         })
     }
 
-    handleChangeRegion(event) {
+    /*handleChangeRegion(event) {
         if(event.target.value === ''){
             this.resetearSelect()
         }else{
@@ -117,7 +147,7 @@ class Titular extends React.Component{
                 Comuna:'',
             });
         }
-    }
+    }*/
 
     handleChangeCiudad(event) {
         if(event.target.value === ''){
@@ -159,8 +189,9 @@ class Titular extends React.Component{
     validarDatos(){
         console.log('Validando Datos')
         if(this.state.Tipoplan !== '' && this.state.Nombre !== '' && this.state.ApPaterno !== '' && this.state.ApMaterno !== '' && this.state.Fechanacimiento !== ''
-         && this.state.Region !== '' && this.state.Comuna !== '' && this.state.Ciudad !== '' && this.state.RegionId !== '' && this.state.ComunaId !== ''
-         && this.state.CiudadId !== '' && this.state.Direccion !== '' && this.state.Telefono !== '' && this.state.Mail !== '' && this.state.Rut !== ''){
+         && this.state.Comuna !== '' && this.state.Ciudad !== '' && this.state.ComunaId !== ''
+         && this.state.CiudadId !== '' && this.state.Direccion !== '' && this.state.Telefono !== '' && this.state.Mail !== '' && this.state.Rut !== ''
+         && this.state.Profesion !== '' && this.state.Nacionalidad !== ''){
             return true
         }else{
             alert('Faltan campos que completar')
@@ -201,10 +232,8 @@ class Titular extends React.Component{
             ApPaterno: this.state.ApPaterno,
             ApMaterno: this.state.ApMaterno,
             Fechanacimiento: this.state.Fechanacimiento,
-            Region: this.state.Region.split('-')[1],
             Comuna: this.state.Comuna.split('-')[1],
             Ciudad: this.state.Ciudad.split('-')[1],
-            RegionId: this.state.RegionId,
             ComunaId: this.state.ComunaId,
             CiudadId: this.state.CiudadId,
             Direccion: this.state.Direccion,
@@ -213,6 +242,11 @@ class Titular extends React.Component{
             TipoVivienda: this.setState.TipoVivienda,
             Telefono: this.state.Telefono,
             Mail: this.state.Mail,
+            cod_nacionalidad: this.state.Nacionalidad.split('-')[0],
+            cod_nacionalidad_campana: this.state.Nacionalidad.split('-')[1],
+            Nacionalidad: this.state.Nacionalidad.split('-')[2],
+            Profesion: this.state.Profesion.split('-')[1],
+            ProfesionId: this.state.Profesion.split('-')[0],
             Rut: clRut.format(this.state.Rut),
             TipoBeneficiario: this.state.TipoBeneficiario,
             Observacion: this.state.Observacion,
@@ -229,6 +263,8 @@ class Titular extends React.Component{
                         if (response.status === 200) {
                             this.state.enviado++;
                             //console.log(this.state.enviado);   
+                            console.log('Envio a parent');
+                            window.parent.postMessage({gestion_finished:true}, "*")
                         }
                         document.getElementById('exitoso').hidden=false
 
@@ -277,6 +313,7 @@ class Titular extends React.Component{
         const curdate = year1 + "-" + month1 + "-" + day1
         return(
             <Container>
+                <EncabezadoCliente data={this.state.id_contacto}></EncabezadoCliente>
                 <h3>Datos Titular</h3>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Row>
@@ -322,17 +359,10 @@ class Titular extends React.Component{
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
-                            <Form.Label>Region</Form.Label>
-                            <Form.Control size='md' as="select" name='Region' value={this.state.Region} onChange={this.handleChangeRegion} required>
-                                <option value=''>Seleccionar</option>
-                                <Region></Region>
-                            </Form.Control>
-                        </Form.Group>
-                        <Form.Group as={Col}>
                             <Form.Label>Localidad</Form.Label>
                             <Form.Control size='md' as="select" name='Ciudad' value={this.state.Ciudad} onChange={this.handleChangeCiudad} required>
                             <option value=''>Seleccionar</option>
-                            <Ciudad data={this.state.RegionId}></Ciudad>
+                            <Ciudad data={500}></Ciudad>
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col}>
@@ -376,6 +406,20 @@ class Titular extends React.Component{
                         <Form.Group as={Col}>
                             <Form.Label>Mail</Form.Label>
                             <Form.Control placeholder="Mail" type='email' name='Mail' value={this.state.Mail} onChange={this.handleInputChange} required/>
+                        </Form.Group>
+                        <Form.Group as={Col} controlId="formProfesion" >
+                            <Form.Label>Profesion</Form.Label>
+                            <Form.Control as='select' name='Profesion' value={this.state.Profesion} onChange={this.handleInputChangeSelect}>
+                                <option value=''>Profesion</option>
+                                <Profesion></Profesion>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Nacionalidad</Form.Label>
+                            <Form.Control as="select" name='Nacionalidad' value={this.state.Nacionalidad} onChange={this.handleInputChangeSelect} required>
+                                <option value=''>Seleccionar</option>
+                                <Nacionalidad></Nacionalidad>
+                            </Form.Control>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>

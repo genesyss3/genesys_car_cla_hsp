@@ -4,11 +4,11 @@ import { Container, Form, Col, Button, Modal, Alert} from "react-bootstrap";
 import Dialog from 'react-bootstrap-dialog';
 import axios from 'axios';
 import clRut from '@validatecl/rut';
-import Region from './region';
 import Comuna from './comuna';
 import Ciudad from './ciudad';
 import PorcentajeBenef from '../components/porcentajebenef'
 import Parentesco from './parentesco'
+import Nacionalidad from './nacionalidad';
 
 let baseUrl = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/res_json_Beneficiario'
 axios.defaults.headers.post['authorizationToken'] = '&S396b<eg5Zn(HiLe)BBNtc&';
@@ -27,8 +27,6 @@ class ModalBeneficiario extends React.Component{
             cola: this.props.cola,
             id_ejecutivo: this.props.id_ejecutivo,
             formValid: true,
-            Region: '',
-            RegionId: '',
             Comuna: '',
             ComunaId: '',
             Ciudad: '',
@@ -40,7 +38,6 @@ class ModalBeneficiario extends React.Component{
         this.envioDatos = this.envioDatos.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleInputChangeSelect = this.handleInputChangeSelect.bind(this)
-        this.handleChangeRegion = this.handleChangeRegion.bind(this)
         this.handleChangeCiudad = this.handleChangeCiudad.bind(this)
         this.handleChangeComuna = this.handleChangeComuna.bind(this)
         this.validaRut = this.validaRut.bind(this)
@@ -57,8 +54,6 @@ class ModalBeneficiario extends React.Component{
             ApPaterno: '',
             ApMaterno: '',
             Rut: '',
-            Region: '',
-            RegionId: '',
             Comuna: '',
             ComunaId: '',
             Ciudad: '',
@@ -92,9 +87,9 @@ class ModalBeneficiario extends React.Component{
         const target = event.target;
         const valor = target.value;
         const nombre = target.name;
-        /*console.log('target: ' + target)
+        //console.log('target: ' + target)
         console.log('valor: ' + valor)
-        console.log('nombre: ' + nombre)*/
+        //console.log('nombre: ' + nombre)
         this.setState({
             [nombre]: valor.toUpperCase()
         })
@@ -103,6 +98,7 @@ class ModalBeneficiario extends React.Component{
         const target = event.target;
         const valor = target.value;
         const nombre = target.name;
+        console.log('valor: ' + valor)
         this.setState({
             [nombre]: valor
         })
@@ -110,8 +106,6 @@ class ModalBeneficiario extends React.Component{
 
     resetearSelect(){
         this.setState({
-            Region: '',
-            RegionId: '',
             ComunaId: '',
             Comuna: '',
             Ciudad: '',
@@ -119,7 +113,7 @@ class ModalBeneficiario extends React.Component{
         })
     }
 
-    handleChangeRegion(event) {
+   /* handleChangeRegion(event) {
         if(event.target.value === ''){
             this.resetearSelect()
         }else{
@@ -131,7 +125,7 @@ class ModalBeneficiario extends React.Component{
                 Comuna:'',
             });
         }
-    }
+    }*/
 
     handleChangeCiudad(event) {
         if(event.target.value === ''){
@@ -195,8 +189,6 @@ class ModalBeneficiario extends React.Component{
             ApPaterno: this.state.ApPaterno,
             ApMaterno: this.state.ApMaterno,
             Rut: clRut.format(this.state.Rut),
-            Region: this.state.Region.split('-')[1],
-            RegionId: this.state.RegionId,
             Comuna: this.state.Comuna.split('-')[1],
             ComunaId: this.state.ComunaId,
             Ciudad: this.state.Ciudad.split('-')[1],
@@ -210,7 +202,11 @@ class ModalBeneficiario extends React.Component{
             Parentesco: this.state.Parentesco,
             Porcentaje: this.state.Porcentaje,
             Mail: this.state.Mail,
-            TipoAgregado: 'Beneficiario Adicional'
+            TipoAgregado: 'Beneficiario',
+            PaisId: this.state.Nacionalidad.split('-')[1],
+            Pais: this.state.Nacionalidad.split('-')[2],
+            NacionalidadId: this.state.Nacionalidad.split('-')[1],
+            Nacionalidad: this.state.Nacionalidad.split('-')[2],
         })
         console.log(body)
         if(this.state.Rut === ''){
@@ -296,17 +292,10 @@ class ModalBeneficiario extends React.Component{
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col}>
-                                    <Form.Label>Region</Form.Label>
-                                    <Form.Control size='md' as="select" name='Region' value={this.state.Region} onChange={this.handleChangeRegion} >
-                                        <option value=''>Seleccionar</option>
-                                        <Region></Region>
-                                    </Form.Control>
-                                </Form.Group>
-                                <Form.Group as={Col}>
                                     <Form.Label>Localidad</Form.Label>
                                     <Form.Control size='md' as="select" name='Ciudad' value={this.state.Ciudad} onChange={this.handleChangeCiudad} >
                                     <option value=''>Seleccionar</option>
-                                    <Ciudad data={this.state.RegionId}></Ciudad>
+                                    <Ciudad data={500}></Ciudad>
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col}>
@@ -365,6 +354,15 @@ class ModalBeneficiario extends React.Component{
                                     <Form.Control as="select" name='Porcentaje' value={this.state.Porcentaje} onChange={this.handleInputChangeSelect} required>
                                         <option value=''>Porecentaje asignado</option>
                                         <PorcentajeBenef id_gestion={this.state.id_gestion}></PorcentajeBenef>
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Nacionalidad</Form.Label>
+                                    <Form.Control as="select" name='Nacionalidad' value={this.state.Nacionalidad} onChange={this.handleInputChangeSelect} required>
+                                        <option value=''>Nacionalidad</option>
+                                        <Nacionalidad></Nacionalidad>
                                     </Form.Control>
                                 </Form.Group>
                             </Form.Row>

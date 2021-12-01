@@ -15,7 +15,7 @@ class Region extends Component {
     }
     async componentDidMount() {
         //console.log('llamo data : '+this.props.data)
-        await axios.post(baseUrlRegion,{id_campana: '506d64a7-9e0f-4d01-bff0-eb3505d67275'})
+        await axios.post(baseUrlRegion,{id_campana: '506d64a7-9e0f-4d01-bff0-eb3505d67275v2'})
         .then(response => {
             //console.log('exito al enviar POST Region: ' + JSON.stringify(response.data));
             this.setState({datos_region:response.data});

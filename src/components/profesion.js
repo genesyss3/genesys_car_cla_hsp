@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
-let baseUrl = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/post_parentesco';
+let baseUrl = 'https://b316wmuwh1.execute-api.us-east-1.amazonaws.com/default/get_profesion';
 
 class Parentesco extends Component {
     
     constructor() {
         super();
         this.state = {
-            datos_parentesco: []
+            datos_profesion: []
         };
     }
     async componentDidMount() {
-        await axios.post(baseUrl,{id_campana: 'cla_hsp_familiar'})
+        await axios.post(baseUrl,{id_cam: '1'})
         .then(response => {
             //console.log('exito al enviar POST Parentesco: ' + JSON.stringify(response.data));
-            this.setState({datos_parentesco:response.data});
+            this.setState({datos_profesion:response.data});
         })
         .catch(response => {
             console.log(response + ' error POST Parentesco')
@@ -24,17 +24,18 @@ class Parentesco extends Component {
 
     }
     render(){
-        const { datos_parentesco } = this.state;
-        let parentescoList = datos_parentesco.length > 0
-            && datos_parentesco.map((item, i) => {
+        const { datos_profesion } = this.state;
+        let profesionList = datos_profesion.length > 0
+            && datos_profesion.map((item, i) => {
                 return (
-                    <option key={item.rel_cod_relationship} value={item.rel_id_cam+'-'+item.rel_cod_relationship+'-'
-                    +item.rel_name_relationship}>{item.rel_name_relationship}</option>
+                    <option key={item.cod_profesion} value={item.cod_profesion+'-'+item.desc_profesion}>
+                        {item.desc_profesion}
+                        </option>
                 )
             }, this);
         return(
             <>
-            {parentescoList}
+            {profesionList}
             </>
         )
     }
