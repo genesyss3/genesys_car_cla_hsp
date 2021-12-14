@@ -53,9 +53,23 @@ class ModalAdicional extends React.Component{
             ApMaterno: '',
             Rut: '',
             Profesion: '',
+            ProfesionId: '',
+            cod_parentesco: '',
+            cod_parentesco_campana: '',
             Parentesco: '',
+            cod_nacionalidad: '',
+            cod_nacionalidad_campana: '',
             Nacionalidad: '',
-            Residencia: ''
+            Residencia: '',
+            Direccion: '',
+            CiudadId: '',
+            Ciudad: '',
+            ComunaId: '',
+            Comuna: '',
+            Telefono: '',
+            TipoAgregado: '',
+            Numeracion: '',
+            Mail: '',
         })
     }
 
@@ -206,8 +220,8 @@ class ModalAdicional extends React.Component{
                         this.state.enviado++;
                         console.log(this.state.enviado);
                         document.getElementById('exitosoAd').hidden=false
+                        this.resetall()
                     }
-                    this.resetall()
                 })
                 .catch(response => {
                     console.log(response + ' error POST envio datos')
