@@ -60,6 +60,7 @@ class ModalAdicional extends React.Component{
             cod_nacionalidad: '',
             cod_nacionalidad_campana: '',
             Nacionalidad: '',
+            Fechanacimiento: '',
             Residencia: '',
             Direccion: '',
             CiudadId: '',
@@ -177,31 +178,28 @@ class ModalAdicional extends React.Component{
             ApMaterno: this.state.ApMaterno,
             Fechanacimiento: this.state.Fechanacimiento,
             Rut: clRut.format(this.state.Rut),
-            Profesion: this.state.Profesion.split('-')[1],
-            ProfesionId: this.state.Profesion.split('-')[0],
+            Profesion: this.state.Profesion,
             cod_parentesco: this.state.Parentesco.split('-')[0],
             cod_parentesco_campana: this.state.Parentesco.split('-')[1],
             Parentesco: this.state.Parentesco.split('-')[2],
-            cod_nacionalidad: this.state.Nacionalidad.split('-')[0],
-            cod_nacionalidad_campana: this.state.Nacionalidad.split('-')[1],
-            Nacionalidad: this.state.Nacionalidad.split('-')[2],
+            Nacionalidad: this.state.Nacionalidad,
             Residencia: this.state.Residencia,
             Direccion: this.state.Direccion,
-            CiudadId: this.state.Ciudad.split('-')[0],
-            Ciudad: this.state.Ciudad.split('-')[1],
-            ComunaId: this.state.Comuna.split('-')[0],
-            Comuna: this.state.Comuna.split('-')[1],
+            Ciudad: this.state.Ciudad,
+            Comuna: this.state.Comuna,
             Telefono: this.state.Telefono,
             TipoAgregado: 'Adicional'
 
         })
+        console.log(body)
         if(this.state.Rut === ''){
             await axios.post(baseUrl,body)
             .then(response => {
-                console.log('exito al enviar POST Datos Adicional: ');
+                console.log('exito al enviar POST Datos: ');
                 if (response.status === 200) {
                     this.state.enviado++;
                     console.log(this.state.enviado);
+                    console.log(body)
                     document.getElementById('exitosoAd').hidden=false
                 }
                 this.resetall()
@@ -219,6 +217,7 @@ class ModalAdicional extends React.Component{
                     if (response.status === 200) {
                         this.state.enviado++;
                         console.log(this.state.enviado);
+                        console.log(body)
                         document.getElementById('exitosoAd').hidden=false
                         this.resetall()
                     }
@@ -317,7 +316,7 @@ class ModalAdicional extends React.Component{
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formfechanacimiento">
                                     <Form.Label>Fecha nacimiento</Form.Label>
-                                    <Form.Control placeholder="Fecha nacimiento" type='date' max={curdate} min="1900-01-01" name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChange} />
+                                    <Form.Control type='date' max={curdate} min="1900-01-01" name='FechaNacimiento' value={this.state.Fechanacimiento} onChange={this.handleInputChangeSelect} />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formRutAdi">
                                     <Form.Label>Rut</Form.Label>
